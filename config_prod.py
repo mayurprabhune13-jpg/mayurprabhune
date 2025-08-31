@@ -1,0 +1,31 @@
+import os
+from config import Config
+
+class ProductionConfig(Config):
+    """Production configuration"""
+    DEBUG = False
+    TESTING = False
+    
+    # Use environment variable for secret key in production
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'change-this-in-production'
+    
+    # Database configuration for production
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///app.db'
+    
+    # Disable track modifications for production
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
+    # File upload configuration
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB max file size
+    UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'app', 'static', 'uploads')
+    
+    # Security settings for production
+    SESSION_COOKIE_SECURE = True
+    REMEMBER_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    REMEMBER_COOKIE_HTTPONLY = True
+    
+    # Admin credentials from environment variables
+    ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
+    ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'admin@example.com')
+    ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'admin')
