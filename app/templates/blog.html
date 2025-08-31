@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - Mayur Prabhune{% endblock %}
+
+{% block styles %}
+<style type="text/tailwindcss">
+  :root {
+    --primary-color: #1466b8;
+    --cyan-accent: #00bcd4;
+    --fuchsia-accent: #f0f;
+  }
+  .blog-post-card {
+    @apply transform transition-transform duration-300 hover:scale-105;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="layout-content-container flex flex-col max-w-7xl flex-1 mx-auto">
+    <div class="text-center mb-12">
+        <h1 class="text-white tracking-tight text-4xl md:text-5xl font-bold leading-tight">From the Blog</h1>
+        <p class="text-[#9dabb8] text-lg mt-4 max-w-2xl mx-auto">
+            Dive into the world of AI with insights and updates on machine learning, data science, and ethical considerations.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        {% for post in posts.items %}
+        <div class="flex flex-col gap-4 bg-[#1a1f24] p-6 rounded-lg border border-[#293038] shadow-lg blog-post-card">
+            {% if post.image_url %}
+            <img alt="{{ post.title }}" 
+                 class="w-full h-48 object-cover rounded-md mb-4" 
+                 src="{{ post.image_url }}"/>
+            {% endif %}
+            <div class="flex flex-col gap-2">
+                <p class="text-sm font-medium text-[var(--cyan-accent)]">{{ post.category }} • {{ post.published_at|datetime or post.created_at|datetime }}</p>
+                <h3 class="text-white text-xl font-bold">{{ post.title }}</h3>
+                {% if post.excerpt %}
+                <p class="text-[#9dabb8] text-base leading-relaxed">{{ post.excerpt }}</p>
+                {% endif %}
+            </div>
+            <a href="{{ url_for('main.post_detail', slug=post.slug) }}" 
+               class="inline-flex items-center text-sm font-medium text-white hover:text-[var(--fuchsia-accent)] mt-auto group">
+                Read More
+                <svg class="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" 
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if not posts.items %}
+    <div class="text-center text-gray-400 py-12">
+        <p>No blog posts available at the moment.</p>
+    </div>
+    {% endif %}
+</div>
+
+{% if posts.pages > 1 %}
+<div class="flex justify-center mt-12">
+    <nav class="flex items-center gap-2">
+        {% if posts.has_prev %}
+        <a href="{{ url_for('main.blog', page=posts.prev_num) }}"
+           class="px-4 py-2 text-sm text-gray-300 hover:text-white">
+            Previous
+        </a>
+        {% endif %}
+        
+        {% for page in posts.iter_pages() %}
+            {% if page %}
+                {% if page != posts.page %}
+                <a href="{{ url_for('main.blog', page=page) }}"
+                   class="px-4 py-2 text-sm text-gray-300 hover:text-white">
+                    {{ page }}
+                </a>
+                {% else %}
+                <span class="px-4 py-2 text-sm text-[var(--cyan-accent)] font-medium">
+                    {{ page }}
+                </span>
+                {% endif %}
+            {% else %}
+            <span class="px-2 text-gray-500">…</span>
+            {% endif %}
+        {% endfor %}
+
+        {% if posts.has_next %}
+        <a href="{{ url_for('main.blog', page=posts.next_num) }}"
+           class="px-4 py-2 text-sm text-gray-300 hover:text-white">
+            Next
+        </a>
+        {% endif %}
+    </nav>
+</div>
+{% endif %}
+{% endblock %}

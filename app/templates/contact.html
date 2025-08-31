@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - Mayur Prabhune{% endblock %}
+
+{% block content %}
+<div class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-y-12 gap-x-16 lg:grid-cols-2">
+        <div class="flex flex-col justify-center">
+            <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">Get in Touch</h1>
+            <p class="mt-4 text-lg text-gray-400">
+                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. 
+                Feel free to reach out!
+            </p>
+
+            <div class="mt-12 space-y-8">
+                <div class="flex items-start gap-4">
+                    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#283039] text-white">
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-96,85.15L52.57,64H203.43ZM98.71,128,40,181.81V74.19Zm11.84,10.85,12,11.05a8,8,0,0,0,10.82,0l12-11.05,58,53.15H52.57ZM157.29,128,216,74.18V181.82Z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white">Email</h3>
+                        <a href="mailto:{{ CONTACT_EMAIL or 'admin@example.com' }}" class="text-gray-400 hover:text-white transition-colors break-all">
+                            {{ CONTACT_EMAIL or 'admin@example.com' }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#283039] text-white">
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80,40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white">Phone</h3>
+                        <a href="tel:{{ CONTACT_PHONE or '+1-000-000-0000' }}" class="text-gray-400 hover:text-white transition-colors">
+                            {{ CONTACT_PHONE or '+1-000-000-0000' }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#283039] text-white">
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white">LinkedIn</h3>
+                        <a href="{{ CONTACT_LINKEDIN or 'https://linkedin.com' }}" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="text-gray-400 hover:text-white transition-colors break-all">
+                            {{ CONTACT_LINKEDIN or 'linkedin.com' }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rounded-lg bg-[#1a1e24] p-8 shadow-lg">
+            <form action="{{ url_for('main.contact') }}" method="POST" class="space-y-6">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div>
+                    <label class="block text-sm font-medium text-white" for="name">Name</label>
+                    <div class="mt-1">
+                        <input class="form-input block w-full rounded-md border-transparent bg-[#283039] text-white placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-3 px-4"
+                               id="name" 
+                               name="name" 
+                               type="text"
+                               placeholder="Your Name"
+                               required/>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-white" for="email">Email or Phone</label>
+                    <div class="mt-1">
+                        <input class="form-input block w-full rounded-md border-transparent bg-[#283039] text-white placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-3 px-4"
+                               id="email" 
+                               name="email" 
+                               type="text"
+                               placeholder="Your Email or Phone"
+                               required/>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-white" for="message">Message</label>
+                    <div class="mt-1">
+                        <textarea class="form-textarea block w-full rounded-md border-transparent bg-[#283039] text-white placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-3 px-4"
+                                  id="message" 
+                                  name="message" 
+                                  rows="4"
+                                  placeholder="Your Message"
+                                  required></textarea>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit"
+                            class="flex w-full justify-center rounded-md border border-transparent bg-[#1172d4] px-4 py-3 text-sm font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+<div class="fixed bottom-4 right-4 z-50">
+    {% for category, message in messages %}
+    <div class="mb-4 rounded-lg p-4 {% if category == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

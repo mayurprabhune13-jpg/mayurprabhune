@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Testimonials - Mayur Prabhune{% endblock %}
+{% block content %}
+<div class="layout-content-container flex flex-col max-w-6xl flex-1 mx-auto">
+  <h1 class="text-white text-3xl font-bold mb-8">Testimonials</h1>
+  <div class="grid md:grid-cols-3 gap-6">
+    {% for t in testimonials %}
+    <figure class="rounded-xl border border-white/10 bg-white/5 p-6">
+      <blockquote class="text-white/80">"{{ t.content }}"</blockquote>
+      <figcaption class="mt-4">
+        <div class="text-white font-semibold">{{ t.author }}</div>
+        {% if t.role %}<div class="text-white/60 text-sm">{{ t.role }}</div>{% endif %}
+      </figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+  {% if not testimonials %}
+    <p class="text-white/60">No testimonials yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

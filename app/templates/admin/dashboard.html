@@ -1,0 +1,181 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block header %}Dashboard Overview{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+    <!-- Video Stats -->
+    <div class="bg-gray-800 p-6 rounded-lg">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold">Videos</h3>
+            <div class="text-[var(--primary-cyan)]">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="text-3xl font-bold">{{ stats.total_videos }}</div>
+        <div class="text-sm text-gray-400 mt-2">Total Videos</div>
+    </div>
+
+    <!-- View Stats -->
+    <div class="bg-gray-800 p-6 rounded-lg">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold">Views</h3>
+            <div class="text-[var(--primary-fuchsia)]">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="text-3xl font-bold">{{ stats.total_views }}</div>
+        <div class="text-sm text-gray-400 mt-2">Total Views</div>
+    </div>
+
+    <!-- Testimonial Stats -->
+    <div class="bg-gray-800 p-6 rounded-lg">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold">Testimonials</h3>
+            <div class="text-[var(--primary-cyan)]">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="text-3xl font-bold">{{ stats.total_testimonials }}</div>
+        <div class="text-sm text-gray-400 mt-2">Total Testimonials</div>
+    </div>
+
+    <!-- Message Stats -->
+    <div class="bg-gray-800 p-6 rounded-lg">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold">Messages</h3>
+            <div class="text-[var(--primary-fuchsia)]">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="text-3xl font-bold">{{ stats.total_messages }}</div>
+        <div class="text-sm text-gray-400 mt-2">Total Messages</div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Recent Videos -->
+    <div class="bg-gray-800 rounded-lg p-6">
+        <h3 class="text-lg font-semibold mb-4">Recent Videos</h3>
+        <div class="space-y-4">
+            {% for video in recent_videos %}
+            <div class="flex items-center space-x-4">
+                <img src="{{ video.thumbnail_url }}" alt="" class="h-16 w-24 object-cover rounded">
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">{{ video.title }}</p>
+                    <p class="text-sm text-gray-400">{{ video.views }} views</p>
+                    <p class="text-xs text-gray-500">{{ video.created_at.strftime('%Y-%m-%d') }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="mt-4">
+            <a href="{{ url_for('admin.videos') }}" 
+               class="text-sm text-[var(--primary-cyan)] hover:text-cyan-400">View all videos →</a>
+        </div>
+    </div>
+
+    <!-- Recent Messages -->
+    <div class="bg-gray-800 rounded-lg p-6">
+        <h3 class="text-lg font-semibold mb-4">Recent Messages</h3>
+        <div class="space-y-4">
+            {% for message in recent_messages %}
+            <div class="border-l-4 border-[var(--primary-fuchsia)] pl-4">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-sm font-medium">{{ message.name }}</p>
+                        <p class="text-xs text-gray-400">{{ message.email }}</p>
+                    </div>
+                    <span class="text-xs text-gray-500">{{ message.created_at.strftime('%Y-%m-%d') }}</span>
+                </div>
+                <p class="mt-2 text-sm text-gray-300">{{ message.content[:100] }}{% if message.content|length > 100 %}...{% endif %}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="mt-4">
+            <a href="{{ url_for('admin.messages') }}" 
+               class="text-sm text-[var(--primary-cyan)] hover:text-cyan-400">View all messages →</a>
+        </div>
+    </div>
+</div>
+
+<!-- Weekly Stats Chart -->
+<div class="mt-6">
+    <div class="bg-gray-800 rounded-lg p-6">
+        <h3 class="text-lg font-semibold mb-4">Weekly Statistics</h3>
+        <canvas id="weeklyStats" height="100"></canvas>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('weeklyStats').getContext('2d');
+    const chartLabels = JSON.parse('{{ chart_data.labels|tojson|safe }}');
+    const viewsData = JSON.parse('{{ chart_data.views|tojson|safe }}');
+    const messagesData = JSON.parse('{{ chart_data.messages|tojson|safe }}');
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: 'Video Views',
+                data: viewsData,
+                borderColor: '#00ffff',
+                tension: 0.4,
+                fill: false
+            }, {
+                label: 'Messages',
+                data: messagesData,
+                borderColor: '#ff00ff',
+                tension: 0.4,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: '#fff'
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    },
+                    ticks: {
+                        color: '#fff'
+                    }
+                },
+                x: {
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    },
+                    ticks: {
+                        color: '#fff'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

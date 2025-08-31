@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Videos - Mayur Prabhune{% endblock %}
+{% block content %}
+<div class="layout-content-container flex flex-col max-w-7xl flex-1 mx-auto">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-white text-3xl font-bold">Videos</h1>
+    <div>
+      <form method="get" class="flex gap-2">
+        <select name="category" class="bg-[#1a1f24] text-white border border-[#293038] rounded px-3 py-2">
+          <option value="">All categories</option>
+          {% for cat in categories %}
+            {% set val = cat[0] %}
+            <option value="{{ val }}" {% if current_category == val %}selected{% endif %}>{{ val }}</option>
+          {% endfor %}
+        </select>
+        <button class="rounded bg-white/10 text-white px-3 py-2 border border-white/20" type="submit">Filter</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for video in videos.items %}
+    <a class="block group" href="{{ url_for('main.video_detail', slug=video.slug) }}">
+      <div class="relative aspect-video rounded-xl overflow-hidden">
+        {% if video.thumbnail_url %}
+        <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" class="w-full h-full object-cover" />
+        {% endif %}
+        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition"></div>
+      </div>
+      <h3 class="mt-3 text-white font-semibold">{{ video.title }}</h3>
+      {% if video.description %}
+      <p class="text-sm text-white/70">{{ video.description }}</p>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+
+  {% if videos.pages > 1 %}
+  <div class="flex justify-center mt-10">
+    <nav class="flex items-center gap-2">
+      {% if videos.has_prev %}
+      <a class="px-3 py-2 text-white/80 hover:text-white" href="{{ url_for('main.videos', page=videos.prev_num, category=current_category) }}">Prev</a>
+      {% endif %}
+      {% for page in videos.iter_pages() %}
+        {% if page %}
+          {% if page != videos.page %}
+          <a class="px-3 py-2 text-white/80 hover:text-white" href="{{ url_for('main.videos', page=page, category=current_category) }}">{{ page }}</a>
+          {% else %}
+          <span class="px-3 py-2 text-cyan-300">{{ page }}</span>
+          {% endif %}
+        {% else %}
+          <span class="px-2 text-white/50">…</span>
+        {% endif %}
+      {% endfor %}
+      {% if videos.has_next %}
+      <a class="px-3 py-2 text-white/80 hover:text-white" href="{{ url_for('main.videos', page=videos.next_num, category=current_category) }}">Next</a>
+      {% endif %}
+    </nav>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

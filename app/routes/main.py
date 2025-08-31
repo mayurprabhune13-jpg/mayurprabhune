@@ -1,0 +1,202 @@
+from flask import Blueprint, render_template, request, flash, redirect, url_for
+from app.models import Post, Testimonial, Video, Contact, CaseStudy
+from app.utils import is_valid_email, format_datetime, reading_time
+from app import db
+
+bp = Blueprint('main', __name__)
+
+@bp.route('/')
+def index():
+    """Home page route"""
+    # Get recent published videos
+    videos = Video.query.filter_by(status='published')\
+        .order_by(Video.created_at.desc()).limit(6).all()
+    
+    # Get approved testimonials
+    testimonials = Testimonial.query.filter_by(status='approved')\
+        .order_by(Testimonial.created_at.desc()).limit(3).all()
+    
+    # Get recent published blog posts
+    posts = Post.query.filter_by(status='published')\
+        .order_by(Post.created_at.desc()).limit(3).all()
+    
+    # Get featured case studies
+    case_studies = CaseStudy.query.filter_by(status='published')\
+        .order_by(CaseStudy.created_at.desc()).limit(2).all()
+    
+    return render_template('index.html', 
+                         videos=videos,
+                         testimonials=testimonials,
+                         posts=posts,
+                         case_studies=case_studies)
+
+@bp.route('/about')
+def about():
+    """About page route"""
+    return render_template('about.html')
+
+@bp.route('/services')
+def services():
+    """Services page route"""
+    return render_template('services.html')
+
+@bp.route('/contact', methods=['GET', 'POST'])
+def contact():
+    """Contact page route"""
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+        
+        if not all([name, email, message]):
+            flash('Please fill out all fields', 'error')
+            return redirect(url_for('main.contact'))
+            
+        if not is_valid_email(email):
+            flash('Please enter a valid email address', 'error')
+            return redirect(url_for('main.contact'))
+        
+        # Create new contact message
+        contact = Contact(
+            name=name,
+            email=email,
+            message=message,
+            status='unread'
+        )
+        
+        try:
+            db.session.add(contact)
+            db.session.commit()
+            flash('Your message has been sent!', 'success')
+            return redirect(url_for('main.index'))
+        except:
+            db.session.rollback()
+            flash('An error occurred. Please try again.', 'error')
+            
+    return render_template('contact.html')
+
+@bp.route('/videos')
+def videos():
+    """Videos listing page"""
+    page = request.args.get('page', 1, type=int)
+    category = request.args.get('category')
+    
+    query = Video.query.filter_by(status='published')
+    
+    if category:
+        query = query.filter_by(category=category)
+        
+    videos = query.order_by(Video.created_at.desc())\
+        .paginate(page=page, per_page=12, error_out=False)
+        
+    # Get all unique categories for filter
+    categories = db.session.query(Video.category)\
+        .filter(Video.category.isnot(None), Video.status=='published')\
+        .distinct().all()
+    
+    return render_template('videos.html', 
+                         videos=videos,
+                         categories=categories,
+                         current_category=category)
+
+@bp.route('/video/<slug>')
+def video_detail(slug):
+    """Video detail page"""
+    video = Video.query.filter_by(slug=slug, status='published').first_or_404()
+    
+    # Increment view count
+    video.views += 1
+    db.session.commit()
+    
+    return render_template('video_detail.html', video=video)
+
+@bp.route('/testimonials')
+def testimonials():
+    """Testimonials page"""
+    testimonials = Testimonial.query.filter_by(status='approved')\
+        .order_by(Testimonial.created_at.desc()).all()
+    return render_template('testimonials.html', testimonials=testimonials)
+
+@bp.route('/blog')
+def blog():
+    """Blog listing page"""
+    page = request.args.get('page', 1, type=int)
+    category = request.args.get('category')
+    
+    query = Post.query.filter_by(status='published')
+    
+    if category:
+        query = query.filter_by(category=category)
+        
+    posts = query.order_by(Post.created_at.desc())\
+        .paginate(page=page, per_page=9, error_out=False)
+        
+    # Get all unique categories for filter
+    categories = db.session.query(Post.category)\
+        .filter(Post.category.isnot(None), Post.status=='published')\
+        .distinct().all()
+    
+    return render_template('blog.html',
+                         posts=posts,
+                         categories=categories,
+                         current_category=category)
+
+@bp.route('/blog/<slug>')
+def post_detail(slug):
+    """Blog post detail page"""
+    post = Post.query.filter_by(slug=slug, status='published').first_or_404()
+    
+    # Increment view count
+    post.views += 1
+    db.session.commit()
+    
+    # Calculate reading time
+    post.reading_time = reading_time(post.content)
+    
+    return render_template('post_detail.html', post=post)
+
+@bp.route('/success-stories')
+def success_stories():
+    """Case studies listing page"""
+    page = request.args.get('page', 1, type=int)
+    industry = request.args.get('industry')
+    
+    query = CaseStudy.query.filter_by(status='published')
+    
+    if industry:
+        query = query.filter_by(industry=industry)
+        
+    case_studies = query.order_by(CaseStudy.created_at.desc())\
+        .paginate(page=page, per_page=6, error_out=False)
+        
+    # Get all unique industries for filter
+    industries = db.session.query(CaseStudy.industry)\
+        .filter(CaseStudy.status=='published')\
+        .distinct().all()
+    
+    return render_template('success_stories.html',
+                         case_studies=case_studies,
+                         industries=industries,
+                         current_industry=industry)
+
+@bp.route('/success-stories/<slug>')
+def case_study_detail(slug):
+    """Case study detail page"""
+    case_study = CaseStudy.query.filter_by(slug=slug, status='published').first_or_404()
+    return render_template('case_study_detail.html', case_study=case_study)
+
+# Template filters
+@bp.app_template_filter('datetime')
+def _jinja2_filter_datetime(date):
+    """Format datetime for templates"""
+    return format_datetime(date)
+
+# Error handlers
+@bp.app_errorhandler(404)
+def not_found_error(error):
+    return render_template('errors/404.html'), 404
+
+@bp.app_errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('errors/500.html'), 500

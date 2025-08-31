@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Admin Login - Mayur Prabhune</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?display=swap&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <style>
+        :root {
+            --primary-cyan: #00ffff;
+            --primary-fuchsia: #ff00ff;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center" style='font-family: "Plus Jakarta Sans", system-ui, sans-serif;'>
+    <div class="w-full max-w-md p-6">
+        <div class="text-center mb-8">
+            <div class="flex items-center justify-center gap-3 mb-6">
+                <div class="text-[var(--primary-cyan)]">
+                    <svg class="h-12 w-12" fill="none" viewBox="0 0 48 48">
+                        <path fill="currentColor" d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z"/>
+                    </svg>
+                </div>
+                <h1 class="text-2xl font-bold">Admin Login</h1>
+            </div>
+            <p class="text-gray-400">Enter your credentials to access the dashboard</p>
+        </div>
+
+        <form action="dashboard.html" class="space-y-6">
+            <div>
+                <label class="block text-sm font-medium mb-2" for="email">Email</label>
+                <input 
+                    type="email" 
+                    id="email"
+                    name="email" 
+                    class="w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:border-[var(--primary-cyan)] focus:ring-1 focus:ring-[var(--primary-cyan)] outline-none"
+                    required
+                />
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-2" for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password"
+                    name="password" 
+                    class="w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:border-[var(--primary-cyan)] focus:ring-1 focus:ring-[var(--primary-cyan)] outline-none"
+                    required
+                />
+            </div>
+
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <input 
+                        type="checkbox" 
+                        id="remember" 
+                        class="h-4 w-4 rounded border-gray-700 bg-gray-800 text-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]"
+                    />
+                    <label class="ml-2 block text-sm text-gray-400" for="remember">Remember me</label>
+                </div>
+                <a href="#" class="text-sm text-[var(--primary-cyan)] hover:underline">Forgot password?</a>
+            </div>
+
+            <button 
+                type="submit" 
+                class="w-full rounded-lg bg-[var(--primary-cyan)] px-5 py-3 font-medium text-gray-900 hover:bg-white transition-colors"
+            >
+                Sign in
+            </button>
+        </form>
+
+        <div class="mt-6 text-center">
+            <a href="/" class="text-sm text-gray-400 hover:text-white transition-colors">← Back to Website</a>
+        </div>
+    </div>
+
+    <script>
+        // Simple form handling (replace with actual authentication in production)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Demo credentials
+            if (email === 'admin@example.com' && password === 'admin123') {
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Invalid credentials. Try admin@example.com / admin123');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}About Me{% endblock %}
+
+{% block content %}
+<div class="flex w-full max-w-5xl flex-col gap-12 mx-auto">
+    <section class="flex flex-col items-center text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">About Me</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-[#9dabb9]">A glimpse into my journey, mission, and the philosophy that drives me.</p>
+    </section>
+
+    <section class="flex flex-col gap-8 md:flex-row md:items-center">
+        <div class="flex-shrink-0">
+            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-32 h-32 sm:w-40 sm:h-40 mx-auto" 
+                 style='background-image: url("{{ url_for('static', filename='images/profile.jpg') }}");'></div>
+        </div>
+        <div class="flex flex-col gap-4 text-center md:text-left">
+            <h2 class="text-3xl font-bold tracking-tight text-white">Mayur Prabhune</h2>
+            <p class="text-lg font-medium text-[#1173d4]">AI Mentor &amp; Tech Leader</p>
+            <p class="text-[#9dabb9]">I am passionate about leveraging AI to solve complex problems and empowering the next generation of tech leaders. My journey is one of continuous learning, innovation, and a commitment to ethical technology.</p>
+        </div>
+    </section>
+
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+        <section>
+            <h3 class="text-2xl font-bold text-white mb-6">Professional Experience</h3>
+            <div class="space-y-6 border-l-2 border-[#3b4754] pl-6">
+                <div class="relative">
+                    <div class="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full bg-[#1173d4]"></div>
+                    <h4 class="font-semibold text-white">AI Mentor</h4>
+                    <p class="text-sm text-[#9dabb9]">Mentoring individuals and teams in AI and machine learning</p>
+                </div>
+                <div class="relative">
+                    <div class="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full bg-[#1173d4]"></div>
+                    <h4 class="font-semibold text-white">Tech Lead</h4>
+                    <p class="text-sm text-[#9dabb9]">Leading technical teams in AI projects</p>
+                </div>
+                <div class="relative">
+                    <div class="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full bg-[#1173d4]"></div>
+                    <h4 class="font-semibold text-white">Software Engineer</h4>
+                    <p class="text-sm text-[#9dabb9]">Developing software solutions with a focus on AI</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3 class="text-2xl font-bold text-white mb-6">Qualifications</h3>
+            <div class="space-y-6 border-l-2 border-[#3b4754] pl-6">
+                <div class="relative">
+                    <div class="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full bg-[#1173d4]"></div>
+                    <h4 class="font-semibold text-white">Master of Science in Computer Science</h4>
+                    <p class="text-sm text-[#9dabb9]">University of California, Berkeley</p>
+                </div>
+                <div class="relative">
+                    <div class="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full bg-[#1173d4]"></div>
+                    <h4 class="font-semibold text-white">Certified AI Professional</h4>
+                    <p class="text-sm text-[#9dabb9]">AI Certification Board</p>
+                </div>
+                <div class="relative">
+                    <div class="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full bg-[#1173d4]"></div>
+                    <h4 class="font-semibold text-white">Leadership Training</h4>
+                    <p class="text-sm text-[#9dabb9]">Leadership Development Institute</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
+        <section class="rounded-lg bg-[#1a1e24] p-6 sm:p-8">
+            <h3 class="text-2xl font-bold text-white mb-4">My Mission</h3>
+            <p class="text-[#9dabb9]">To empower individuals and organizations to leverage AI effectively and ethically, fostering innovation and growth through mentorship and guidance.</p>
+        </section>
+        <section class="rounded-lg bg-[#1a1e24] p-6 sm:p-8">
+            <h3 class="text-2xl font-bold text-white mb-4">My Philosophy</h3>
+            <p class="text-[#9dabb9]">I believe in a collaborative and personalized approach to mentorship, focusing on understanding each client's unique needs and goals to provide tailored guidance and support.</p>
+        </section>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}Services - Mayur Prabhune{% endblock %}
+
+{% block styles %}
+<style type="text/tailwindcss">
+  :root {
+    --primary-color: #00ffff;
+    --secondary-color: #1a1a1a;
+  }
+  .bg-primary {
+    background-color: var(--primary-color);
+  }
+  .text-primary {
+    color: var(--primary-color);
+  }
+  .border-primary {
+    border-color: var(--primary-color);
+  }
+  .bg-secondary {
+    background-color: var(--secondary-color);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-7xl">
+    <div class="text-center mb-12 md:mb-16">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tighter mb-4">
+            <span class="text-primary">AI</span> Mentoring Services
+        </h1>
+        <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
+            Empowering individuals and organizations with cutting-edge AI solutions and expertise.
+        </p>
+    </div>
+
+    <div class="space-y-16 md:space-y-20">
+        <!-- AI for Startups Bootcamp -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div class="bg-secondary p-6 md:p-8 rounded-xl border border-gray-800 shadow-2xl">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-primary text-black p-3 rounded-full">
+                        <svg class="h-7 w-7" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M200,48H136V16a8,8,0,0,0-16,0V48H56A32,32,0,0,0,24,80V192a32,32,0,0,0,32,32H200a32,32,0,0,0,32-32V80A32,32,0,0,0,200,48Z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold">AI for Startups Bootcamp</h2>
+                </div>
+                <p class="text-gray-400 mb-6">
+                    A comprehensive program designed to equip startups with the knowledge and tools to leverage AI effectively. 
+                    This bootcamp covers everything from AI strategy to implementation, ensuring your startup is AI-ready.
+                </p>
+                <a href="{{ url_for('main.contact') }}" 
+                   class="w-full flex items-center justify-center rounded-md h-12 px-6 bg-primary text-black text-sm font-bold leading-normal tracking-wide shadow-lg hover:bg-opacity-90 transition-all">
+                    Learn More
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                {% for feature in bootcamp_features %}
+                <div class="flex items-center gap-4 bg-secondary p-4 rounded-lg border border-gray-800">
+                    <div class="text-primary flex items-center justify-center bg-[#2d2d2d] shrink-0 size-10 rounded-full">
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/>
+                        </svg>
+                    </div>
+                    <p class="text-gray-300 font-medium">{{ feature }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- AI Leadership for Managers -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 lg:order-2">
+                {% for feature in leadership_features %}
+                <div class="flex items-center gap-4 bg-secondary p-4 rounded-lg border border-gray-800">
+                    <div class="text-primary flex items-center justify-center bg-[#2d2d2d] shrink-0 size-10 rounded-full">
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/>
+                        </svg>
+                    </div>
+                    <p class="text-gray-300 font-medium">{{ feature }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="bg-secondary p-6 md:p-8 rounded-xl border border-gray-800 shadow-2xl lg:order-1">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-primary text-black p-3 rounded-full">
+                        <svg class="h-7 w-7" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4Z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold">AI + Leadership for Managers</h2>
+                </div>
+                <p class="text-gray-400 mb-6">
+                    A specialized program for managers to understand and lead AI initiatives. 
+                    This course focuses on strategic integration of AI and effective leadership in an AI-driven environment.
+                </p>
+                <a href="{{ url_for('main.contact') }}"
+                   class="w-full flex items-center justify-center rounded-md h-12 px-6 bg-primary text-black text-sm font-bold leading-normal tracking-wide shadow-lg hover:bg-opacity-90 transition-all">
+                    Learn More
+                </a>
+            </div>
+        </div>
+
+        <!-- AI Awareness for Students -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div class="bg-secondary p-6 md:p-8 rounded-xl border border-gray-800 shadow-2xl">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-primary text-black p-3 rounded-full">
+                        <svg class="h-7 w-7" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M226.53,56.41l-96-32a8,8,0,0,0-5.06,0l-96,32A8,8,0,0,0,24,64v80a8,8,0,0,0,16,0V75.1L73.59,86.29a64,64,0,0,0,20.65,88.05c-18,7.06-33.56,19.83-44.94,37.29a8,8,0,1,0,13.4,8.74C77.77,197.25,101.57,184,128,184s50.23,13.25,65.3,36.37a8,8,0,0,0,13.4-8.74c-11.38-17.46-27-30.23-44.94-37.29a64,64,0,0,0,20.65-88l44.12-14.7a8,8,0,0,0,0-15.18Z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold">AI Awareness for Students</h2>
+                </div>
+                <p class="text-gray-400 mb-6">
+                    An introductory course for students to grasp the basics of AI and its potential applications. 
+                    This program aims to spark interest in AI and provide a foundation for future learning.
+                </p>
+                <a href="{{ url_for('main.contact') }}"
+                   class="w-full flex items-center justify-center rounded-md h-12 px-6 bg-primary text-black text-sm font-bold leading-normal tracking-wide shadow-lg hover:bg-opacity-90 transition-all">
+                    Learn More
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                {% for feature in student_features %}
+                <div class="flex items-center gap-4 bg-secondary p-4 rounded-lg border border-gray-800">
+                    <div class="text-primary flex items-center justify-center bg-[#2d2d2d] shrink-0 size-10 rounded-full">
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/>
+                        </svg>
+                    </div>
+                    <p class="text-gray-300 font-medium">{{ feature }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

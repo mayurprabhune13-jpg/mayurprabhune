@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ video.title }} - Video{% endblock %}
+{% block content %}
+<div class="layout-content-container flex flex-col max-w-4xl flex-1 mx-auto">
+  <h1 class="text-white text-3xl font-bold mb-6">{{ video.title }}</h1>
+  {% if video.video_url %}
+  <div class="aspect-video w-full rounded-xl overflow-hidden bg-black mb-6">
+    <iframe src="{{ video.video_url }}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+  </div>
+  {% endif %}
+  {% if video.description %}
+  <p class="text-white/80">{{ video.description }}</p>
+  {% endif %}
+</div>
+{% endblock %}

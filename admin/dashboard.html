@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Admin Dashboard - Mayur Prabhune</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?display=swap&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <style>
+        :root {
+            --primary-cyan: #00ffff;
+            --primary-fuchsia: #ff00ff;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white" style='font-family: "Plus Jakarta Sans", system-ui, sans-serif;'>
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-800 border-r border-gray-700">
+            <div class="p-6">
+                <div class="flex items-center gap-3">
+                    <div class="text-[var(--primary-cyan)]">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 48 48">
+                            <path fill="currentColor" d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-lg font-bold">Admin Panel</h1>
+                </div>
+            </div>
+            <nav class="mt-6">
+                <a href="#" class="flex items-center gap-3 px-6 py-3 text-[var(--primary-cyan)] border-r-4 border-[var(--primary-cyan)] bg-gray-900">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="#" class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-700">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                    </svg>
+                    Blog Posts
+                </a>
+                <a href="#" class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-700">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    Testimonials
+                </a>
+                <a href="#" class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-700">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    Success Stories
+                </a>
+                <a href="#" class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-700">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    Events
+                </a>
+                <a href="#" class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-700">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    Messages
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top bar -->
+            <header class="bg-gray-800 border-b border-gray-700">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <h2 class="text-xl font-semibold">Dashboard Overview</h2>
+                    <div class="flex items-center gap-4">
+                        <button class="text-gray-400 hover:text-white">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                            </svg>
+                        </button>
+                        <div class="flex items-center gap-3">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVR0OF-meQPUh-zV34yoM7Y1qVlQA8Yqqfes34iV4SlNh8tcMStP-OPF5BZDxWhGxR6m4qr-Mqk4vEdQEk1y-2VebA00kCras2SsLYo8Gam9NXFNdG-U8AF1FvRwxMIAJWaUMWTFnSpkYHDVfaMF0VeWS1R0jizpj4vdGSTixO3xOrkETQXQfRWf-lRkc8kec1Ee3Z5Cf6bLDay_PPwVbLUUWPnmFLRKhs1Dq-ib6eyDv7fURaFwCNy8YcdwAmZ309AwCQGaCIPH4z" 
+                                alt="Profile" 
+                                class="h-8 w-8 rounded-full object-cover"/>
+                            <span class="font-medium">Mayur Prabhune</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="flex-1 overflow-y-auto bg-gray-900 p-6">
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-400">Total Workshops</h3>
+                            <span class="text-[var(--primary-cyan)]">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <p class="text-3xl font-bold">24</p>
+                        <p class="text-green-400 text-sm mt-2">↑ 12% from last month</p>
+                    </div>
+
+                    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-400">Active Clients</h3>
+                            <span class="text-[var(--primary-fuchsia)]">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <p class="text-3xl font-bold">156</p>
+                        <p class="text-green-400 text-sm mt-2">↑ 18% from last month</p>
+                    </div>
+
+                    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-400">Success Stories</h3>
+                            <span class="text-[var(--primary-cyan)]">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <p class="text-3xl font-bold">48</p>
+                        <p class="text-green-400 text-sm mt-2">↑ 8% from last month</p>
+                    </div>
+
+                    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-400">New Messages</h3>
+                            <span class="text-[var(--primary-fuchsia)]">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <p class="text-3xl font-bold">18</p>
+                        <p class="text-yellow-400 text-sm mt-2">↔ Same as last month</p>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Latest Messages -->
+                    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                        <h3 class="text-xl font-semibold mb-4">Latest Messages</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <img src="path_to_avatar1" alt="Avatar" class="w-10 h-10 rounded-full bg-gray-700"/>
+                                <div>
+                                    <p class="font-medium">John Smith</p>
+                                    <p class="text-gray-400 text-sm">Interested in AI strategy workshop...</p>
+                                </div>
+                                <span class="ml-auto text-xs text-gray-500">2h ago</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <img src="path_to_avatar2" alt="Avatar" class="w-10 h-10 rounded-full bg-gray-700"/>
+                                <div>
+                                    <p class="font-medium">Sarah Johnson</p>
+                                    <p class="text-gray-400 text-sm">Looking for mentorship opportunities...</p>
+                                </div>
+                                <span class="ml-auto text-xs text-gray-500">5h ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Events -->
+                    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                        <h3 class="text-xl font-semibold mb-4">Upcoming Events</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-gray-700 rounded p-2">
+                                    <span class="text-[var(--primary-cyan)]">SEP</span>
+                                    <p class="text-2xl font-bold">15</p>
+                                </div>
+                                <div>
+                                    <p class="font-medium">AI Leadership Workshop</p>
+                                    <p class="text-gray-400 text-sm">Virtual Event • 2:00 PM</p>
+                                </div>
+                                <span class="ml-auto text-xs text-gray-500">12 Registered</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="bg-gray-700 rounded p-2">
+                                    <span class="text-[var(--primary-cyan)]">SEP</span>
+                                    <p class="text-2xl font-bold">22</p>
+                                </div>
+                                <div>
+                                    <p class="font-medium">AI Ethics Conference</p>
+                                    <p class="text-gray-400 text-sm">Mumbai • 10:00 AM</p>
+                                </div>
+                                <span class="ml-auto text-xs text-gray-500">45 Registered</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

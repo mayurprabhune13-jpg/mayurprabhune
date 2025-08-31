@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %}{% endblock %} - Admin Dashboard</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <style>
+        :root {
+            --primary-cyan: #00ffff;
+            --primary-fuchsia: #ff00ff;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white" style='font-family: "Plus Jakarta Sans", system-ui, sans-serif;'>
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-800 border-r border-gray-700">
+            <div class="p-6">
+                <div class="flex items-center gap-3">
+                    <div class="text-[var(--primary-cyan)]">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 48 48">
+                            <path fill="currentColor" d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-lg font-bold">Admin Panel</h1>
+                </div>
+            </div>
+            <nav class="mt-6">
+                <a href="{{ url_for('admin.dashboard') }}" 
+                   class="flex items-center gap-3 px-6 py-3 {% if request.endpoint == 'admin.dashboard' %}text-[var(--primary-cyan)] border-r-4 border-[var(--primary-cyan)] bg-gray-900{% else %}text-gray-400 hover:bg-gray-700{% endif %}">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="{{ url_for('admin.videos') }}"
+                   class="flex items-center gap-3 px-6 py-3 {% if request.endpoint == 'admin.videos' %}text-[var(--primary-cyan)] border-r-4 border-[var(--primary-cyan)] bg-gray-900{% else %}text-gray-400 hover:bg-gray-700{% endif %}">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    </svg>
+                    Videos
+                </a>
+                <a href="{{ url_for('admin.testimonials') }}"
+                   class="flex items-center gap-3 px-6 py-3 {% if request.endpoint == 'admin.testimonials' %}text-[var(--primary-cyan)] border-r-4 border-[var(--primary-cyan)] bg-gray-900{% else %}text-gray-400 hover:bg-gray-700{% endif %}">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                    </svg>
+                    Testimonials
+                </a>
+                <a href="{{ url_for('admin.messages') }}"
+                   class="flex items-center gap-3 px-6 py-3 {% if request.endpoint == 'admin.messages' %}text-[var(--primary-cyan)] border-r-4 border-[var(--primary-cyan)] bg-gray-900{% else %}text-gray-400 hover:bg-gray-700{% endif %}">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    Messages
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top bar -->
+            <header class="bg-gray-800 border-b border-gray-700">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <h2 class="text-xl font-semibold">{% block header %}{% endblock %}</h2>
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="font-medium">{{ current_user.username }}</span>
+                            <a href="{{ url_for('auth.logout') }}" class="text-sm text-gray-400 hover:text-white transition-colors">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="messages px-6 py-4">
+                        {% for category, message in messages %}
+                            <div class="rounded-lg p-4 mb-4 {% if category == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto bg-gray-900 p-6">
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

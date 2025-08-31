@@ -1,0 +1,246 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Videos{% endblock %}
+{% block header %}Video Management{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Add Video Form -->
+    <div class="bg-gray-800 rounded-lg p-6">
+        <h3 class="text-lg font-semibold mb-4">Add New Video</h3>
+        <form action="{{ url_for('admin.add_video') }}" method="POST" class="space-y-4">
+            {{ form.csrf_token }}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-400">Title</label>
+                    <input type="text" name="title" id="title" required
+                           class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]">
+                </div>
+                <div>
+                    <label for="video_url" class="block text-sm font-medium text-gray-400">Video URL</label>
+                    <input type="url" name="video_url" id="video_url" required
+                           class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]">
+                </div>
+                <div>
+                    <label for="thumbnail_url" class="block text-sm font-medium text-gray-400">Thumbnail URL</label>
+                    <input type="url" name="thumbnail_url" id="thumbnail_url" required
+                           class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]">
+                </div>
+                <div>
+                    <label for="category" class="block text-sm font-medium text-gray-400">Category</label>
+                    <select name="category" id="category" required
+                            class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]">
+                        <option value="tutorial">Tutorial</option>
+                        <option value="vlog">Vlog</option>
+                        <option value="review">Review</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-400">Description</label>
+                <textarea name="description" id="description" rows="3" required
+                          class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]"></textarea>
+            </div>
+            <div class="flex justify-end">
+                <button type="submit" 
+                        class="px-4 py-2 bg-[var(--primary-cyan)] text-gray-900 rounded-md hover:bg-cyan-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary-cyan)]">
+                    Add Video
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Video List -->
+    <div class="bg-gray-800 rounded-lg p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold">Video List</h3>
+            <div class="flex gap-2">
+                <select id="categoryFilter" 
+                        class="rounded-md bg-gray-700 border-gray-600 text-white focus:border-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]">
+                    <option value="">All Categories</option>
+                    <option value="tutorial">Tutorial</option>
+                    <option value="vlog">Vlog</option>
+                    <option value="review">Review</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="text" id="searchInput" placeholder="Search videos..." 
+                       class="rounded-md bg-gray-700 border-gray-600 text-white focus:border-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]">
+            </div>
+        </div>
+        
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-700">
+                <thead>
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Title</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Category</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Date Added</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Views</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-700">
+                    {% for video in videos %}
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <img class="h-10 w-10 rounded-sm object-cover" src="{{ video.thumbnail_url }}" alt="">
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium">{{ video.title }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                       {% if video.category == 'tutorial' %}bg-green-100 text-green-800
+                                       {% elif video.category == 'vlog' %}bg-blue-100 text-blue-800
+                                       {% elif video.category == 'review' %}bg-yellow-100 text-yellow-800
+                                       {% else %}bg-gray-100 text-gray-800{% endif %}">
+                                {{ video.category|title }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                            {{ video.created_at.strftime('%Y-%m-%d') }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                            {{ video.views }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <button onclick="editVideo('{{ video.id }}')"
+                                    class="text-[var(--primary-cyan)] hover:text-cyan-400">Edit</button>
+                            <button onclick="deleteVideo('{{ video.id }}')"
+                                    class="ml-3 text-red-400 hover:text-red-300">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Video Modal -->
+<div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-gray-800 rounded-lg p-6 w-full max-w-2xl">
+        <h3 class="text-lg font-semibold mb-4">Edit Video</h3>
+        <form id="editForm" method="POST" class="space-y-4">
+            <input type="hidden" name="_method" value="PUT">
+            {{ form.csrf_token }}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="editTitle" class="block text-sm font-medium text-gray-400">Title</label>
+                    <input type="text" name="title" id="editTitle" required
+                           class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]">
+                </div>
+                <div>
+                    <label for="editVideoUrl" class="block text-sm font-medium text-gray-400">Video URL</label>
+                    <input type="url" name="video_url" id="editVideoUrl" required
+                           class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]">
+                </div>
+                <div>
+                    <label for="editThumbnailUrl" class="block text-sm font-medium text-gray-400">Thumbnail URL</label>
+                    <input type="url" name="thumbnail_url" id="editThumbnailUrl" required
+                           class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]">
+                </div>
+                <div>
+                    <label for="editCategory" class="block text-sm font-medium text-gray-400">Category</label>
+                    <select name="category" id="editCategory" required
+                            class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]">
+                        <option value="tutorial">Tutorial</option>
+                        <option value="vlog">Vlog</option>
+                        <option value="review">Review</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="editDescription" class="block text-sm font-medium text-gray-400">Description</label>
+                <textarea name="description" id="editDescription" rows="3" required
+                          class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-[var(--primary-cyan)] focus:ring-[var(--primary-cyan)]"></textarea>
+            </div>
+            <div class="flex justify-end gap-3">
+                <button type="button" onclick="closeEditModal()"
+                        class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-500">
+                    Cancel
+                </button>
+                <button type="submit"
+                        class="px-4 py-2 bg-[var(--primary-cyan)] text-gray-900 rounded-md hover:bg-cyan-400">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Filter and search functionality
+    const categoryFilter = document.getElementById('categoryFilter');
+    const searchInput = document.getElementById('searchInput');
+    const videoRows = document.querySelectorAll('tbody tr');
+
+    function filterVideos() {
+        const category = categoryFilter.value.toLowerCase();
+        const searchTerm = searchInput.value.toLowerCase();
+
+        videoRows.forEach(row => {
+            const title = row.querySelector('.font-medium').textContent.toLowerCase();
+            const rowCategory = row.querySelector('.rounded-full').textContent.trim().toLowerCase();
+            const matchesCategory = !category || rowCategory === category;
+            const matchesSearch = !searchTerm || title.includes(searchTerm);
+            
+            row.style.display = matchesCategory && matchesSearch ? '' : 'none';
+        });
+    }
+
+    categoryFilter.addEventListener('change', filterVideos);
+    searchInput.addEventListener('input', filterVideos);
+
+    // Edit modal functionality
+    const editModal = document.getElementById('editModal');
+    const editForm = document.getElementById('editForm');
+
+    function editVideo(videoId) {
+        // Fetch video data and populate form
+        fetch(`/api/videos/${videoId}`)
+            .then(response => response.json())
+            .then(video => {
+                document.getElementById('editTitle').value = video.title;
+                document.getElementById('editVideoUrl').value = video.video_url;
+                document.getElementById('editThumbnailUrl').value = video.thumbnail_url;
+                document.getElementById('editCategory').value = video.category;
+                document.getElementById('editDescription').value = video.description;
+                editForm.action = `/admin/videos/${videoId}`;
+                editModal.classList.remove('hidden');
+            });
+    }
+
+    function closeEditModal() {
+        editModal.classList.add('hidden');
+    }
+
+    function deleteVideo(videoId) {
+        if (confirm('Are you sure you want to delete this video?')) {
+            fetch(`/admin/videos/${videoId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token() }}'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                }
+            });
+        }
+    }
+
+    // Close modal when clicking outside
+    editModal.addEventListener('click', (e) => {
+        if (e.target === editModal) {
+            closeEditModal();
+        }
+    });
+</script>
+{% endblock %}
