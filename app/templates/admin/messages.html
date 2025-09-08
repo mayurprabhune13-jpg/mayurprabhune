@@ -57,7 +57,7 @@
                             </div>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="text-sm text-gray-300 line-clamp-2">{{ message.content }}</p>
+                            <p class="text-sm text-gray-300 line-clamp-2">{{ message.message }}</p>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
                             {{ message.created_at.strftime('%Y-%m-%d %H:%M') }}
@@ -164,7 +164,7 @@ function viewMessage(messageId) {
             document.getElementById('modalName').textContent = message.name;
             document.getElementById('modalEmail').textContent = message.email;
             document.getElementById('modalDate').textContent = new Date(message.created_at).toLocaleString();
-            document.getElementById('modalContent').textContent = message.content;
+            document.getElementById('modalContent').textContent = message.message;
             document.getElementById('replyButton').onclick = () => {
                 window.location.href = `mailto:${message.email}?subject=Re: Contact Form Submission`;
             };

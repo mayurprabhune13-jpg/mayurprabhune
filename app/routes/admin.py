@@ -26,11 +26,14 @@ def require_admin():
 @bp.route('/dashboard')
 def dashboard():
     """Admin dashboard showing overview of content"""
+    # Calculate total views from all videos
+    total_views = db.session.query(db.func.sum(Video.views)).scalar() or 0
+    
     stats = {
-        'video_count': Video.query.count(),
-        'testimonial_count': Testimonial.query.count(),
-        'post_count': Post.query.count(),
-        'case_study_count': CaseStudy.query.count(),
+        'total_videos': Video.query.count(),
+        'total_views': total_views,
+        'total_testimonials': Testimonial.query.count(),
+        'total_messages': Contact.query.count(),
         'unread_messages': Contact.query.filter_by(status='unread').count()
     }
     
@@ -40,12 +43,20 @@ def dashboard():
         .order_by(Contact.created_at.desc()).limit(5).all()
     recent_posts = Post.query.order_by(Post.created_at.desc()).limit(5).all()
     
+    # Generate dummy chart data for weekly statistics
+    chart_data = {
+        'labels': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        'views': [12, 19, 3, 5, 2, 3, 15],
+        'messages': [5, 8, 2, 4, 1, 6, 10]
+    }
+    
     return render_template('admin/dashboard.html',
                          stats=stats,
                          recent_videos=recent_videos,
                          recent_testimonials=recent_testimonials,
                          recent_messages=recent_messages,
-                         recent_posts=recent_posts)
+                         recent_posts=recent_posts,
+                         chart_data=chart_data)
 
 @bp.route('/videos', methods=['GET', 'POST'])
 def videos():

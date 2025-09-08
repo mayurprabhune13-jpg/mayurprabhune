@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Home - Mayur Prabhune{% endblock %}
 
 {% block styles %}
     {{ super() }}
     <link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet"/>
     <style type="text/tailwindcss">
         :root {
-            /* Match provided design colors */
             --primary-cyan: #00ffff;
             --primary-fuchsia: #ff00ff;
         }
@@ -45,280 +44,276 @@
             justify-content: center;
         }
         .swiper-button-prev:hover, .swiper-button-next:hover {
-            background-color: rgba(55, 65, 81, 0.9);
+             background-color: rgba(55, 65, 81, 0.9);
         }
         .swiper-button-prev:after, .swiper-button-next:after {
             font-size: 20px !important;
             font-weight: bold;
-        }
-        body {
-            font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;
         }
     </style>
 {% endblock %}
 
 {% block content %}
 <section class="relative min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-96px)] flex items-center justify-center py-20 overflow-hidden">
-<div class="absolute inset-0 z-0">
-<video autoplay="" class="w-full h-full object-cover" loop="" muted="" playsinline="" poster="https://lh3.googleusercontent.com/aida-public/AB6AXuC2pC9ja_JsXe9PVBgPe0Jv0pHqhHObLSVPchV6O7NeTqbFqKtlsUkqM6xmRQbN2BeiseoDhzNE0WhlNjsuyyM9O8zMxHl4zDrH25zb2XxnuWmH7YH3tSgtQ9iZW_FzS3OHcjuxvfzmG-xmFQBfyp6W0kvUqdD8HJfpzYfucAOkBEooOwM06ypRuir64mqMXSyljGc27jfmUGkyilDlrTZZt2LyZVkJHyQzQyoX2zz0xqXj836mn78MXB9DJDiOPtAAgb1CRF2FaOxB">
-<source src="https://storage.googleapis.com/aida-test-videos/hero-background.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
-<div class="absolute inset-0 bg-gray-900/80"></div>
-</div>
-<div class="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-10 flex flex-col md:flex-row items-center gap-12">
-<div class="w-full md:w-1/2 flex justify-center">
-<img alt="Mayur Prabhune Headshot" class="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full object-cover border-4 border-[var(--primary-cyan)] glow-effect" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVR0OF-meQPUh-zV34yoM7Y1qVlQA8Yqqfes34iV4SlNh8tcMStP-OPF5BZDxWhGxR6m4qr-Mqk4vEdQEk1y-2VebA00kCras2SsLYo8Gam9NXFNdG-U8AF1FvRwxMIAJWaUMWTFnSpkYHDVfaMF0VeWS1R0jizpj4vdGSTixO3xOrkETQXQfRWf-lRkc8kec1Ee3Z5Cf6bLDay_PPwVbLUUWPnmFLRKhs1Dq-ib6eyDv7fURaFwCNy8YcdwAmZ309AwCQGaCIPH4z"/>
-</div>
-<div class="w-full md:w-1/2 text-center md:text-left flex flex-col items-center md:items-start">
-<h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)]"> Empowering Leaders with AI </h1>
-<p class="max-w-xl text-gray-300 text-base md:text-lg mb-8"> Mayur Prabhune is an AI Mentor dedicated to helping leaders harness the power of artificial intelligence to drive innovation and achieve their strategic goals. With a focus on practical applications and ethical considerations, Mayur provides tailored guidance and workshops to equip leaders with the knowledge and skills needed to navigate the AI landscape effectively. </p>
-<div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-<a href="{{ url_for('main.contact') }}" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-[var(--primary-cyan)] text-gray-900 text-base font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors duration-300 ease-in-out transform hover:scale-105 glow-effect">
-    <span class="truncate">Book a Workshop</span>
-</a>
-<a href="#" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 border-2 border-[var(--primary-fuchsia)] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-fuchsia)] hover:text-gray-900 transition-colors duration-300 ease-in-out transform hover:scale-105">
-    <span class="truncate">Connect on LinkedIn</span>
-</a>
-</div>
-</div>
-</div>
+    <div class="absolute inset-0 z-0">
+        <video autoplay class="w-full h-full object-cover" loop muted playsinline poster="https://lh3.googleusercontent.com/aida-public/AB6AXuC2pC9ja_JsXe9PVBgPe0Jv0pHqhHObLSVPchV6O7NeTqbFqKtlsUkqM6xmRQbN2BeiseoDhzNE0WhlNjsuyyM9O8zMxHl4zDrH25zb2XxnuWmH7YH3tSgtQ9iZW_FzS3OHcjuxvfzmG-xmFQBfyp6W0kvUqdD8HJfpzYfucAOkBEooOwM06ypRuir64mqMXSyljGc27jfmUGkyilDlrTZZt2LyZVkJHyQzQyoX2zz0xqXj836mn78MXB9DJDiOPtAAgb1CRF2FaOxB">
+            <source src="https://storage.googleapis.com/aida-test-videos/hero-background.mp4" type="video/mp4"/> Your browser does not support the video tag. 
+        </video>
+        <div class="absolute inset-0 bg-gray-900/80"></div>
+    </div>
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-10 flex flex-col md:flex-row items-center gap-12">
+        <div class="w-full md:w-1/2 flex justify-center">
+            <img alt="Mayur Prabhune Headshot" class="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full object-cover border-4 border-[var(--primary-cyan)] glow-effect" src="{{ url_for('static', filename='images/profile.jpg') }}"/>
+        </div>
+        <div class="w-full md:w-1/2 text-center md:text-left flex flex-col items-center md:items-start">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)]"> Empowering Leaders with AI </h1>
+            <p class="max-w-xl text-gray-300 text-base md:text-lg mb-8"> Mayur Prabhune is an AI Mentor dedicated to helping leaders harness the power of artificial intelligence to drive innovation and achieve their strategic goals. With a focus on practical applications and ethical considerations, Mayur provides tailored guidance and workshops to equip leaders with the knowledge and skills needed to navigate the AI landscape effectively. </p>
+            <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                <a href="{{ url_for('main.contact') }}" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-[var(--primary-cyan)] text-gray-900 text-base font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors duration-300 ease-in-out transform hover:scale-105 glow-effect">
+                    <span class="truncate">Book a Workshop</span>
+                </a>
+                <a href="https://www.linkedin.com/in/mayur-prabhune" target="_blank" rel="noopener noreferrer" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 border-2 border-[var(--primary-fuchsia)] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-fuchsia)] hover:text-gray-900 transition-colors duration-300 ease-in-out transform hover:scale-105">
+                    <span class="truncate">Connect on LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
+
 <section class="bg-gray-800 py-16 md:py-24">
-<div class="max-w-7xl mx-auto px-4 md:px-10">
-<div class="text-center mb-12">
-<h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">My Services</h2>
-<p class="text-lg text-gray-400 max-w-3xl mx-auto">Tailored AI mentorship and workshops to empower your leadership and organization.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="bg-gray-900 p-8 rounded-xl border border-[var(--primary-cyan)]/30 transform hover:scale-105 transition-transform duration-300">
-<h3 class="text-2xl font-bold text-[var(--primary-cyan)] mb-4">Executive AI Coaching</h3>
-<p class="text-gray-400">One-on-one mentorship for leaders to develop AI strategies that align with business goals and drive innovation.</p>
-</div>
-<div class="bg-gray-900 p-8 rounded-xl border border-[var(--primary-fuchsia)]/30 transform hover:scale-105 transition-transform duration-300">
-<h3 class="text-2xl font-bold text-[var(--primary-fuchsia)] mb-4">Team AI Workshops</h3>
-<p class="text-gray-400">Customized workshops for teams to build foundational AI knowledge and practical skills for real-world application.</p>
-</div>
-<div class="bg-gray-900 p-8 rounded-xl border border-[var(--primary-cyan)]/30 transform hover:scale-105 transition-transform duration-300">
-<h3 class="text-2xl font-bold text-[var(--primary-cyan)] mb-4">AI Strategy Consulting</h3>
-<p class="text-gray-400">Expert guidance on integrating AI ethically and effectively into your organization's roadmap.</p>
-</div>
-</div>
-<div class="text-center mt-12">
-<a href="{{ url_for('main.services') }}" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-transparent border-2 border-[var(--primary-cyan)] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-cyan)] hover:text-gray-900 transition-colors duration-300 ease-in-out transform hover:scale-105 mx-auto">
-    <span class="truncate">View All Services</span>
-</a>
-</div>
-</div>
+    <div class="max-w-7xl mx-auto px-4 md:px-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">My Services</h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Tailored AI mentorship and workshops to empower your leadership and organization.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-gray-900 p-8 rounded-xl border border-[var(--primary-cyan)]/30 transform hover:scale-105 transition-transform duration-300">
+                <h3 class="text-2xl font-bold text-[var(--primary-cyan)] mb-4">Executive AI Coaching</h3>
+                <p class="text-gray-400">One-on-one mentorship for leaders to develop AI strategies that align with business goals and drive innovation.</p>
+            </div>
+            <div class="bg-gray-900 p-8 rounded-xl border border-[var(--primary-fuchsia)]/30 transform hover:scale-105 transition-transform duration-300">
+                <h3 class="text-2xl font-bold text-[var(--primary-fuchsia)] mb-4">Team AI Workshops</h3>
+                <p class="text-gray-400">Customized workshops for teams to build foundational AI knowledge and practical skills for real-world application.</p>
+            </div>
+            <div class="bg-gray-900 p-8 rounded-xl border border-[var(--primary-cyan)]/30 transform hover:scale-105 transition-transform duration-300">
+                <h3 class="text-2xl font-bold text-[var(--primary-cyan)] mb-4">AI Strategy Consulting</h3>
+                <p class="text-gray-400">Expert guidance on integrating AI ethically and effectively into your organization's roadmap.</p>
+            </div>
+        </div>
+        <div class="text-center mt-12">
+            <a href="{{ url_for('main.services') }}" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-transparent border-2 border-[var(--primary-cyan)] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-cyan)] hover:text-gray-900 transition-colors duration-300 ease-in-out transform hover:scale-105 mx-auto">
+                <span class="truncate">View All Services</span>
+            </a>
+        </div>
+    </div>
 </section>
+
 <section class="bg-gray-900 py-16 md:py-24">
-<div class="max-w-7xl mx-auto px-4 md:px-10">
-<div class="text-center mb-12">
-<h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">Upcoming Events &amp; Webinars</h2>
-<p class="text-lg text-gray-400 max-w-3xl mx-auto">Join me for upcoming workshops and webinars to stay ahead in the AI landscape.</p>
-</div>
-<div class="space-y-8 px-4 md:px-10">
-<div class="bg-gray-800 p-8 rounded-xl border border-transparent hover:border-[var(--primary-cyan)]/50 transition-all duration-300 flex flex-col md:flex-row items-start gap-8">
-<div class="w-full md:w-1/4">
-<p class="text-lg font-bold text-[var(--primary-cyan)]">October 25, 2024</p>
-<p class="text-sm text-gray-400">Online Webinar</p>
-</div>
-<div class="w-full md:w-1/2">
-<h3 class="text-2xl font-bold text-white mb-2">AI for Product Managers</h3>
-<p class="text-gray-400">An in-depth workshop on leveraging AI to build better products, from ideation to launch.</p>
-</div>
-<div class="w-full md:w-1/4 flex flex-col md:items-end mt-4 md:mt-0">
-<button class="flex w-full md:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[var(--primary-cyan)] text-gray-900 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors">
-<span class="truncate">Register Now</span>
-</button>
-</div>
-</div>
-<div class="bg-gray-800 p-8 rounded-xl border border-transparent hover:border-[var(--primary-fuchsia)]/50 transition-all duration-300 flex flex-col md:flex-row items-start gap-8">
-<div class="w-full md:w-1/4">
-<p class="text-lg font-bold text-[var(--primary-fuchsia)]">November 12, 2024</p>
-<p class="text-sm text-gray-400">Speaking Engagement</p>
-</div>
-<div class="w-full md:w-1/2">
-<h3 class="text-2xl font-bold text-white mb-2">Keynote at AI Innovators Summit</h3>
-<p class="text-gray-400">Join me as I discuss the future of AI and its impact on global business leadership.</p>
-</div>
-<div class="w-full md:w-1/4 flex flex-col md:items-end mt-4 md:mt-0">
-<button class="flex w-full md:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 border-2 border-[var(--primary-fuchsia)] text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-fuchsia)] hover:text-gray-900 transition-colors">
-<span class="truncate">Learn More</span>
-</button>
-</div>
-</div>
-<div class="bg-gray-800 p-8 rounded-xl border border-transparent hover:border-[var(--primary-cyan)]/50 transition-all duration-300 flex flex-col md:flex-row items-start gap-8">
-<div class="w-full md:w-1/4">
-<p class="text-lg font-bold text-[var(--primary-cyan)]">December 5, 2024</p>
-<p class="text-sm text-gray-400">Exclusive Workshop</p>
-</div>
-<div class="w-full md:w-1/2">
-<h3 class="text-2xl font-bold text-white mb-2">Leading with GenAI: Executive Playbook</h3>
-<p class="text-gray-400">A hands-on workshop designed for C-suite leaders to craft and implement a winning Generative AI strategy.</p>
-</div>
-<div class="w-full md:w-1/4 flex flex-col md:items-end mt-4 md:mt-0">
-<button class="flex w-full md:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[var(--primary-cyan)] text-gray-900 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors">
-<span class="truncate">Register Now</span>
-</button>
-</div>
-</div>
-</div>
-<div class="text-center mt-12">
-<a href="#" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 border-2 border-[var(--primary-cyan)] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-cyan)] hover:text-gray-900 transition-colors duration-300 ease-in-out transform hover:scale-105 mx-auto">
-    <span class="truncate">View All Events</span>
-</a>
-</div>
-</div>
+    <div class="max-w-7xl mx-auto px-4 md:px-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">Upcoming Events & Webinars</h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Join me for upcoming workshops and webinars to stay ahead in the AI landscape.</p>
+        </div>
+        <div class="space-y-8">
+            <div class="bg-gray-800 p-8 rounded-xl border border-transparent hover:border-[var(--primary-cyan)]/50 transition-all duration-300 flex flex-col md:flex-row items-start gap-8">
+                <div class="w-full md:w-1/4">
+                    <p class="text-lg font-bold text-[var(--primary-cyan)]">October 25, 2024</p>
+                    <p class="text-sm text-gray-400">Online Webinar</p>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-2xl font-bold text-white mb-2">AI for Product Managers</h3>
+                    <p class="text-gray-400">An in-depth workshop on leveraging AI to build better products, from ideation to launch.</p>
+                </div>
+                <div class="w-full md:w-1/4 flex flex-col md:items-end mt-4 md:mt-0">
+                    <button class="flex w-full md:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[var(--primary-cyan)] text-gray-900 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors">
+                        <span class="truncate">Register Now</span>
+                    </button>
+                </div>
+            </div>
+            <div class="bg-gray-800 p-8 rounded-xl border border-transparent hover:border-[var(--primary-fuchsia)]/50 transition-all duration-300 flex flex-col md:flex-row items-start gap-8">
+                <div class="w-full md:w-1/4">
+                    <p class="text-lg font-bold text-[var(--primary-fuchsia)]">November 12, 2024</p>
+                    <p class="text-sm text-gray-400">Speaking Engagement</p>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-2xl font-bold text-white mb-2">Keynote at AI Innovators Summit</h3>
+                    <p class="text-gray-400">Join me as I discuss the future of AI and its impact on global business leadership.</p>
+                </div>
+                <div class="w-full md:w-1/4 flex flex-col md:items-end mt-4 md:mt-0">
+                    <button class="flex w-full md:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 border-2 border-[var(--primary-fuchsia)] text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-fuchsia)] hover:text-gray-900 transition-colors">
+                        <span class="truncate">Learn More</span>
+                    </button>
+                </div>
+            </div>
+            <div class="bg-gray-800 p-8 rounded-xl border border-transparent hover:border-[var(--primary-cyan)]/50 transition-all duration-300 flex flex-col md:flex-row items-start gap-8">
+                <div class="w-full md:w-1/4">
+                    <p class="text-lg font-bold text-[var(--primary-cyan)]">December 5, 2024</p>
+                    <p class="text-sm text-gray-400">Exclusive Workshop</p>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-2xl font-bold text-white mb-2">Leading with GenAI: Executive Playbook</h3>
+                    <p class="text-gray-400">A hands-on workshop designed for C-suite leaders to craft and implement a winning Generative AI strategy.</p>
+                </div>
+                <div class="w-full md:w-1/4 flex flex-col md:items-end mt-4 md:mt-0">
+                    <button class="flex w-full md:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[var(--primary-cyan)] text-gray-900 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors">
+                        <span class="truncate">Register Now</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-12">
+            <button class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 border-2 border-[var(--primary-cyan)] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-cyan)] hover:text-gray-900 transition-colors duration-300 ease-in-out transform hover:scale-105 mx-auto">
+                <span class="truncate">View All Events</span>
+            </button>
+        </div>
+    </div>
 </section>
+
 <section class="bg-gray-800 py-16 md:py-24 overflow-hidden">
-<div class="max-w-7xl mx-auto">
-<div class="text-center mb-12 px-4 md:px-10">
-<h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">Trusted by Industry Leaders</h2>
-<p class="text-lg text-gray-400 max-w-3xl mx-auto">I've had the privilege of working with a diverse range of innovative companies.</p>
-</div>
-<div class="relative w-full overflow-hidden mask-gradient-to-r">
-<div class="logo-carousel">
-<div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-<img alt="Client Logo 1" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
-</div>
-<div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-<img alt="Client Logo 2" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
-</div>
-<div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-<img alt="Client Logo 3" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
-</div>
-<div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-<img alt="Client Logo 4" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
-</div>
-<div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-<img alt="Client Logo 5" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
-</div>
-<div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-<img alt="Client Logo 6" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
-</div>
-<div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-<img alt="Client Logo 1" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
-</div>
-<div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-<img alt="Client Logo 2" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
-</div>
-<div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-<img alt="Client Logo 3" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
-</div>
-<div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-<img alt="Client Logo 4" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
-</div>
-<div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-<img alt="Client Logo 5" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
-</div>
-<div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-<img alt="Client Logo 6" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
-</div>
-</div>
-</div>
-</div>
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12 px-4 md:px-10">
+            <h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">Trusted by Industry Leaders</h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">I've had the privilege of working with a diverse range of innovative companies.</p>
+        </div>
+        <div class="relative w-full overflow-hidden mask-gradient-to-r">
+            <div class="logo-carousel">
+                {% for i in range(12) %}
+                <div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
+                    <img alt="Client Logo {{ i+1 }}" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </section>
+
 <section class="bg-gray-900 py-16 md:py-24">
-<div class="max-w-7xl mx-auto px-4 md:px-10">
-<div class="text-center mb-12">
-<h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">What Leaders Are Saying</h2>
-<p class="text-lg text-gray-400 max-w-3xl mx-auto">Real stories from leaders who have transformed their organizations with AI.</p>
-</div>
-<div class="swiper testimonial-carousel relative">
-<div class="swiper-wrapper">
-<div class="swiper-slide">
-<div class="bg-gray-800 p-8 rounded-xl border border-gray-700/50 max-w-3xl mx-auto text-center">
-<blockquote class="text-xl italic text-gray-300 leading-relaxed">"Mayur's guidance was a game-changer for our AI strategy. His deep expertise and practical approach helped us navigate the complexities of AI with confidence and clarity."</blockquote>
-<cite class="block text-[var(--primary-fuchsia)] font-bold mt-6 not-italic text-lg">Jane Doe</cite>
-<span class="text-gray-400">CEO, Tech Innovations Inc.</span>
-</div>
-</div>
-<div class="swiper-slide">
-<div class="bg-gray-800 p-8 rounded-xl border border-gray-700/50 max-w-3xl mx-auto text-center">
-<blockquote class="text-xl italic text-gray-300 leading-relaxed">"The workshop on AI for Product Managers was incredibly insightful. Mayur has a unique ability to break down complex topics into actionable insights."</blockquote>
-<cite class="block text-[var(--primary-fuchsia)] font-bold mt-6 not-italic text-lg">John Smith</cite>
-<span class="text-gray-400">Head of Product, Future Solutions</span>
-</div>
-</div>
-<div class="swiper-slide">
-<div class="bg-gray-800 p-8 rounded-xl border border-gray-700/50 max-w-3xl mx-auto text-center">
-<blockquote class="text-xl italic text-gray-300 leading-relaxed">"Working with Mayur helped us build a strong, ethical framework for our AI initiatives. His consulting was invaluable for our long-term vision."</blockquote>
-<cite class="block text-[var(--primary-fuchsia)] font-bold mt-6 not-italic text-lg">Samantha Lee</cite>
-<span class="text-gray-400">Chief Strategy Officer, Global Enterprises</span>
-</div>
-</div>
-</div>
-<div class="swiper-button-prev -left-4 md:-left-16"></div>
-<div class="swiper-button-next -right-4 md:-right-16"></div>
-<div class="swiper-pagination mt-8 !relative"></div>
-</div>
-</div>
+    <div class="max-w-7xl mx-auto px-4 md:px-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">What Leaders Are Saying</h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Real stories from leaders who have transformed their organizations with AI.</p>
+        </div>
+        <div class="swiper testimonial-carousel relative">
+            <div class="swiper-wrapper">
+                {% for testimonial in testimonials %}
+                <div class="swiper-slide">
+                    <div class="bg-gray-800 p-8 rounded-xl border border-gray-700/50 max-w-3xl mx-auto text-center">
+                        <blockquote class="text-xl italic text-gray-300 leading-relaxed">"{{ testimonial.content }}"</blockquote>
+                        <cite class="block text-[var(--primary-fuchsia)] font-bold mt-6 not-italic text-lg">{{ testimonial.author }}</cite>
+                        <span class="text-gray-400">{{ testimonial.role }}</span>
+                    </div>
+                </div>
+                {% else %}
+                <div class="swiper-slide">
+                    <div class="bg-gray-800 p-8 rounded-xl border border-gray-700/50 max-w-3xl mx-auto text-center">
+                        <blockquote class="text-xl italic text-gray-300 leading-relaxed">"Mayur's guidance was a game-changer for our AI strategy. His deep expertise and practical approach helped us navigate the complexities of AI with confidence and clarity."</blockquote>
+                        <cite class="block text-[var(--primary-fuchsia)] font-bold mt-6 not-italic text-lg">Jane Doe</cite>
+                        <span class="text-gray-400">CEO, Tech Innovations Inc.</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="bg-gray-800 p-8 rounded-xl border border-gray-700/50 max-w-3xl mx-auto text-center">
+                        <blockquote class="text-xl italic text-gray-300 leading-relaxed">"The workshop on AI for Product Managers was incredibly insightful. Mayur has a unique ability to break down complex topics into actionable insights."</blockquote>
+                        <cite class="block text-[var(--primary-fuchsia)] font-bold mt-6 not-italic text-lg">John Smith</cite>
+                        <span class="text-gray-400">Head of Product, Future Solutions</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="bg-gray-800 p-8 rounded-xl border border-gray-700/50 max-w-3xl mx-auto text-center">
+                        <blockquote class="text-xl italic text-gray-300 leading-relaxed">"Working with Mayur helped us build a strong, ethical framework for our AI initiatives. His consulting was invaluable for our long-term vision."</blockquote>
+                        <cite class="block text-[var(--primary-fuchsia)] font-bold mt-6 not-italic text-lg">Samantha Lee</cite>
+                        <span class="text-gray-400">Chief Strategy Officer, Global Enterprises</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-button-prev -left-4 md:-left-16"></div>
+            <div class="swiper-button-next -right-4 md:-right-16"></div>
+            <div class="swiper-pagination mt-8 !relative"></div>
+        </div>
+    </div>
 </section>
+
 <section class="bg-gray-800 py-16 md:py-24">
-<div class="max-w-7xl mx-auto px-4 md:px-10">
-<div class="text-center mb-12">
-<h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">Featured Video</h2>
-<p class="text-lg text-gray-400 max-w-3xl mx-auto">Get a glimpse into the world of AI leadership with this featured talk.</p>
-</div>
-<div class="aspect-video w-full max-w-4xl mx-auto rounded-xl overflow-hidden border-2 border-[var(--primary-fuchsia)]/50 glow-effect">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="w-full h-full" frameborder="0" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player"></iframe>
-</div>
-<div class="text-center mt-12">
-<a href="{{ url_for('main.videos') }}" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-[var(--primary-cyan)] text-gray-900 text-base font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors duration-300 ease-in-out transform hover:scale-105 mx-auto">
-    <span class="truncate">Explore More Videos</span>
-</a>
-</div>
-</div>
+    <div class="max-w-7xl mx-auto px-4 md:px-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">Featured Video</h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Get a glimpse into the world of AI leadership with this featured talk.</p>
+        </div>
+        {% if videos %}
+        <div class="aspect-video w-full max-w-4xl mx-auto rounded-xl overflow-hidden border-2 border-[var(--primary-fuchsia)]/50 glow-effect">
+            <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full" frameborder="0" src="https://www.youtube.com/embed/{{ videos[0].video_url.split('v=')[1] if videos[0].video_url else '' }}" title="{{ videos[0].title }}"></iframe>
+        </div>
+        {% else %}
+        <div class="aspect-video w-full max-w-4xl mx-auto rounded-xl overflow-hidden border-2 border-[var(--primary-fuchsia)]/50 glow-effect">
+            <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full" frameborder="0" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player"></iframe>
+        </div>
+        {% endif %}
+        <div class="text-center mt-12">
+            <a href="{{ url_for('main.videos') }}" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-[var(--primary-cyan)] text-gray-900 text-base font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors duration-300 ease-in-out transform hover:scale-105 mx-auto">
+                <span class="truncate">Explore More Videos</span>
+            </a>
+        </div>
+    </div>
 </section>
+
 <section class="bg-gray-900 py-16 md:py-24">
-<div class="max-w-7xl mx-auto px-4 md:px-10">
-<div class="text-center mb-12">
-<h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">From the Blog</h2>
-<p class="text-lg text-gray-400 max-w-3xl mx-auto">Stay updated with the latest insights on AI leadership and innovation.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-cyan)] border border-transparent transition-all duration-300">
-<h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-cyan)]">The 5 Pillars of a Successful AI Strategy</h3>
-<p class="text-gray-400 mb-4">Discover the key components that every leader needs to consider when building a robust AI roadmap for their organization.</p>
-<a class="font-semibold text-[var(--primary-cyan)] hover:underline" href="{{ url_for('main.blog') }}">Read More</a>
-</div>
-<div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-fuchsia)] border border-transparent transition-all duration-300">
-<h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-fuchsia)]">Ethical AI: A Leader's Responsibility</h3>
-<p class="text-gray-400 mb-4">Navigating the ethical landscape of AI is crucial. Learn how to lead with integrity and build trust in your AI initiatives.</p>
-<a class="font-semibold text-[var(--primary-fuchsia)] hover:underline" href="{{ url_for('main.blog') }}">Read More</a>
-</div>
-<div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-cyan)] border border-transparent transition-all duration-300">
-<h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-cyan)]">Demystifying AI for the C-Suite</h3>
-<p class="text-gray-400 mb-4">A practical guide for executives to understand AI's potential and limitations, enabling informed decision-making.</p>
-<a class="font-semibold text-[var(--primary-cyan)] hover:underline" href="{{ url_for('main.blog') }}">Read More</a>
-</div>
-</div>
-<div class="text-center mt-12">
-<a href="{{ url_for('main.blog') }}" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 border-2 border-[var(--primary-fuchsia)] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-fuchsia)] hover:text-gray-900 transition-colors duration-300 ease-in-out transform hover:scale-105 mx-auto">
-    <span class="truncate">Visit the Blog</span>
-</a>
-</div>
-</div>
+    <div class="max-w-7xl mx-auto px-4 md:px-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">From the Blog</h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Stay updated with the latest insights on AI leadership and innovation.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for post in posts %}
+            <div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-cyan)] border border-transparent transition-all duration-300">
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-cyan)]">{{ post.title }}</h3>
+                <p class="text-gray-400 mb-4">{{ post.excerpt|truncate(120) }}</p>
+                <a href="{{ url_for('blog.post_detail', slug=post.slug) }}" class="font-semibold text-[var(--primary-cyan)] hover:underline">Read More</a>
+            </div>
+            {% else %}
+            <div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-cyan)] border border-transparent transition-all duration-300">
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-cyan)]">The 5 Pillars of a Successful AI Strategy</h3>
+                <p class="text-gray-400 mb-4">Discover the key components that every leader needs to consider when building a robust AI roadmap for their organization.</p>
+                <a href="#" class="font-semibold text-[var(--primary-cyan)] hover:underline">Read More</a>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-fuchsia)] border border-transparent transition-all duration-300">
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-fuchsia)]">Ethical AI: A Leader's Responsibility</h3>
+                <p class="text-gray-400 mb-4">Navigating the ethical landscape of AI is crucial. Learn how to lead with integrity and build trust in your AI initiatives.</p>
+                <a href="#" class="font-semibold text-[var(--primary-fuchsia)] hover:underline">Read More</a>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-cyan)] border border-transparent transition-all duration-300">
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-cyan)]">Demystifying AI for the C-Suite</h3>
+                <p class="text-gray-400 mb-4">A practical guide for executives to understand AI's potential and limitations, enabling informed decision-making.</p>
+                <a href="#" class="font-semibold text-[var(--primary-cyan)] hover:underline">Read More</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-12">
+            <a href="{{ url_for('main.blog') }}" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 border-2 border-[var(--primary-fuchsia)] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-fuchsia)] hover:text-gray-900 transition-colors duration-300 ease-in-out transform hover:scale-105 mx-auto">
+                <span class="truncate">Visit the Blog</span>
+            </a>
+        </div>
+    </div>
 </section>
 {% endblock %}
 
 {% block scripts %}
-    {{ super() }}
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        const swiper = new Swiper('.testimonial-carousel', {
-            loop: true,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    </script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper('.testimonial-carousel', {
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
 {% endblock %}

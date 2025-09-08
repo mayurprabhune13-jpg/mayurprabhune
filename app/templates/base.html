@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{% block title %}{% endblock %} - Mayur Prabhune</title>
     <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" onload="this.rel='stylesheet'" rel="stylesheet"/>
+    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" onload="this.rel='stylesheet'" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='favicon.ico') }}" rel="icon" type="image/x-icon"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     {% block styles %}
     <style type="text/tailwindcss">
         :root {
-            --cyan: #06f9f9;
-            --fuchsia: #f906f9;
+            --primary-cyan: #00ffff;
+            --primary-fuchsia: #ff00ff;
         }
         .play-button {
             display: flex;
@@ -28,7 +28,7 @@
         }
         .video-thumbnail:hover .play-button {
             transform: scale(1.1);
-            background-color: var(--cyan);
+            background-color: var(--primary-cyan);
         }
         .video-thumbnail:hover .play-icon {
             color: #111818;
@@ -36,83 +36,124 @@
     </style>
     {% endblock %}
 </head>
-<body>
-    <div class="relative flex size-full min-h-screen flex-col bg-[#111818] dark group/design-root overflow-x-hidden" style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
-        <div class="layout-container flex h-full grow flex-col">
-            <!-- Header -->
-            <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#273a3a] px-10 py-4">
-                <div class="flex items-center gap-4 text-white">
-                    <a href="{{ url_for('main.index') }}" class="flex items-center gap-4">
-                        <svg class="size-8 text-[var(--cyan)]" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_6_543)">
-                                <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
-                                <path clip-rule="evenodd" d="M7.24189 26.4066C7.31369 26.4411 7.64204 26.5637 8.52504 26.3738C9.59462 26.1438 11.0343 25.5311 12.7183 24.4963C14.7583 23.2426 17.0256 21.4503 19.238 19.238C21.4503 17.0256 23.2426 14.7583 24.4963 12.7183C25.5311 11.0343 26.1438 9.59463 26.3738 8.52504C26.5637 7.64204 26.4411 7.31369 26.4066 7.24189C26.345 7.21246 26.143 7.14535 25.6664 7.1918C24.9745 7.25925 23.9954 7.5498 22.7699 8.14278C20.3369 9.32007 17.3369 11.4915 14.4142 14.4142C11.4915 17.3369 9.32007 20.3369 8.14278 22.7699C7.5498 23.9954 7.25925 24.9745 7.1918 25.6664C7.14534 26.143 7.21246 26.345 7.24189 26.4066ZM29.9001 10.7285C29.4519 12.0322 28.7617 13.4172 27.9042 14.8126C26.465 17.1544 24.4686 19.6641 22.0664 22.0664C19.6641 24.4686 17.1544 26.465 14.8126 27.9042C13.4172 28.7617 12.0322 29.4519 10.7285 29.9001L21.5754 40.747C21.6001 40.7606 21.8995 40.931 22.8729 40.7217C23.9424 40.4916 25.3821 39.879 27.0661 38.8441C29.1062 37.5904 31.3734 35.7982 33.5858 33.5858C35.7982 31.3734 37.5904 29.1062 38.8441 27.0661C39.879 25.3821 40.4916 23.9425 40.7216 22.8729C40.931 21.8995 40.7606 21.6001 40.747 21.5754L29.9001 10.7285Z" fill="var(--fuchsia)" fill-rule="evenodd"></path>
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_6_543"><rect fill="white" height="48" width="48"></rect></clipPath>
-                            </defs>
-                        </svg>
-                        <h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">Mayur Prabhune</h2>
-                    </a>
-                </div>
-                <nav class="flex flex-1 justify-end gap-8">
-                    <div class="flex items-center gap-6 text-sm font-medium">
-                        <a class="text-white/80 hover:text-white transition-colors" href="{{ url_for('main.about') }}">About</a>
-                        <a class="text-white/80 hover:text-white transition-colors" href="{{ url_for('main.services') }}">Services</a>
-                        <a class="text-white/80 hover:text-white transition-colors" href="{{ url_for('main.videos') }}">Videos</a>
-                        <a class="text-white/80 hover:text-white transition-colors" href="{{ url_for('main.contact') }}">Contact</a>
-                    </div>
-                    <a href="{{ url_for('main.contact') }}" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-[var(--cyan)] text-[#111818] text-sm font-bold leading-normal tracking-[0.015em] hover:bg-opacity-80 transition-all">
-                        <span class="truncate">Book a Call</span>
-                    </a>
+<body class="bg-gray-900 text-white" style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+    <div class="layout-container flex h-full grow flex-col">
+        <!-- Header -->
+        <header class="flex items-center justify-between whitespace-nowrap px-4 sm:px-10 py-5 bg-gray-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50">
+            <div class="flex items-center gap-4 text-white">
+                <a href="{{ url_for('main.index') }}" class="flex items-center gap-4">
+                    <svg class="size-8 text-[var(--primary-cyan)]" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_6_543)">
+                            <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4844 40.8634 22.2221 37.8124 24.4208 34.2346C25.7672 32.0436 27.6615 29.6551 29.9688 27.3478C32.2761 25.0405 34.6646 23.1462 36.8556 21.7998C39.4334 19.6011 42.4844 18.8634 43.7949 20.1739L42.1739 20.1739Z" fill="currentColor"></path>
+                            <path clip-rule="evenodd" d="M7.24189 26.4066C7.31369 26.4411 7.64204 26.5692 8.22696 26.7909C8.81188 27.0126 9.65338 27.328 10.7515 27.737C11.8496 28.146 13.2043 28.6486 14.8156 29.2448C16.4269 29.841 18.2948 30.5308 20.4193 31.3142C22.5438 32.0976 24.9249 32.9746 27.5626 33.9452C30.2003 34.9158 33.0946 35.98 36.2456 37.1379C39.3966 38.2958 42.8043 39.5473 46.4687 40.8925C47.3009 41.2151 47.717 41.3764 47.717 41.3764C47.717 41.3764 47.3009 41.2151 46.4687 40.8925C42.8043 39.5473 39.3966 38.2958 36.2456 37.1379C33.0946 35.98 30.2003 34.9158 27.5626 33.9452C24.9249 32.9746 22.5438 32.0976 20.4193 31.3142C18.2948 30.5308 16.4269 29.841 14.8156 29.2448C13.2043 28.6486 11.8496 28.146 10.7515 27.737C9.65338 27.328 8.81188 27.0126 8.22696 26.7909C7.64204 26.5692 7.31369 26.4411 7.24189 26.4066Z" fill="var(--primary-fuchsia)" fill-rule="evenodd"></path>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_6_543"><rect fill="white" height="48" width="48"></rect></clipPath>
+                        </defs>
+                    </svg>
+                    <h2 class="text-white text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em]">Mayur Prabhune</h2>
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-white focus:outline-none" id="menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+                <nav class="flex items-center gap-9">
+                    <a class="text-gray-300 hover:text-white text-base font-medium leading-normal" href="{{ url_for('main.about') }}">About</a>
+                    <a class="text-gray-300 hover:text-white text-base font-medium leading-normal" href="{{ url_for('main.services') }}">Services</a>
+                    <a class="text-gray-300 hover:text-white text-base font-medium leading-normal" href="{{ url_for('main.blog') }}">Blog</a>
+                    <a class="text-gray-300 hover:text-white text-base font-medium leading-normal" href="{{ url_for('main.contact') }}">Contact</a>
                 </nav>
-            </header>
-
-            <!-- Flash Messages -->
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    <div class="messages px-10 py-4">
-                        {% for category, message in messages %}
-                            <div class="rounded-lg p-4 mb-4 {% if category == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            {% endwith %}
-
-            <!-- Main Content -->
-            <main class="px-10 md:px-20 lg:px-40 flex flex-1 justify-center py-10 md:py-16">
-                {% block content %}{% endblock %}
-            </main>
-
-            <!-- Footer -->
-            <footer class="border-t border-solid border-t-[#273a3a] px-10 md:px-20 lg:px-40 py-10">
-                <div class="flex max-w-7xl mx-auto flex-col items-center">
-                    <div class="flex w-full flex-wrap items-center justify-between gap-6">
-                        <div class="flex flex-wrap items-center justify-center gap-6 text-sm">
-                            <a class="text-[#9bbbbb] hover:text-white transition-colors" href="#">Privacy Policy</a>
-                            <a class="text-[#9bbbbb] hover:text-white transition-colors" href="#">Terms of Service</a>
-                        </div>
-                        <div class="flex flex-wrap justify-center gap-4">
-                            <a class="text-[#9bbbbb] hover:text-white transition-colors" href="#" aria-label="Twitter">
-                                <svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Z"></path>
-                                </svg>
-                            </a>
-                            <a class="text-[#9bbbbb] hover:text-white transition-colors" href="#" aria-label="LinkedIn">
-                                <svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <p class="text-[#9bbbbb] text-sm font-normal leading-normal mt-8">© {{ now.year }} Mayur Prabhune. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="{{ url_for('main.contact') }}" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[var(--primary-cyan)] text-gray-900 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors">
+                        <span class="truncate">Book a Workshop</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mayur-prabhune" target="_blank" rel="noopener noreferrer" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-700 text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-gray-600 transition-colors">
+                        <span class="truncate">Connect on LinkedIn</span>
+                    </a>
                 </div>
-            </footer>
-        </div>
-    </div>
+            </div>
+        </header>
 
-    {% block scripts %}{% endblock %}
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-gray-900/90 backdrop-blur-sm fixed top-[76px] left-0 right-0 z-40 p-5" id="mobile-menu">
+            <nav class="flex flex-col items-center gap-6">
+                <a class="text-gray-300 hover:text-white text-lg font-medium" href="{{ url_for('main.about') }}">About</a>
+                <a class="text-gray-300 hover:text-white text-lg font-medium" href="{{ url_for('main.services') }}">Services</a>
+                <a class="text-gray-300 hover:text-white text-lg font-medium" href="{{ url_for('main.blog') }}">Blog</a>
+                <a class="text-gray-300 hover:text-white text-lg font-medium" href="{{ url_for('main.contact') }}">Contact</a>
+            </nav>
+            <div class="flex flex-col gap-4 mt-6">
+                <a href="{{ url_for('main.contact') }}" class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 bg-[var(--primary-cyan)] text-gray-900 text-base font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors">
+                    <span class="truncate">Book a Workshop</span>
+                </a>
+                <a href="https://www.linkedin.com/in/mayur-prabhune" target="_blank" rel="noopener noreferrer" class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 bg-gray-700 text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-gray-600 transition-colors">
+                    <span class="truncate">Connect on LinkedIn</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="messages px-10 py-4 mt-20">
+                    {% for category, message in messages %}
+                        <div class="rounded-lg p-4 mb-4 {% if category == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Main Content -->
+        <main class="flex-1 pt-20 md:pt-24">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-solid border-t-[#273a3a] px-10 md:px-20 lg:px-40 py-10">
+            <div class="flex max-w-7xl mx-auto flex-col items-center">
+                <div class="flex w-full flex-wrap items-center justify-between gap-6">
+                    <div class="flex flex-wrap items-center justify-center gap-6 text-sm">
+                        <a class="text-[#9bbbbb] hover:text-white transition-colors" href="#">Privacy Policy</a>
+                        <a class="text-[#9bbbbb] hover:text-white transition-colors" href="#">Terms of Service</a>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a class="text-[#9bbbbb] hover:text-white transition-colors" href="#" aria-label="Twitter">
+                            <svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,80,88v6.09C79.74,88.47,77.91,88,76,88a56,56,0,0,0-56,56,56.34,56.34,极"</path>
+                            </svg>
+                        </a>
+                        <a class="text-[#9bbbbb] hover:text-white transition-colors" href="https://www.linkedin.com/in/mayur-prabhune" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,极"</path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <p class="text-[#9bbbbb] text-sm font-normal leading-normal mt-8">© {{ now.year }} Mayur Prabhune. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+</script>
+{% endblock %}
 </body>
 </html>

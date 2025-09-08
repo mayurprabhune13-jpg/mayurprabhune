@@ -42,7 +42,7 @@
         {% for case_study in case_studies %}
         <div class="case-study-card flex flex-col overflow-hidden rounded-lg bg-[#1a2222] @container {% if loop.index is even %}md:flex-row-reverse{% else %}md:flex-row{% endif %}">
             <div class="h-64 w-full bg-cover bg-center md:h-auto md:w-1/3"
-                 style="background-image: url('{{ url_for('static', filename=case_study.image_url) }}');">
+                 {% if case_study.image_url %}style="background-image: url('{{ url_for('static', filename=case_study.image_url) }}');"{% endif %}>
             </div>
             <div class="flex flex-1 flex-col justify-between p-6 sm:p-8">
                 <div>

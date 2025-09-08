@@ -98,7 +98,7 @@
                     </div>
                     <span class="text-xs text-gray-500">{{ message.created_at.strftime('%Y-%m-%d') }}</span>
                 </div>
-                <p class="mt-2 text-sm text-gray-300">{{ message.content[:100] }}{% if message.content|length > 100 %}...{% endif %}</p>
+                <p class="mt-2 text-sm text-gray-300">{{ message.message[:100] }}{% if message.message|length > 100 %}...{% endif %}</p>
             </div>
             {% endfor %}
         </div>

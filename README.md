@@ -67,7 +67,7 @@ A comprehensive Flask-based portfolio website with admin dashboard, content mana
    SECRET_KEY=your-secret-key-here
    DATABASE_URL=sqlite:///app.db
    ADMIN_USERNAME=admin
-   ADMIN_EMAIL=admin@example.com
+   ADMIN_EMAIL=mayur.prabhune@gmail.com
    ADMIN_PASSWORD=admin
    ```
 
@@ -220,8 +220,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For support and questions, please contact:
-- Email: admin@example.com
+- Email: mayur.prabhune@gmail.com
 - Website: https://your-domain.com
+- LinkedIn: https://www.linkedin.com/in/mayur-prabhune
 
 ## Changelog
 
@@ -266,13 +267,13 @@ FLASK_ENV=development
 SECRET_KEY=change-me
 DATABASE_URL=sqlite:///app.db
 ADMIN_USERNAME=admin
-ADMIN_EMAIL=admin@example.com
+ADMIN_EMAIL=mayur.prabhune@gmail.com
 ADMIN_PASSWORD=admin
 
 # Optional contact info exposed to templates via context processor
-CONTACT_EMAIL=admin@example.com
-CONTACT_PHONE=+1-555-0100
-CONTACT_LINKEDIN=https://www.linkedin.com/in/your-handle/
+CONTACT_EMAIL=mayur.prabhune@gmail.com
+CONTACT_PHONE=+91 7620065818
+CONTACT_LINKEDIN=https://www.linkedin.com/in/mayur-prabhune
 ```
 
 ## Deployment (Render/Railway)
@@ -297,12 +298,24 @@ The app uses `wsgi.py` and Gunicorn (`gunicorn wsgi:app`).
 2. Add a Service → `Python`
 3. Variables: copy from `.env` and set `PORT` if required by buildpack
 4. Start Command:
-   ```
-   gunicorn wsgi:app --bind 0.0.0.0:$PORT
-   ```
+    ```
+    gunicorn wsgi:app --bind 0.0.0.0:$PORT
+    ```
+
+### Docker Deployment
+1. Build the Docker image:
+    ```bash
+    docker build -t your-app .
+    ```
+2. Run the container:
+    ```bash
+    docker run -d -p 5000:5000 --env-file .env your-app
+    ```
+3. For production, use Docker Compose or orchestration tools.
 
 ## Notes
 
 - Error templates live at `app/templates/errors/404.html` and `app/templates/errors/500.html`.
 - New public templates include `videos.html`, `video_detail.html`, `testimonials.html`, and `post_detail.html`.
 - Service CTAs in `templates/services.html` currently link to `main.contact` until dedicated pages are added.
+- For detailed deployment instructions, see [`DEPLOYMENT.md`](DEPLOYMENT.md).
