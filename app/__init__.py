@@ -8,6 +8,12 @@ from config import Config
 from datetime import datetime
 from app.monitoring import Monitoring
 
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 # Initialize Flask extensions
 db = SQLAlchemy()
 migrate = Migrate()
@@ -21,26 +27,72 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
     
-    # Handle DATABASE_URL format for PostgreSQL with connection pooling
-    if app.config['DATABASE_URL']:
-        if app.config['DATABASE_URL'].startswith('postgres://'):
-            db_url = app.config['DATABASE_URL'].replace('postgres://', 'postgresql://', 1)
-        else:
+    # Handle DATABASE_URL format for PostgreSQL
+    try:
+        if app.config.get('DATABASE_URL'):
+            logger.info("Configuring database connection...")
             db_url = app.config['DATABASE_URL']
-        
-        # Add connection pooling parameters if not present
-        if '?' not in db_url:
-            db_url += '?prepared_statement_cache_size=0&pool_pre_ping=true'
-        
-        app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+            
+            if db_url.startswith('postgres://'):
+                db_url = db_url.replace('postgres://', 'postgresql://', 1)
+                logger.info("Converted postgres:// to postgresql://")
+            
+            # Add connection pooling parameters
+            if '?' not in db_url:
+                db_url += '?pool_size=10&pool_timeout=30&pool_pre_ping=true'
+            logger.info("Added connection pooling parameters")
+            
+            app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+            app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+                'pool_size': 10,
+                'pool_timeout': 30,
+                'pool_pre_ping': True
+            }
+            logger.info(f"Database URL configured: {db_url.split('@')[0]}@[HIDDEN]")
+        else:
+            logger.warning("No DATABASE_URL configured, using SQLite")
     
     # Initialize extensions with app
-    db.init_app(app)
-    migrate.init_app(app, db)
-    login_manager.init_app(app)
-    csrf.init_app(app)
-    monitoring.init_app(app)
-    mail.init_app(app)
+    try:
+        logger.info("Initializing database...")
+        db.init_app(app)
+        
+        logger.info("Initializing migrations...")
+        migrate.init_app(app, db)
+        
+        logger.info("Initializing login manager...")
+        login_manager.init_app(app)
+        
+        logger.info("Initializing CSRF protection...")
+        csrf.init_app(app)
+        
+        logger.info("Initializing monitoring...")
+        monitoring.init_app(app)
+        
+        logger.info("Initializing mail...")
+        mail.init_app(app)
+        
+        # Test database connection with retry
+        max_retries = 3
+        retry_count = 0
+        while retry_count < max_retries:
+            try:
+                with app.app_context():
+                    db.engine.connect()
+                    logger.info("Database connection test successful")
+                    break
+            except Exception as conn_err:
+                retry_count += 1
+                if retry_count == max_retries:
+                    logger.error(f"Failed to connect to database after {max_retries} attempts")
+                    raise
+                logger.warning(f"Database connection attempt {retry_count} failed: {str(conn_err)}")
+                from time import sleep
+                sleep(2 ** retry_count)  # Exponential backoff
+            
+    except Exception as e:
+        logger.error(f"Error during initialization: {str(e)}")
+        raise
     
     # Configure login
     login_manager.login_view = 'auth.login'
