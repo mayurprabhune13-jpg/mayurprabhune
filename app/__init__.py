@@ -21,10 +21,18 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
     
-    # Handle DATABASE_URL format for PostgreSQL
-    if app.config['DATABASE_URL'] and app.config['DATABASE_URL'].startswith('postgres://'):
-        app.config['DATABASE_URL'] = app.config['DATABASE_URL'].replace('postgres://', 'postgresql://', 1)
-        app.config['SQLALCHEMY_DATABASE_URI'] = app.config['DATABASE_URL']
+    # Handle DATABASE_URL format for PostgreSQL with connection pooling
+    if app.config['DATABASE_URL']:
+        if app.config['DATABASE_URL'].startswith('postgres://'):
+            db_url = app.config['DATABASE_URL'].replace('postgres://', 'postgresql://', 1)
+        else:
+            db_url = app.config['DATABASE_URL']
+        
+        # Add connection pooling parameters if not present
+        if '?' not in db_url:
+            db_url += '?prepared_statement_cache_size=0&pool_pre_ping=true'
+        
+        app.config['SQLALCHEMY_DATABASE_URI'] = db_url
     
     # Initialize extensions with app
     db.init_app(app)
