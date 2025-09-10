@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
 from flask_migrate import Migrate
+from flask_mail import Mail
 from config import Config
 from datetime import datetime
 from app.monitoring import Monitoring
@@ -13,6 +14,7 @@ migrate = Migrate()
 login_manager = LoginManager()
 csrf = CSRFProtect()
 monitoring = Monitoring()
+mail = Mail()
 
 def create_app(config_class=Config):
     """Create and configure the Flask application"""
@@ -25,6 +27,7 @@ def create_app(config_class=Config):
     login_manager.init_app(app)
     csrf.init_app(app)
     monitoring.init_app(app)
+    mail.init_app(app)
     
     # Configure login
     login_manager.login_view = 'auth.login'

@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app
 from app.models import Post, Testimonial, Video, Contact, CaseStudy
-from app.utils import is_valid_email, format_datetime, reading_time
+from app.utils import is_valid_email, format_datetime, reading_time, send_email
 from app import db
 from app.monitoring import log_function_call, log_db_query
 
@@ -70,10 +70,46 @@ def contact():
         try:
             db.session.add(contact)
             db.session.commit()
+            
+            # Send confirmation email to the sender
+            confirmation_subject = "Thank you for contacting Mayur Prabhune"
+            confirmation_body = f"""
+Dear {name},
+
+Thank you for reaching out. I have received your message and will get back to you soon.
+
+Best regards,
+Mayur Prabhune
+"""
+            send_email(
+                subject=confirmation_subject,
+                sender=current_app.config['MAIL_DEFAULT_SENDER'],
+                recipients=[email],
+                text_body=confirmation_body
+            )
+            
+            # Send notification email to admin
+            admin_subject = "New Contact Form Submission"
+            admin_body = f"""
+New contact form submission received:
+
+Name: {name}
+Email: {email}
+Message:
+{message}
+"""
+            send_email(
+                subject=admin_subject,
+                sender=current_app.config['MAIL_DEFAULT_SENDER'],
+                recipients=[current_app.config['ADMIN_EMAIL']],
+                text_body=admin_body
+            )
+            
             flash('Your message has been sent!', 'success')
             return redirect(url_for('main.index'))
-        except:
+        except Exception as e:
             db.session.rollback()
+            current_app.logger.error(f"Error in contact form: {str(e)}")
             flash('An error occurred. Please try again.', 'error')
             
     return render_template('contact.html')

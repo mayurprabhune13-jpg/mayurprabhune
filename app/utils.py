@@ -1,6 +1,9 @@
 import re
 from unidecode import unidecode
 from datetime import datetime
+from flask import current_app
+from flask_mail import Message
+from app import mail
 
 def generate_slug(text):
     """
@@ -52,3 +55,16 @@ def reading_time(text, wpm=200):
     word_count = count_words(text)
     minutes = word_count / wpm
     return max(1, round(minutes))
+
+def send_email(subject, sender, recipients, text_body, html_body=None):
+    """Send an email using Flask-Mail"""
+    try:
+        msg = Message(subject, sender=sender, recipients=recipients)
+        msg.body = text_body
+        if html_body:
+            msg.html = html_body
+        mail.send(msg)
+        return True
+    except Exception as e:
+        current_app.logger.error(f"Error sending email: {str(e)}")
+        return False
