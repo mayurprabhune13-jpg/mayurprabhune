@@ -21,6 +21,11 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
     
+    # Handle DATABASE_URL format for PostgreSQL
+    if app.config['DATABASE_URL'] and app.config['DATABASE_URL'].startswith('postgres://'):
+        app.config['DATABASE_URL'] = app.config['DATABASE_URL'].replace('postgres://', 'postgresql://', 1)
+        app.config['SQLALCHEMY_DATABASE_URI'] = app.config['DATABASE_URL']
+    
     # Initialize extensions with app
     db.init_app(app)
     migrate.init_app(app, db)
