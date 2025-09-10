@@ -4,6 +4,7 @@ from app import db
 from app.models import Video, Testimonial, Contact, Post, CaseStudy
 from app.utils import is_valid_email
 from datetime import datetime
+from app.monitoring import log_function_call, log_db_query
 
 bp = Blueprint('api', __name__)
 
@@ -70,6 +71,7 @@ def serialize_case_study(case_study):
     }
 
 @bp.route('/videos', methods=['GET'])
+@log_function_call
 def get_videos():
     """Get all videos with optional filtering"""
     status = request.args.get('status', 'published')
@@ -86,12 +88,14 @@ def get_videos():
     return jsonify([serialize_video(v) for v in videos])
 
 @bp.route('/video/<int:id>', methods=['GET'])
+@log_function_call
 def get_video(id):
     """Get a specific video"""
     video = Video.query.get_or_404(id)
     return jsonify(serialize_video(video))
 
 @bp.route('/posts', methods=['GET'])
+@log_function_call
 def get_posts():
     """Get all blog posts with optional filtering"""
     status = request.args.get('status', 'published')
@@ -108,12 +112,14 @@ def get_posts():
     return jsonify([serialize_post(p) for p in posts])
 
 @bp.route('/post/<int:id>', methods=['GET'])
+@log_function_call
 def get_post(id):
     """Get a specific blog post"""
     post = Post.query.get_or_404(id)
     return jsonify(serialize_post(post))
 
 @bp.route('/case-studies', methods=['GET'])
+@log_function_call
 def get_case_studies():
     """Get all case studies with optional filtering"""
     status = request.args.get('status', 'published')
@@ -130,12 +136,14 @@ def get_case_studies():
     return jsonify([serialize_case_study(cs) for cs in case_studies])
 
 @bp.route('/case-study/<int:id>', methods=['GET'])
+@log_function_call
 def get_case_study(id):
     """Get a specific case study"""
     case_study = CaseStudy.query.get_or_404(id)
     return jsonify(serialize_case_study(case_study))
 
 @bp.route('/testimonials', methods=['GET'])
+@log_function_call
 def get_testimonials():
     """Get all testimonials with optional filtering"""
     status = request.args.get('status', 'approved')
@@ -159,6 +167,7 @@ def get_testimonials():
     } for t in testimonials])
 
 @bp.route('/contact', methods=['POST'])
+@log_function_call
 def create_contact():
     """Create a new contact message"""
     data = request.get_json()
@@ -192,6 +201,7 @@ def create_contact():
         return jsonify({'error': 'Error creating contact message'}), 500
 
 @bp.route('/messages', methods=['GET'])
+@log_function_call
 def get_messages():
     """Get messages with optional status filter"""
     status = request.args.get('status', 'unread')
@@ -215,6 +225,7 @@ def get_messages():
     } for m in messages])
 
 @bp.route('/stats', methods=['GET'])
+@log_function_call
 def get_stats():
     """Get dashboard statistics"""
     return jsonify({
@@ -249,10 +260,12 @@ def get_stats():
 
 # Error handlers
 @bp.errorhandler(404)
+@log_function_call
 def not_found(error):
     return jsonify({'error': 'Resource not found'}), 404
 
 @bp.errorhandler(500)
+@log_function_call
 def internal_error(error):
     db.session.rollback()
     return jsonify({'error': 'Internal server error'}), 500

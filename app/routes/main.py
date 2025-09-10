@@ -2,10 +2,12 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from app.models import Post, Testimonial, Video, Contact, CaseStudy
 from app.utils import is_valid_email, format_datetime, reading_time
 from app import db
+from app.monitoring import log_function_call, log_db_query
 
 bp = Blueprint('main', __name__)
 
 @bp.route('/')
+@log_function_call
 def index():
     """Home page route"""
     # Get recent published videos
@@ -41,6 +43,7 @@ def services():
     return render_template('services.html')
 
 @bp.route('/contact', methods=['GET', 'POST'])
+@log_function_call
 def contact():
     """Contact page route"""
     if request.method == 'POST':
@@ -100,6 +103,7 @@ def videos():
                          current_category=category)
 
 @bp.route('/video/<slug>')
+@log_function_call
 def video_detail(slug):
     """Video detail page"""
     video = Video.query.filter_by(slug=slug, status='published').first_or_404()
@@ -142,6 +146,7 @@ def blog():
                          current_category=category)
 
 @bp.route('/blog/<slug>')
+@log_function_call
 def post_detail(slug):
     """Blog post detail page"""
     post = Post.query.filter_by(slug=slug, status='published').first_or_404()
@@ -180,6 +185,7 @@ def success_stories():
                          current_industry=industry)
 
 @bp.route('/success-stories/<slug>')
+@log_function_call
 def case_study_detail(slug):
     """Case study detail page"""
     case_study = CaseStudy.query.filter_by(slug=slug, status='published').first_or_404()
@@ -193,10 +199,12 @@ def _jinja2_filter_datetime(date):
 
 # Error handlers
 @bp.app_errorhandler(404)
+@log_function_call
 def not_found_error(error):
     return render_template('errors/404.html'), 404
 
 @bp.app_errorhandler(500)
+@log_function_call
 def internal_error(error):
     db.session.rollback()
     return render_template('errors/500.html'), 500

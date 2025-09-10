@@ -3,11 +3,13 @@ from flask_login import login_user, logout_user, login_required, current_user
 from urllib.parse import urlparse
 from app.models import User
 from app import db, csrf
+from app.monitoring import log_function_call, log_db_query
 
 bp = Blueprint('auth', __name__)
 
 @bp.route('/login', methods=['GET', 'POST'])
 @csrf.exempt
+@log_function_call
 def login():
     """Handle user login"""
     if current_user.is_authenticated:
@@ -41,6 +43,7 @@ def login():
 
 @bp.route('/logout')
 @login_required
+@log_function_call
 def logout():
     """Handle user logout"""
     logout_user()
@@ -49,6 +52,7 @@ def logout():
 
 @bp.route('/change-password', methods=['GET', 'POST'])
 @login_required
+@log_function_call
 def change_password():
     """Allow users to change their password"""
     if request.method == 'POST':
