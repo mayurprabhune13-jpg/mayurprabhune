@@ -10,7 +10,8 @@ class ProductionConfig(Config):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'change-this-in-production'
     
     # Database configuration for production
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///app.db'
+    # Let the base Config class handle DATABASE_URL transformation
+    pass
     
     # Disable track modifications for production
     SQLALCHEMY_TRACK_MODIFICATIONS = False
