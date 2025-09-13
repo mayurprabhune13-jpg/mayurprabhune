@@ -1,24 +1,19 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
-from flask_migrate import Migrate
 from flask_mail import Mail
 from config import Config
 from datetime import datetime
-from app.monitoring import Monitoring
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Initialize Flask extensions
-db = SQLAlchemy()
-migrate = Migrate()
+# Initialize minimal Flask extensions (no database yet)
 login_manager = LoginManager()
 csrf = CSRFProtect()
-monitoring = Monitoring()
 mail = Mail()
 
 def create_app(config_class=Config):
@@ -26,36 +21,14 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
     
-    # Configure database connection
-    if app.config.get('DATABASE_URL'):
-        logger.info("Configuring database connection...")
-        db_url = app.config['DATABASE_URL']
-        
-        # Simple URL transformation
-        if db_url.startswith('postgres://'):
-            db_url = db_url.replace('postgres://', 'postgresql://', 1)
-            logger.info("Converted postgres:// to postgresql://")
-        
-        app.config['SQLALCHEMY_DATABASE_URI'] = db_url
-        logger.info(f"Database URL configured: {db_url.split('@')[0]}@[HIDDEN]")
-    else:
-        logger.warning("No DATABASE_URL configured, using SQLite")
-        
-    # Initialize extensions
-    logger.info("Initializing database...")
-    db.init_app(app)
+    logger.info("Starting minimal Flask application...")
     
-    logger.info("Initializing migrations...")
-    migrate.init_app(app, db)
-    
+    # Initialize only non-database extensions
     logger.info("Initializing login manager...")
     login_manager.init_app(app)
     
     logger.info("Initializing CSRF protection...")
     csrf.init_app(app)
-    
-    logger.info("Initializing monitoring...")
-    monitoring.init_app(app)
     
     logger.info("Initializing mail...")
     mail.init_app(app)
@@ -63,6 +36,70 @@ def create_app(config_class=Config):
     # Configure login
     login_manager.login_view = 'auth.login'
     login_manager.login_message_category = 'info'
+    
+    # Health check route
+    @app.route('/health')
+    def health_check():
+        return jsonify({'status': 'healthy', 'message': 'Application is running'})
+    
+    # Database setup route
+    @app.route('/setup-db')
+    def setup_database():
+        """Initialize database connection and setup"""
+        try:
+            # Import database components only when needed
+            from flask_sqlalchemy import SQLAlchemy
+            from flask_migrate import Migrate
+            
+            # Initialize database extensions
+            db = SQLAlchemy()
+            migrate = Migrate()
+            
+            # Configure database URL
+            if app.config.get('DATABASE_URL'):
+                db_url = app.config['DATABASE_URL']
+                if db_url.startswith('postgres://'):
+                    db_url = db_url.replace('postgres://', 'postgresql://', 1)
+                app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+                logger.info("Database URL configured")
+            
+            # Initialize database
+            db.init_app(app)
+            migrate.init_app(app, db)
+            
+            # Create tables and admin user
+            with app.app_context():
+                db.create_all()
+                
+                # Import models and create admin user
+                from app.models import User
+                admin = User.query.filter_by(username=app.config['ADMIN_USERNAME']).first()
+                if not admin:
+                    admin = User(
+                        username=app.config['ADMIN_USERNAME'],
+                        email=app.config['ADMIN_EMAIL'],
+                        is_admin=True
+                    )
+                    db.session.add(admin)
+                admin.set_password(app.config['ADMIN_PASSWORD'])
+                db.session.commit()
+                
+            return jsonify({'status': 'success', 'message': 'Database setup completed'})
+            
+        except Exception as e:
+            logger.error(f"Database setup error: {str(e)}")
+            return jsonify({'status': 'error', 'message': str(e)}), 500
+    
+    # Basic home route
+    @app.route('/')
+    def home():
+        return '''
+        <h1>Mayur Prabhune - Website</h1>
+        <p>Application is running successfully!</p>
+        <p><a href="/health">Health Check</a></p>
+        <p><a href="/setup-db">Setup Database</a></p>
+        <p>Domain: mayurprabhune.in</p>
+        '''
     
     # Global template variables
     @app.context_processor
@@ -78,54 +115,20 @@ def create_app(config_class=Config):
     def inject_now():
         return {'now': datetime.utcnow()}
     
-    # Database initialization route (call this after deployment)
-    @app.route('/init-db')
-    def init_database():
-        """Initialize database and admin user - call this after deployment"""
-        try:
-            logger.info("Creating database tables...")
-            db.create_all()
-            
-            logger.info("Creating admin user...")
-            from app.models import User
-            admin = User.query.filter_by(username=app.config['ADMIN_USERNAME']).first()
-            if not admin:
-                admin = User(
-                    username=app.config['ADMIN_USERNAME'],
-                    email=app.config['ADMIN_EMAIL'],
-                    is_admin=True
-                )
-                db.session.add(admin)
-            admin.set_password(app.config['ADMIN_PASSWORD'])
-            db.session.commit()
-            logger.info("Admin user configured successfully")
-            return "Database initialized successfully!"
-        except Exception as e:
-            logger.error(f"Database initialization error: {str(e)}")
-            return f"Database initialization failed: {str(e)}", 500
+    # Try to register blueprints (may fail if database not set up)
+    try:
+        from app.routes.main import bp as main_bp
+        app.register_blueprint(main_bp)
+        logger.info("Registered main blueprint")
+    except Exception as e:
+        logger.warning(f"Could not register main blueprint: {e}")
     
-    # Health check route
-    @app.route('/health')
-    def health_check():
-        return {'status': 'healthy', 'message': 'Application is running'}
-    
-    # Register blueprints
-    from app.routes.main import bp as main_bp
-    app.register_blueprint(main_bp)
-    
-    from app.routes.auth import bp as auth_bp
-    app.register_blueprint(auth_bp, url_prefix='/auth')
-    
-    from app.routes.blog import bp as blog_bp
-    app.register_blueprint(blog_bp, url_prefix='/blog')
-    
-    from app.routes.admin import bp as admin_bp
-    app.register_blueprint(admin_bp, url_prefix='/admin')
-    
-    from app.routes.api import bp as api_bp
-    app.register_blueprint(api_bp, url_prefix='/api')
+    try:
+        from app.routes.auth import bp as auth_bp
+        app.register_blueprint(auth_bp, url_prefix='/auth')
+        logger.info("Registered auth blueprint")
+    except Exception as e:
+        logger.warning(f"Could not register auth blueprint: {e}")
     
     logger.info("Application initialized successfully")
     return app
-
-from app import models  # Import models after db is defined
