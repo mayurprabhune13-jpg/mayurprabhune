@@ -9,12 +9,13 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV FLASK_ENV=production
 
-# Install system dependencies
+# Install system dependencies including curl
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         gcc \
         g++ \
         libpq-dev \
+        curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
@@ -34,9 +35,6 @@ USER appuser
 
 # Expose port (Railway provides PORT environment variable)
 EXPOSE $PORT
-
-# Install curl for health checks
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
 # Start command - use Railway's PORT environment variable
 CMD gunicorn --bind 0.0.0.0:$PORT --workers 4 --timeout 120 wsgi:app
