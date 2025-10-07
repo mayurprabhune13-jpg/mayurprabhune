@@ -11,17 +11,32 @@ bp = Blueprint('main', __name__)
 @log_function_call
 def index():
     """Home page route"""
-    # Get recent published videos
-    videos = Video.query.filter_by(status='published')\
-        .order_by(Video.created_at.desc()).limit(6).all()
+    # Initialize empty defaults
+    videos = []
+    testimonials = []
+    posts = []
+    case_studies = []
     
-    # Get approved testimonials
-    testimonials = Testimonial.query.filter_by(status='approved')\
-        .order_by(Testimonial.created_at.desc()).limit(3).all()
+    try:
+        # Get recent published videos
+        videos = Video.query.filter_by(status='published')\
+            .order_by(Video.created_at.desc()).limit(6).all()
+    except Exception as e:
+        current_app.logger.warning(f"Could not fetch videos: {str(e)}")
     
-    # Get recent published blog posts
-    posts = Post.query.filter_by(status='published')\
-        .order_by(Post.created_at.desc()).limit(2).all()
+    try:
+        # Get approved testimonials
+        testimonials = Testimonial.query.filter_by(status='approved')\
+            .order_by(Testimonial.created_at.desc()).limit(3).all()
+    except Exception as e:
+        current_app.logger.warning(f"Could not fetch testimonials: {str(e)}")
+    
+    try:
+        # Get recent published blog posts
+        posts = Post.query.filter_by(status='published')\
+            .order_by(Post.created_at.desc()).limit(2).all()
+    except Exception as e:
+        current_app.logger.warning(f"Could not fetch posts: {str(e)}")
     
     # Get LinkedIn blog content
     linkedin_posts = get_linkedin_blog_content(limit=1)
@@ -29,9 +44,12 @@ def index():
     # Combine database posts with LinkedIn content
     all_posts = list(posts) + linkedin_posts
     
-    # Get featured case studies
-    case_studies = CaseStudy.query.filter_by(status='published')\
-        .order_by(CaseStudy.created_at.desc()).limit(2).all()
+    try:
+        # Get featured case studies
+        case_studies = CaseStudy.query.filter_by(status='published')\
+            .order_by(CaseStudy.created_at.desc()).limit(2).all()
+    except Exception as e:
+        current_app.logger.warning(f"Could not fetch case studies: {str(e)}")
     
     return render_template('index.html',
                          videos=videos,
@@ -130,20 +148,29 @@ def videos():
     page = request.args.get('page', 1, type=int)
     category = request.args.get('category')
     
-    query = Video.query.filter_by(status='published')
+    videos = None
+    categories = []
     
-    if category:
-        query = query.filter_by(category=category)
+    try:
+        query = Video.query.filter_by(status='published')
         
-    videos = query.order_by(Video.created_at.desc())\
-        .paginate(page=page, per_page=12, error_out=False)
-        
-    # Get all unique categories for filter
-    categories = db.session.query(Video.category)\
-        .filter(Video.category.isnot(None), Video.status=='published')\
-        .distinct().all()
+        if category:
+            query = query.filter_by(category=category)
+            
+        videos = query.order_by(Video.created_at.desc())\
+            .paginate(page=page, per_page=12, error_out=False)
+            
+        # Get all unique categories for filter
+        categories = db.session.query(Video.category)\
+            .filter(Video.category.isnot(None), Video.status=='published')\
+            .distinct().all()
+    except Exception as e:
+        current_app.logger.warning(f"Could not fetch videos: {str(e)}")
+        # Create empty pagination object
+        from flask_sqlalchemy import Pagination
+        videos = Pagination(page=page, per_page=12, total=0, items=[])
     
-    return render_template('videos.html', 
+    return render_template('videos.html',
                          videos=videos,
                          categories=categories,
                          current_category=category)
@@ -163,8 +190,13 @@ def video_detail(slug):
 @bp.route('/testimonials')
 def testimonials():
     """Testimonials page"""
-    testimonials = Testimonial.query.filter_by(status='approved')\
-        .order_by(Testimonial.created_at.desc()).all()
+    testimonials = []
+    try:
+        testimonials = Testimonial.query.filter_by(status='approved')\
+            .order_by(Testimonial.created_at.desc()).all()
+    except Exception as e:
+        current_app.logger.warning(f"Could not fetch testimonials: {str(e)}")
+    
     return render_template('testimonials.html', testimonials=testimonials)
 
 @bp.route('/blog')
@@ -173,23 +205,32 @@ def blog():
     page = request.args.get('page', 1, type=int)
     category = request.args.get('category')
     
-    query = Post.query.filter_by(status='published')
+    posts = None
+    categories = []
     
-    if category:
-        query = query.filter_by(category=category)
+    try:
+        query = Post.query.filter_by(status='published')
         
-    posts = query.order_by(Post.created_at.desc())\
-        .paginate(page=page, per_page=6, error_out=False)
+        if category:
+            query = query.filter_by(category=category)
+            
+        posts = query.order_by(Post.created_at.desc())\
+            .paginate(page=page, per_page=6, error_out=False)
+            
+        # Get all unique categories for filter
+        categories = db.session.query(Post.category)\
+            .filter(Post.category.isnot(None), Post.status=='published')\
+            .distinct().all()
+    except Exception as e:
+        current_app.logger.warning(f"Could not fetch posts: {str(e)}")
+        # Create empty pagination object
+        from flask_sqlalchemy import Pagination
+        posts = Pagination(page=page, per_page=6, total=0, items=[])
     
     # Get LinkedIn blog content (only for first page and no category filter)
     linkedin_posts = []
     if page == 1 and not category:
         linkedin_posts = get_linkedin_blog_content(limit=3)
-        
-    # Get all unique categories for filter
-    categories = db.session.query(Post.category)\
-        .filter(Post.category.isnot(None), Post.status=='published')\
-        .distinct().all()
     
     return render_template('blog.html',
                          posts=posts,
@@ -218,18 +259,27 @@ def success_stories():
     page = request.args.get('page', 1, type=int)
     industry = request.args.get('industry')
     
-    query = CaseStudy.query.filter_by(status='published')
+    case_studies = None
+    industries = []
     
-    if industry:
-        query = query.filter_by(industry=industry)
+    try:
+        query = CaseStudy.query.filter_by(status='published')
         
-    case_studies = query.order_by(CaseStudy.created_at.desc())\
-        .paginate(page=page, per_page=6, error_out=False)
-        
-    # Get all unique industries for filter
-    industries = db.session.query(CaseStudy.industry)\
-        .filter(CaseStudy.status=='published')\
-        .distinct().all()
+        if industry:
+            query = query.filter_by(industry=industry)
+            
+        case_studies = query.order_by(CaseStudy.created_at.desc())\
+            .paginate(page=page, per_page=6, error_out=False)
+            
+        # Get all unique industries for filter
+        industries = db.session.query(CaseStudy.industry)\
+            .filter(CaseStudy.status=='published')\
+            .distinct().all()
+    except Exception as e:
+        current_app.logger.warning(f"Could not fetch case studies: {str(e)}")
+        # Create empty pagination object
+        from flask_sqlalchemy import Pagination
+        case_studies = Pagination(page=page, per_page=6, total=0, items=[])
     
     return render_template('success_stories.html',
                          case_studies=case_studies,
