@@ -24,6 +24,43 @@
 {% endblock %}
 
 {% block content %}
+<!-- Service Schema for GEO Optimization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "AI Mentoring and Consulting Services",
+  "description": "Comprehensive AI mentoring services for startups, managers, and students",
+  "provider": {
+    "@type": "Person",
+    "name": "Mayur Prabhune"
+  },
+  "serviceType": ["AI Consulting", "AI Training", "AI Strategy", "AI Leadership"],
+  "areaServed": ["India", "Global"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "AI Mentoring Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "AI for Startups Bootcamp",
+        "description": "Comprehensive program for startups to leverage AI effectively"
+      },
+      {
+        "@type": "Offer",
+        "name": "AI Leadership for Managers",
+        "description": "Strategic AI integration and leadership training for managers"
+      },
+      {
+        "@type": "Offer",
+        "name": "AI Awareness for Students",
+        "description": "Introductory AI course for students and beginners"
+      }
+    ]
+  }
+}
+</script>
+
 <div class="mx-auto max-w-7xl">
     <div class="text-center mb-12 md:mb-16">
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tighter mb-4">
@@ -32,6 +69,44 @@
         <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
             Empowering individuals and organizations with cutting-edge AI solutions and expertise.
         </p>
+    </div>
+
+    <!-- AI-Optimized Q&A Section -->
+    <div class="mb-16 bg-gray-800/50 rounded-xl p-8">
+        <h2 class="text-3xl font-bold mb-8 text-center">Services Overview</h2>
+        <div class="space-y-6">
+            
+            <div class="border-l-4 border-primary pl-6">
+                <h3 class="text-xl font-semibold text-primary mb-2">What AI services does Mayur Prabhune offer?</h3>
+                <p class="text-gray-300">Mayur offers three core AI mentoring programs: AI for Startups Bootcamp (comprehensive AI implementation for startups), AI Leadership for Managers (strategic AI integration and leadership training), and AI Awareness for Students (foundational AI knowledge for beginners). Each program is tailored to specific audience needs and skill levels.</p>
+            </div>
+
+            <div class="border-l-4 border-primary pl-6">
+                <h3 class="text-xl font-semibold text-primary mb-2">Who can benefit from Mayur's AI mentoring services?</h3>
+                <p class="text-gray-300">Mayur's services cater to three main audiences: startup founders and entrepreneurs looking to integrate AI into their business models, managers and executives who need to lead AI initiatives effectively, and students or professionals seeking to understand AI fundamentals and career opportunities in artificial intelligence.</p>
+            </div>
+
+            <div class="border-l-4 border-primary pl-6">
+                <h3 class="text-xl font-semibold text-primary mb-2">What makes Mayur's AI training approach unique?</h3>
+                <p class="text-gray-300">Mayur combines practical implementation with strategic thinking, focusing on ethical AI deployment and real-world applications. His programs emphasize hands-on learning, industry best practices, and personalized mentorship to ensure participants can immediately apply AI knowledge in their specific contexts.</p>
+            </div>
+
+            <div class="border-l-4 border-primary pl-6">
+                <h3 class="text-xl font-semibold text-primary mb-2">How does the AI for Startups Bootcamp help businesses?</h3>
+                <p class="text-gray-300">The bootcamp provides startups with AI strategy development, practical implementation roadmaps, cost-effective AI solutions, and market positioning guidance. Participants learn to identify AI opportunities, evaluate AI tools, build AI-ready teams, and create competitive advantages through intelligent automation.</p>
+            </div>
+
+            <div class="border-l-4 border-primary pl-6">
+                <h3 class="text-xl font-semibold text-primary mb-2">What topics are covered in AI Leadership for Managers?</h3>
+                <p class="text-gray-300">The program covers AI strategy formulation, team leadership in AI projects, change management for AI adoption, ethical AI implementation, ROI measurement for AI initiatives, and building AI-literate organizations. Managers learn to bridge technical and business perspectives effectively.</p>
+            </div>
+
+            <div class="border-l-4 border-primary pl-6">
+                <h3 class="text-xl font-semibold text-primary mb-2">Is the AI Awareness course suitable for complete beginners?</h3>
+                <p class="text-gray-300">Yes, the AI Awareness program is designed for complete beginners with no prior AI experience. It covers AI fundamentals, practical applications, career opportunities, ethical considerations, and hands-on exercises using user-friendly AI tools. Students gain confidence and practical skills to continue their AI journey.</p>
+            </div>
+
+        </div>
     </div>
 
     <div class="space-y-16 md:space-y-20">

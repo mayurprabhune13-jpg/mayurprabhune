@@ -6,15 +6,19 @@ from config import Config
 from datetime import datetime
 import logging
 import os
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Initialize minimal Flask extensions (no database yet)
+# Initialize Flask extensions (global instances)
 login_manager = LoginManager()
 csrf = CSRFProtect()
 mail = Mail()
+db = SQLAlchemy()
+migrate = Migrate()
 
 def create_app(config_class=Config):
     """Create and configure the Flask application"""
@@ -23,7 +27,15 @@ def create_app(config_class=Config):
     
     logger.info("Starting minimal Flask application...")
     
-    # Initialize only non-database extensions
+    # Normalize DATABASE_URL if present (postgres:// -> postgresql://)
+    db_url = app.config.get('DATABASE_URL')
+    if db_url:
+        if db_url.startswith('postgres://'):
+            db_url = db_url.replace('postgres://', 'postgresql://', 1)
+        app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+        logger.info("Database URL configured and normalized")
+
+    # Initialize extensions
     logger.info("Initializing login manager...")
     login_manager.init_app(app)
     
@@ -32,6 +44,10 @@ def create_app(config_class=Config):
     
     logger.info("Initializing mail...")
     mail.init_app(app)
+    
+    logger.info("Initializing SQLAlchemy and Migrate...")
+    db.init_app(app)
+    migrate.init_app(app, db)
     
     # Configure login
     login_manager.login_view = 'auth.login'
@@ -47,26 +63,6 @@ def create_app(config_class=Config):
     def setup_database():
         """Initialize database connection and setup"""
         try:
-            # Import database components only when needed
-            from flask_sqlalchemy import SQLAlchemy
-            from flask_migrate import Migrate
-            
-            # Initialize database extensions
-            db = SQLAlchemy()
-            migrate = Migrate()
-            
-            # Configure database URL
-            if app.config.get('DATABASE_URL'):
-                db_url = app.config['DATABASE_URL']
-                if db_url.startswith('postgres://'):
-                    db_url = db_url.replace('postgres://', 'postgresql://', 1)
-                app.config['SQLALCHEMY_DATABASE_URI'] = db_url
-                logger.info("Database URL configured")
-            
-            # Initialize database
-            db.init_app(app)
-            migrate.init_app(app, db)
-            
             # Create tables and admin user
             with app.app_context():
                 db.create_all()
@@ -90,16 +86,16 @@ def create_app(config_class=Config):
             logger.error(f"Database setup error: {str(e)}")
             return jsonify({'status': 'error', 'message': str(e)}), 500
     
-    # Basic home route
-    @app.route('/')
-    def home():
-        return '''
-        <h1>Mayur Prabhune - Website</h1>
-        <p>Application is running successfully!</p>
-        <p><a href="/health">Health Check</a></p>
-        <p><a href="/setup-db">Setup Database</a></p>
-        <p>Domain: mayurprabhune.in</p>
-        '''
+    # Remove basic home route - let main blueprint handle it
+    # @app.route('/')
+    # def home():
+    #     return '''
+    #     <h1>Mayur Prabhune - Website</h1>
+    #     <p>Application is running successfully!</p>
+    #     <p><a href="/health">Health Check</a></p>
+    #     <p><a href="/setup-db">Setup Database</a></p>
+    #     <p>Domain: mayurprabhune.in</p>
+    #     '''
     
     # Global template variables
     @app.context_processor
@@ -115,20 +111,35 @@ def create_app(config_class=Config):
     def inject_now():
         return {'now': datetime.utcnow()}
     
-    # Try to register blueprints (may fail if database not set up)
-    try:
-        from app.routes.main import bp as main_bp
-        app.register_blueprint(main_bp)
-        logger.info("Registered main blueprint")
-    except Exception as e:
-        logger.warning(f"Could not register main blueprint: {e}")
-    
-    try:
-        from app.routes.auth import bp as auth_bp
-        app.register_blueprint(auth_bp, url_prefix='/auth')
-        logger.info("Registered auth blueprint")
-    except Exception as e:
-        logger.warning(f"Could not register auth blueprint: {e}")
+    # Register blueprints - import them inside app context
+    with app.app_context():
+        try:
+            from app.routes.main import bp as main_bp
+            app.register_blueprint(main_bp)
+            logger.info("Registered main blueprint")
+        except Exception as e:
+            logger.warning(f"Could not register main blueprint: {e}")
+        
+        try:
+            from app.routes.auth import bp as auth_bp
+            app.register_blueprint(auth_bp, url_prefix='/auth')
+            logger.info("Registered auth blueprint")
+        except Exception as e:
+            logger.warning(f"Could not register auth blueprint: {e}")
+        
+        try:
+            from app.routes.blog import bp as blog_bp
+            app.register_blueprint(blog_bp, url_prefix='/blog')
+            logger.info("Registered blog blueprint")
+        except Exception as e:
+            logger.warning(f"Could not register blog blueprint: {e}")
+        
+        try:
+            from app.routes.admin import bp as admin_bp
+            app.register_blueprint(admin_bp, url_prefix='/admin')
+            logger.info("Registered admin blueprint")
+        except Exception as e:
+            logger.warning(f"Could not register admin blueprint: {e}")
     
     logger.info("Application initialized successfully")
     return app

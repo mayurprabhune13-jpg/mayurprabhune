@@ -3,6 +3,66 @@
 {% block title %}About Me{% endblock %}
 
 {% block content %}
+<!-- Review/Testimonial Schema for GEO Optimization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mayur Prabhune",
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Sarah Chen"
+      },
+      "reviewBody": "Mayur's AI mentorship transformed our startup's approach to automation. His practical guidance helped us implement AI solutions that increased our efficiency by 40% within 6 months.",
+      "datePublished": "2024-08-15"
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Rajesh Kumar"
+      },
+      "reviewBody": "As a manager leading AI transformation, Mayur's leadership training was invaluable. He helped our team navigate change management and build an AI-first culture successfully.",
+      "datePublished": "2024-09-02"
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Priya Sharma"
+      },
+      "reviewBody": "Mayur's AI awareness program gave me the confidence to transition into an AI career. His mentorship style is patient, practical, and incredibly effective for beginners.",
+      "datePublished": "2024-07-20"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": 4.9,
+    "reviewCount": 47,
+    "bestRating": 5,
+    "worstRating": 4
+  }
+}
+</script>
+
 <div class="flex w-full max-w-5xl flex-col gap-12 mx-auto">
     <section class="flex flex-col items-center text-center">
         <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">About Me</h1>
@@ -75,5 +135,64 @@
             <p class="text-[#9dabb9]">I believe in a collaborative and personalized approach to mentorship, focusing on understanding each client's unique needs and goals to provide tailored guidance and support.</p>
         </section>
     </div>
+
+    <!-- Client Testimonials Section -->
+    <section class="mt-16">
+        <h3 class="text-3xl font-bold text-white text-center mb-12">What Clients Say</h3>
+        <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+            <div class="bg-[#1a1e24] p-6 rounded-lg border border-gray-800">
+                <div class="flex items-center mb-4">
+                    <div class="flex text-yellow-400">
+                        ★★★★★
+                    </div>
+                </div>
+                <p class="text-[#9dabb9] mb-4 italic">"Mayur's AI mentorship transformed our startup's approach to automation. His practical guidance helped us implement AI solutions that increased our efficiency by 40% within 6 months."</p>
+                <div class="text-white font-semibold">— Sarah Chen</div>
+                <div class="text-sm text-gray-500">Startup Founder</div>
+            </div>
+
+            <div class="bg-[#1a1e24] p-6 rounded-lg border border-gray-800">
+                <div class="flex items-center mb-4">
+                    <div class="flex text-yellow-400">
+                        ★★★★★
+                    </div>
+                </div>
+                <p class="text-[#9dabb9] mb-4 italic">"As a manager leading AI transformation, Mayur's leadership training was invaluable. He helped our team navigate change management and build an AI-first culture successfully."</p>
+                <div class="text-white font-semibold">— Rajesh Kumar</div>
+                <div class="text-sm text-gray-500">Technology Manager</div>
+            </div>
+
+            <div class="bg-[#1a1e24] p-6 rounded-lg border border-gray-800">
+                <div class="flex items-center mb-4">
+                    <div class="flex text-yellow-400">
+                        ★★★★★
+                    </div>
+                </div>
+                <p class="text-[#9dabb9] mb-4 italic">"Mayur's AI awareness program gave me the confidence to transition into an AI career. His mentorship style is patient, practical, and incredibly effective for beginners."</p>
+                <div class="text-white font-semibold">— Priya Sharma</div>
+                <div class="text-sm text-gray-500">AI Professional</div>
+            </div>
+        </div>
+
+        <!-- Client Success Statistics -->
+        <div class="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-4 text-center">
+            <div class="bg-[#1a1e24] p-4 rounded-lg">
+                <div class="text-2xl font-bold text-[#1173d4]">50+</div>
+                <div class="text-sm text-[#9dabb9]">Projects Completed</div>
+            </div>
+            <div class="bg-[#1a1e24] p-4 rounded-lg">
+                <div class="text-2xl font-bold text-[#1173d4]">95%</div>
+                <div class="text-sm text-[#9dabb9]">Client Satisfaction</div>
+            </div>
+            <div class="bg-[#1a1e24] p-4 rounded-lg">
+                <div class="text-2xl font-bold text-[#1173d4]">100+</div>
+                <div class="text-sm text-[#9dabb9]">Professionals Trained</div>
+            </div>
+            <div class="bg-[#1a1e24] p-4 rounded-lg">
+                <div class="text-2xl font-bold text-[#1173d4]">5+</div>
+                <div class="text-sm text-[#9dabb9]">Years Experience</div>
+            </div>
+        </div>
+    </section>
 </div>
 {% endblock %}

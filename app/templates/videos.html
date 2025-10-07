@@ -1,5 +1,202 @@
 {% extends "base.html" %}
 {% block title %}Videos - Mayur Prabhune{% endblock %}
+
+{% block head %}
+{{ super() }}
+<!-- VideoObject Schema for AI Optimization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "AI Mentorship Videos by Mayur Prabhune",
+  "description": "Educational videos on AI leadership, implementation strategies, and business transformation by AI mentor Mayur Prabhune",
+  "url": "https://mayurprabhune.in/videos",
+  "author": {
+    "@type": "Person",
+    "name": "Mayur Prabhune",
+    "jobTitle": "AI Mentor & Strategy Consultant",
+    "url": "https://mayurprabhune.in",
+    "sameAs": "https://linkedin.com/in/mayur-prabhune"
+  },
+  "itemListElement": [
+    {
+      "@type": "VideoObject",
+      "name": "Introduction to AI Leadership for Business Managers",
+      "description": "Essential concepts and frameworks for business leaders implementing AI in their organizations. Learn the LEAD framework and key strategies for successful AI adoption.",
+      "thumbnailUrl": "https://mayurprabhune.in/static/images/ai-leadership-intro-thumb.jpg",
+      "uploadDate": "2024-12-15",
+      "duration": "PT15M30S",
+      "contentUrl": "https://mayurprabhune.in/videos/ai-leadership-intro",
+      "embedUrl": "https://mayurprabhune.in/videos/ai-leadership-intro/embed",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mayur Prabhune AI Consulting",
+        "url": "https://mayurprabhune.in"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Mayur Prabhune"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "AI Leadership"
+        },
+        {
+          "@type": "Thing",
+          "name": "Business Strategy"
+        },
+        {
+          "@type": "Thing",
+          "name": "Change Management"
+        }
+      ],
+      "keywords": "AI leadership, business management, AI strategy, leadership training, AI implementation",
+      "educationalLevel": "Intermediate",
+      "learningResourceType": "Educational Video",
+      "inLanguage": "en",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "Business Manager"
+      },
+      "transcript": {
+        "@type": "MediaObject",
+        "contentUrl": "https://mayurprabhune.in/data/video-transcripts/ai-leadership-intro-transcript.json",
+        "encodingFormat": "application/json"
+      }
+    },
+    {
+      "@type": "VideoObject",
+      "name": "AI Ethics and Cultural Sensitivity in Indian Organizations",
+      "description": "Understanding the importance of ethical AI implementation and cultural sensitivity when deploying AI solutions in diverse Indian business environments.",
+      "thumbnailUrl": "https://mayurprabhune.in/static/images/ai-ethics-thumb.jpg",
+      "uploadDate": "2024-11-20",
+      "duration": "PT12M45S",
+      "contentUrl": "https://mayurprabhune.in/videos/ai-ethics-cultural-sensitivity",
+      "embedUrl": "https://mayurprabhune.in/videos/ai-ethics-cultural-sensitivity/embed",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mayur Prabhune AI Consulting",
+        "url": "https://mayurprabhune.in"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Mayur Prabhune"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "AI Ethics"
+        },
+        {
+          "@type": "Thing",
+          "name": "Cultural Sensitivity"
+        },
+        {
+          "@type": "Thing",
+          "name": "Indian Business Culture"
+        }
+      ],
+      "keywords": "AI ethics, cultural sensitivity, Indian organizations, responsible AI, ethical implementation",
+      "educationalLevel": "Intermediate",
+      "learningResourceType": "Educational Video",
+      "inLanguage": "en",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "Business Leader"
+      }
+    },
+    {
+      "@type": "VideoObject",
+      "name": "AI for Startups: Getting Started with AI Implementation",
+      "description": "A comprehensive guide for startup founders on how to identify AI opportunities, select appropriate technologies, and implement AI solutions effectively.",
+      "thumbnailUrl": "https://mayurprabhune.in/static/images/ai-startups-thumb.jpg",
+      "uploadDate": "2024-10-10",
+      "duration": "PT18M20S",
+      "contentUrl": "https://mayurprabhune.in/videos/ai-for-startups-getting-started",
+      "embedUrl": "https://mayurprabhune.in/videos/ai-for-startups-getting-started/embed",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mayur Prabhune AI Consulting",
+        "url": "https://mayurprabhune.in"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Mayur Prabhune"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Startup AI"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Implementation"
+        },
+        {
+          "@type": "Thing",
+          "name": "Technology Selection"
+        }
+      ],
+      "keywords": "AI for startups, startup AI implementation, AI technology selection, startup mentoring",
+      "educationalLevel": "Beginner to Intermediate",
+      "learningResourceType": "Educational Video",
+      "inLanguage": "en",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "Entrepreneur"
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Organization Schema for Video Publisher -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Mayur Prabhune AI Consulting",
+  "description": "Leading AI mentorship and consulting services specializing in ethical AI implementation for Indian businesses",
+  "url": "https://mayurprabhune.in",
+  "logo": "https://mayurprabhune.in/static/images/logo.png",
+  "founder": {
+    "@type": "Person",
+    "name": "Mayur Prabhune",
+    "jobTitle": "AI Mentor & Strategy Consultant"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Pune",
+    "@type": "PostalAddress",
+    "addressRegion": "Maharashtra",
+    "addressCountry": "IN"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+91-7620065818",
+    "contactType": "customer service",
+    "availableLanguage": ["English", "Hindi", "Marathi"]
+  },
+  "sameAs": [
+    "https://linkedin.com/in/mayur-prabhune"
+  ],
+  "knowsAbout": [
+    "Artificial Intelligence",
+    "Machine Learning",
+    "AI Strategy",
+    "Business Consulting",
+    "Leadership Training",
+    "Ethical AI"
+  ],
+  "serviceArea": {
+    "@type": "Place",
+    "name": "India and Global (Virtual Services)"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="layout-content-container flex flex-col max-w-7xl flex-1 mx-auto">
   <div class="flex items-center justify-between mb-8">

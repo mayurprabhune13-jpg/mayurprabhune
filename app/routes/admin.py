@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 from app import db
 from app.models import Video, Testimonial, Post, Contact, CaseStudy
-from app import Config
+from config import Config
 from app.utils import generate_slug
 
 bp = Blueprint('admin', __name__)
