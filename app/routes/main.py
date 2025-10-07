@@ -119,7 +119,10 @@ Message:
             current_app.logger.error(f"Error in contact form: {str(e)}")
             flash('An error occurred. Please try again.', 'error')
             
-    return render_template('contact.html')
+    return render_template('contact.html',
+                         CONTACT_EMAIL='info@mayurprabhune.in',
+                         CONTACT_PHONE='+91-7620065818',
+                         CONTACT_LINKEDIN='https://www.linkedin.com/in/mayur-prabhune')
 
 @bp.route('/videos')
 def videos():

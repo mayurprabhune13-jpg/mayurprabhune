@@ -101,11 +101,15 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold text-white">LinkedIn</h3>
-                        <a href="{{ CONTACT_LINKEDIN or 'https://linkedin.com' }}" 
-                           target="_blank" 
-                           rel="noopener noreferrer" 
+                        <a href="{{ CONTACT_LINKEDIN or 'https://linkedin.com' }}"
+                           target="_blank"
+                           rel="noopener noreferrer"
                            class="text-gray-400 hover:text-white transition-colors break-all">
-                            {{ CONTACT_LINKEDIN or 'linkedin.com' }}
+                            {% if CONTACT_LINKEDIN %}
+                                linkedin.com/in/mayur-prabhune
+                            {% else %}
+                                linkedin.com
+                            {% endif %}
                         </a>
                     </div>
                 </div>
