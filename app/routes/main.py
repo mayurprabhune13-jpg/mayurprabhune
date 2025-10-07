@@ -3,6 +3,7 @@ from app.models import Post, Testimonial, Video, Contact, CaseStudy
 from app.utils import is_valid_email, format_datetime, reading_time, send_email
 from app import db
 from app.monitoring import log_function_call, log_db_query
+from app.linkedin_integration import get_linkedin_blog_content
 
 bp = Blueprint('main', __name__)
 
@@ -20,16 +21,22 @@ def index():
     
     # Get recent published blog posts
     posts = Post.query.filter_by(status='published')\
-        .order_by(Post.created_at.desc()).limit(3).all()
+        .order_by(Post.created_at.desc()).limit(2).all()
+    
+    # Get LinkedIn blog content
+    linkedin_posts = get_linkedin_blog_content(limit=1)
+    
+    # Combine database posts with LinkedIn content
+    all_posts = list(posts) + linkedin_posts
     
     # Get featured case studies
     case_studies = CaseStudy.query.filter_by(status='published')\
         .order_by(CaseStudy.created_at.desc()).limit(2).all()
     
-    return render_template('index.html', 
+    return render_template('index.html',
                          videos=videos,
                          testimonials=testimonials,
-                         posts=posts,
+                         posts=all_posts,
                          case_studies=case_studies)
 
 @bp.route('/about')
@@ -169,7 +176,12 @@ def blog():
         query = query.filter_by(category=category)
         
     posts = query.order_by(Post.created_at.desc())\
-        .paginate(page=page, per_page=9, error_out=False)
+        .paginate(page=page, per_page=6, error_out=False)
+    
+    # Get LinkedIn blog content (only for first page and no category filter)
+    linkedin_posts = []
+    if page == 1 and not category:
+        linkedin_posts = get_linkedin_blog_content(limit=3)
         
     # Get all unique categories for filter
     categories = db.session.query(Post.category)\
@@ -178,6 +190,7 @@ def blog():
     
     return render_template('blog.html',
                          posts=posts,
+                         linkedin_posts=linkedin_posts,
                          categories=categories,
                          current_category=category)
 

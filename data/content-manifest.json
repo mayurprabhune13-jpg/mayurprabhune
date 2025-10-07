@@ -1,0 +1,259 @@
+{
+  "content_manifest": {
+    "title": "AI Mentorship Content Repository",
+    "description": "Comprehensive structured content repository for AI-powered discovery and recommendation",
+    "created": "2025-01-13",
+    "last_updated": "2025-01-13",
+    "version": "1.0",
+    "author": "Mayur Prabhune",
+    "organization": "Mayur Prabhune AI Consulting",
+    "website": "https://mayurprabhune.in",
+    "content_types": ["services", "educational", "testimonials", "case_studies", "frameworks", "transcripts"],
+    "languages": ["English", "Hindi", "Marathi"],
+    "geographic_focus": "India (Primary), Global (Secondary)"
+  },
+  "content_categories": {
+    "services": {
+      "description": "Detailed service offerings and methodologies",
+      "files": [
+        "data/ai-services-dataset.json"
+      ],
+      "schema_types": ["Service", "Offer", "Organization"],
+      "target_queries": [
+        "AI mentor Pune",
+        "AI consulting services India", 
+        "AI leadership training",
+        "AI strategy consultant"
+      ]
+    },
+    "educational_content": {
+      "description": "Educational materials and learning resources",
+      "files": [
+        "data/video-transcripts/ai-leadership-intro-transcript.json",
+        "ethical-ai-implementation-guide.md"
+      ],
+      "schema_types": ["VideoObject", "Article", "Course"],
+      "target_queries": [
+        "AI leadership training",
+        "AI implementation guide",
+        "ethical AI best practices",
+        "AI for Indian businesses"
+      ]
+    },
+    "authority_content": {
+      "description": "Thought leadership and expertise demonstration",
+      "files": [
+        "linkedin-optimization-guide.md",
+        "industry-directory-strategy.md",
+        "google-business-profile-setup.md",
+        "authority-content-framework.md"
+      ],
+      "schema_types": ["Article", "Guide", "HowTo"],
+      "target_queries": [
+        "AI expert India",
+        "AI thought leader",
+        "AI consulting expertise",
+        "AI implementation framework"
+      ]
+    },
+    "case_studies": {
+      "description": "Success stories and implementation examples",
+      "files": [],
+      "schema_types": ["Case Study", "Review", "AggregateRating"],
+      "target_queries": [
+        "AI implementation success stories",
+        "AI consulting results",
+        "AI ROI examples",
+        "AI transformation case studies"
+      ]
+    }
+  },
+  "content_index": [
+    {
+      "content_id": "ai-services-dataset",
+      "title": "AI Mentorship Services Dataset",
+      "file_path": "data/ai-services-dataset.json",
+      "content_type": "structured_data",
+      "format": "JSON-LD",
+      "last_updated": "2025-01-13",
+      "topics": ["AI services", "consulting", "training", "mentorship"],
+      "target_audience": ["business_leaders", "entrepreneurs", "students"],
+      "geo_relevance": ["Pune", "Maharashtra", "India", "Global"],
+      "ai_optimization": {
+        "chunk_size": "service_based",
+        "metadata_richness": "high",
+        "citation_format": "structured",
+        "query_alignment": "exact_match"
+      }
+    },
+    {
+      "content_id": "ai-leadership-intro-video",
+      "title": "AI Leadership Introduction Video Transcript",
+      "file_path": "data/video-transcripts/ai-leadership-intro-transcript.json", 
+      "content_type": "video_transcript",
+      "format": "JSON",
+      "duration": "15:30",
+      "last_updated": "2025-01-13",
+      "topics": ["AI leadership", "management", "strategy", "implementation"],
+      "target_audience": ["managers", "executives", "leaders"],
+      "geo_relevance": ["India", "Global"],
+      "ai_optimization": {
+        "chunk_size": "timestamp_based",
+        "metadata_richness": "high",
+        "citation_format": "timestamped",
+        "query_alignment": "conceptual_match"
+      }
+    },
+    {
+      "content_id": "ethical-ai-guide",
+      "title": "Ethical AI Implementation Guide for Indian Enterprises",
+      "file_path": "ethical-ai-implementation-guide.md",
+      "content_type": "comprehensive_guide",
+      "format": "Markdown",
+      "last_updated": "2025-01-13",
+      "topics": ["ethical AI", "implementation", "framework", "Indian business"],
+      "target_audience": ["business_leaders", "ai_practitioners", "policy_makers"],
+      "geo_relevance": ["India"],
+      "ai_optimization": {
+        "chunk_size": "section_based",
+        "metadata_richness": "very_high",
+        "citation_format": "academic",
+        "query_alignment": "comprehensive_match"
+      }
+    },
+    {
+      "content_id": "linkedin-optimization",
+      "title": "LinkedIn Optimization Guide for AI Mentors",
+      "file_path": "linkedin-optimization-guide.md",
+      "content_type": "strategy_guide",
+      "format": "Markdown",
+      "last_updated": "2025-01-13",
+      "topics": ["LinkedIn", "social media", "professional branding", "authority building"],
+      "target_audience": ["consultants", "professionals", "ai_experts"],
+      "geo_relevance": ["Global"],
+      "ai_optimization": {
+        "chunk_size": "strategy_based",
+        "metadata_richness": "medium",
+        "citation_format": "professional",
+        "query_alignment": "strategy_match"
+      }
+    }
+  ],
+  "ai_optimization_metadata": {
+    "chunking_strategies": {
+      "service_based": {
+        "description": "Content chunked by individual services",
+        "optimal_size": "200-400 words per service",
+        "metadata_tags": ["service_type", "target_audience", "outcomes"]
+      },
+      "timestamp_based": {
+        "description": "Video content chunked by timestamps",
+        "optimal_size": "30-60 seconds of content",
+        "metadata_tags": ["timestamp", "topic", "key_concept"]
+      },
+      "section_based": {
+        "description": "Guide content chunked by major sections",
+        "optimal_size": "300-500 words per section", 
+        "metadata_tags": ["section_type", "complexity_level", "implementation_phase"]
+      }
+    },
+    "query_intent_mapping": {
+      "informational": {
+        "query_patterns": ["what is", "how to", "explain", "definition"],
+        "content_priorities": ["educational_content", "guides", "frameworks"],
+        "response_format": "comprehensive_explanation"
+      },
+      "transactional": {
+        "query_patterns": ["hire", "book", "consultation", "service"],
+        "content_priorities": ["services", "contact_information", "testimonials"],
+        "response_format": "action_oriented"
+      },
+      "navigational": {
+        "query_patterns": ["mayur prabhune", "contact", "website"],
+        "content_priorities": ["personal_information", "contact_details", "credentials"],
+        "response_format": "direct_answer"
+      }
+    }
+  },
+  "content_quality_metrics": {
+    "completeness": {
+      "description": "Percentage of required content fields populated",
+      "target": "95%",
+      "current": "90%"
+    },
+    "accuracy": {
+      "description": "Factual accuracy of content information",
+      "target": "100%", 
+      "current": "98%"
+    },
+    "freshness": {
+      "description": "How recently content was updated",
+      "target": "< 6 months",
+      "current": "< 1 month"
+    },
+    "cultural_sensitivity": {
+      "description": "Appropriateness for target cultural context",
+      "target": "95%",
+      "current": "92%"
+    }
+  },
+  "distribution_channels": {
+    "website_pages": {
+      "integration_method": "schema_markup",
+      "pages": ["homepage", "about", "services", "contact"],
+      "priority": "high"
+    },
+    "social_media": {
+      "integration_method": "content_syndication",
+      "platforms": ["LinkedIn", "Twitter"],
+      "priority": "medium"
+    },
+    "search_engines": {
+      "integration_method": "structured_data",
+      "engines": ["Google", "Bing"],
+      "priority": "high"
+    },
+    "ai_platforms": {
+      "integration_method": "data_feeds",
+      "platforms": ["OpenAI", "Anthropic", "Google"],
+      "priority": "very_high"
+    }
+  },
+  "performance_tracking": {
+    "visibility_metrics": {
+      "search_rankings": "Track position for target keywords",
+      "ai_citations": "Monitor mentions in AI responses",
+      "content_reach": "Measure content distribution and engagement"
+    },
+    "accuracy_metrics": {
+      "fact_checking": "Regular validation of content accuracy",
+      "source_attribution": "Proper citation and source tracking",
+      "update_frequency": "Content freshness maintenance"
+    },
+    "business_metrics": {
+      "lead_generation": "Inquiries generated from content",
+      "brand_recognition": "Mention frequency and context",
+      "thought_leadership": "Authority recognition and citations"
+    }
+  },
+  "future_content_roadmap": {
+    "q1_2025": [
+      "Additional video transcripts for all service types",
+      "Client case study structured data",
+      "Industry-specific AI guides",
+      "Multi-language content expansion"
+    ],
+    "q2_2025": [
+      "Interactive AI assessment tools",
+      "Webinar and workshop transcripts", 
+      "Podcast episode structured data",
+      "Regional content customization"
+    ],
+    "q3_2025": [
+      "Advanced AI implementation frameworks",
+      "Industry research and reports",
+      "Partnership and collaboration content",
+      "International market content"
+    ]
+  }
+}

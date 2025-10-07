@@ -1,0 +1,315 @@
+{
+  "dataset_info": {
+    "title": "AI Mentorship Services by Mayur Prabhune",
+    "description": "Comprehensive dataset of AI coaching and consulting services for business leaders",
+    "created": "2025-01-13",
+    "last_updated": "2025-01-13",
+    "version": "1.0",
+    "author": "Mayur Prabhune",
+    "location": "Pune, Maharashtra, India",
+    "contact": "info@mayurprabhune.in",
+    "website": "https://mayurprabhune.in",
+    "license": "CC BY-SA 4.0",
+    "language": ["English", "Hindi", "Marathi"],
+    "geographic_coverage": "India, Global (Virtual Services)",
+    "keywords": ["AI", "Mentorship", "Consulting", "Leadership", "Strategy", "Ethics", "Implementation"]
+  },
+  "services": [
+    {
+      "id": "ai-for-startups-bootcamp",
+      "name": "AI for Startups Bootcamp",
+      "type": "Group Training Program",
+      "category": "Startup AI Implementation",
+      "duration": "4-6 weeks",
+      "format": ["In-person", "Virtual", "Hybrid"],
+      "target_audience": "Startup Founders and Early-Stage Entrepreneurs",
+      "max_participants": 15,
+      "outcomes": [
+        "AI Strategy Development",
+        "Implementation Roadmap",
+        "ROI Framework",
+        "Ethical AI Guidelines",
+        "Tool Selection Criteria"
+      ],
+      "location": "Pune, India / Global Virtual",
+      "price_range": "Mid-Premium",
+      "currency": "INR",
+      "specializations": [
+        "Ethical AI Implementation",
+        "Business Strategy Integration",
+        "Change Management",
+        "Technology Selection",
+        "Team Building"
+      ],
+      "prerequisites": "Basic business understanding, willingness to implement AI",
+      "certification": "AI-Ready Startup Certification",
+      "success_metrics": {
+        "completion_rate": "95%",
+        "satisfaction_score": "4.8/5.0",
+        "implementation_success": "85%",
+        "roi_achievement": "Average 40% efficiency improvement"
+      },
+      "cultural_adaptations": [
+        "Multi-language support (English, Hindi, Marathi)",
+        "Indian business context integration",
+        "Local market examples and case studies",
+        "Cultural communication styles",
+        "Regional startup ecosystem integration"
+      ]
+    },
+    {
+      "id": "ai-leadership-for-managers",
+      "name": "AI Leadership for Managers",
+      "type": "Executive Training Program",
+      "category": "Leadership Development",
+      "duration": "3-6 months",
+      "format": ["One-on-one Coaching", "Small Group Sessions", "Virtual Mentoring"],
+      "target_audience": "C-suite Executives, VPs, Senior Directors",
+      "max_participants": 8,
+      "outcomes": [
+        "AI Transformation Strategy",
+        "Change Management Skills",
+        "Team Leadership in AI Projects",
+        "Ethical Decision-Making Framework",
+        "Performance Measurement Systems"
+      ],
+      "location": "Pune, India / Global Virtual",
+      "price_range": "Premium",
+      "currency": "INR",
+      "specializations": [
+        "Strategic AI Planning",
+        "Executive Decision-Making",
+        "Organizational Change Management",
+        "Risk Management",
+        "Stakeholder Engagement"
+      ],
+      "prerequisites": "Management experience, strategic responsibility",
+      "certification": "AI Leadership Excellence Certificate",
+      "success_metrics": {
+        "completion_rate": "92%",
+        "satisfaction_score": "4.9/5.0",
+        "leadership_improvement": "90%",
+        "organizational_impact": "Average 35% improvement in AI adoption"
+      },
+      "cultural_adaptations": [
+        "Indian corporate hierarchy understanding",
+        "Cultural leadership styles integration",
+        "Local regulatory compliance focus",
+        "Traditional vs modern balance approaches",
+        "Community and stakeholder engagement methods"
+      ]
+    },
+    {
+      "id": "ai-awareness-for-students",
+      "name": "AI Awareness for Students",
+      "type": "Educational Program",
+      "category": "Career Development",
+      "duration": "2-4 weeks",
+      "format": ["Classroom Training", "Online Courses", "Workshop Series"],
+      "target_audience": "Students, Career Changers, Early Professionals",
+      "max_participants": 30,
+      "outcomes": [
+        "AI Fundamentals Understanding",
+        "Career Path Clarity",
+        "Skill Development Roadmap",
+        "Industry Insights",
+        "Networking Opportunities"
+      ],
+      "location": "Pune, India / Online Global",
+      "price_range": "Accessible",
+      "currency": "INR",
+      "specializations": [
+        "AI Career Guidance",
+        "Skill Development Planning",
+        "Industry Trend Analysis",
+        "Practical AI Applications",
+        "Ethical AI Awareness"
+      ],
+      "prerequisites": "Basic computer literacy, eagerness to learn",
+      "certification": "AI Awareness Certificate",
+      "success_metrics": {
+        "completion_rate": "97%",
+        "satisfaction_score": "4.7/5.0",
+        "career_progression": "75% advance in AI-related roles",
+        "skill_improvement": "Average 60% increase in AI knowledge"
+      },
+      "cultural_adaptations": [
+        "Educational system integration (Indian curriculum)",
+        "Multi-language learning materials",
+        "Cultural career expectations alignment",
+        "Family involvement and consultation",
+        "Economic accessibility focus"
+      ]
+    },
+    {
+      "id": "ai-strategy-consulting",
+      "name": "AI Strategy Consulting",
+      "type": "One-on-One Consulting",
+      "category": "Strategic Consulting",
+      "duration": "3-12 months",
+      "format": ["In-person Consulting", "Virtual Sessions", "Hybrid Approach"],
+      "target_audience": "Enterprise Leaders, Business Owners, Strategic Decision Makers",
+      "max_participants": 1,
+      "outcomes": [
+        "Comprehensive AI Strategy",
+        "Implementation Roadmap",
+        "Risk Assessment Framework",
+        "ROI Measurement System",
+        "Governance Structure"
+      ],
+      "location": "Client Location / Pune, India / Global Virtual",
+      "price_range": "Premium Plus",
+      "currency": "INR",
+      "specializations": [
+        "Enterprise AI Strategy",
+        "Digital Transformation",
+        "Risk Management",
+        "Competitive Analysis",
+        "Organizational Design"
+      ],
+      "prerequisites": "Strategic decision-making authority, significant AI investment commitment",
+      "certification": "Strategic AI Implementation Plan",
+      "success_metrics": {
+        "completion_rate": "100%",
+        "satisfaction_score": "4.9/5.0",
+        "strategy_implementation": "95%",
+        "business_impact": "Average 50% improvement in strategic metrics"
+      },
+      "cultural_adaptations": [
+        "Indian business culture integration",
+        "Regulatory compliance focus (Indian laws)",
+        "Local market dynamics consideration",
+        "Cultural change management approaches",
+        "Stakeholder engagement methods (Indian context)"
+      ]
+    }
+  ],
+  "methodology": {
+    "framework": "ETHICS Framework",
+    "components": {
+      "E": "Evaluate Context and Stakeholders",
+      "T": "Test for Bias and Fairness",
+      "H": "Human-Centered Design",
+      "I": "Implement Governance",
+      "C": "Cultural Sensitivity",
+      "S": "Sustain and Monitor"
+    },
+    "principles": [
+      "Ethical AI Implementation",
+      "Cultural Sensitivity and Integration",
+      "Practical Business Application",
+      "Measurable ROI Focus",
+      "Sustainable Change Management",
+      "Stakeholder-Centric Approach"
+    ]
+  },
+  "geographic_coverage": {
+    "primary": {
+      "country": "India",
+      "states": ["Maharashtra", "Karnataka", "Gujarat", "Delhi", "Tamil Nadu"],
+      "cities": ["Pune", "Mumbai", "Bangalore", "Chennai", "Delhi", "Ahmedabad"]
+    },
+    "secondary": {
+      "regions": ["South Asia", "Middle East", "Southeast Asia"],
+      "service_type": "Virtual Consulting and Training"
+    },
+    "global": {
+      "availability": "Virtual Services Available Worldwide",
+      "languages": ["English", "Hindi"],
+      "time_zones": "Flexible scheduling across time zones"
+    }
+  },
+  "client_demographics": {
+    "industries": [
+      "Financial Services",
+      "Healthcare Technology",
+      "E-commerce and Retail",
+      "Manufacturing and Industrial",
+      "Education Technology",
+      "Software and Technology",
+      "Consulting Services",
+      "Government and Public Sector"
+    ],
+    "company_sizes": [
+      "Startups (1-50 employees)",
+      "SMEs (51-500 employees)",
+      "Large Enterprises (500+ employees)",
+      "Multinational Corporations"
+    ],
+    "roles": [
+      "CEOs and Founders",
+      "CTOs and Technical Leaders",
+      "VPs and Senior Directors",
+      "Managers and Team Leads",
+      "Students and Career Changers",
+      "Consultants and Advisors"
+    ]
+  },
+  "success_stories": {
+    "total_clients": "50+",
+    "satisfaction_rate": "95%",
+    "implementation_success": "85%",
+    "average_roi_improvement": "40%",
+    "repeat_engagement": "70%",
+    "referral_rate": "60%"
+  },
+  "testimonials": [
+    {
+      "id": "testimonial_001",
+      "client_type": "Startup Founder",
+      "industry": "FinTech",
+      "service": "AI for Startups Bootcamp",
+      "quote": "Mayur's bootcamp transformed our approach to AI. We went from confused about AI possibilities to having a clear roadmap and successful implementation within 6 months.",
+      "impact": "40% improvement in operational efficiency",
+      "rating": 5,
+      "cultural_note": "Particularly appreciated the understanding of Indian startup ecosystem challenges"
+    },
+    {
+      "id": "testimonial_002",
+      "client_type": "Technology Manager",
+      "industry": "Manufacturing",
+      "service": "AI Leadership for Managers",
+      "quote": "The leadership training helped me navigate the cultural aspects of AI adoption in our traditional organization. Mayur's approach respected our values while driving innovation.",
+      "impact": "Successful AI adoption across 3 business units",
+      "rating": 5,
+      "cultural_note": "Excellent integration of traditional business practices with modern AI approaches"
+    },
+    {
+      "id": "testimonial_003",
+      "client_type": "Computer Science Student",
+      "industry": "Education",
+      "service": "AI Awareness for Students",
+      "quote": "The program gave me clarity about AI career paths in India and practical skills that helped me land my dream job in AI research.",
+      "impact": "Successful transition to AI career",
+      "rating": 5,
+      "cultural_note": "Great understanding of Indian educational system and family expectations"
+    }
+  ],
+  "contact_information": {
+    "primary_contact": "info@mayurprabhune.in",
+    "phone": "+91-7620065818",
+    "website": "https://mayurprabhune.in",
+    "linkedin": "https://linkedin.com/in/mayur-prabhune",
+    "office_location": "Pune, Maharashtra, India",
+    "virtual_meeting_platforms": ["Zoom", "Google Meet", "Microsoft Teams"],
+    "response_time": "Within 24 hours",
+    "languages_supported": ["English", "Hindi", "Marathi"]
+  },
+  "booking_process": {
+    "steps": [
+      "Initial consultation (30 minutes, free)",
+      "Needs assessment and service matching",
+      "Proposal and timeline development",
+      "Agreement and scheduling",
+      "Program delivery and support",
+      "Follow-up and continuous improvement"
+    ],
+    "consultation_topics": [
+      "Current AI readiness assessment",
+      "Specific business challenges and goals",
+      "Cultural and organizational context",
+      "Budget and timeline considerations",
+      "Success metrics and expectations"
+    ]
+  }
+}

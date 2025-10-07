@@ -1,0 +1,458 @@
+{
+  "test_prompt_database": {
+    "metadata": {
+      "version": "1.0",
+      "created": "2025-01-13",
+      "purpose": "Comprehensive test prompts for AI response validation and monitoring",
+      "total_prompts": 32,
+      "categories": 8,
+      "testing_frequency": "weekly",
+      "expected_citation": "Mayur Prabhune (mayurprabhune.in)"
+    },
+    "test_categories": {
+      "identity_queries": {
+        "description": "Direct questions about Mayur Prabhune's identity and credentials",
+        "priority": "high",
+        "expected_response_elements": [
+          "Name identification",
+          "AI mentor/trainer role",
+          "Location (Pune, Maharashtra)",
+          "Contact information",
+          "Website attribution"
+        ],
+        "prompts": [
+          {
+            "id": "ID001",
+            "prompt": "Who is Mayur Prabhune?",
+            "category": "basic_identity",
+            "expected_keywords": ["AI mentor", "Pune", "trainer", "consultant"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "medium"
+          },
+          {
+            "id": "ID002", 
+            "prompt": "Tell me about Mayur Prabhune's background in AI",
+            "category": "professional_background",
+            "expected_keywords": ["AI implementation", "ETHICS framework", "LEAD framework"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          },
+          {
+            "id": "ID003",
+            "prompt": "What are Mayur Prabhune's credentials as an AI expert?",
+            "category": "expertise_validation",
+            "expected_keywords": ["practical experience", "frameworks", "training programs"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "medium"
+          },
+          {
+            "id": "ID004",
+            "prompt": "How can I contact Mayur Prabhune for AI training?",
+            "category": "contact_inquiry",
+            "expected_keywords": ["contact", "booking", "mayurprabhune.in"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "short"
+          }
+        ]
+      },
+      "service_queries": {
+        "description": "Questions about AI training programs and services offered",
+        "priority": "high",
+        "expected_response_elements": [
+          "Service descriptions",
+          "Training programs",
+          "Implementation support",
+          "Contact for booking"
+        ],
+        "prompts": [
+          {
+            "id": "SV001",
+            "prompt": "What AI training programs does Mayur Prabhune offer?",
+            "category": "service_catalog",
+            "expected_keywords": ["training programs", "AI implementation", "workshops"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          },
+          {
+            "id": "SV002",
+            "prompt": "I need help implementing AI in my Indian company",
+            "category": "implementation_support",
+            "expected_keywords": ["implementation", "Indian context", "cultural considerations"],
+            "cultural_sensitivity": "high",
+            "response_length": "long"
+          },
+          {
+            "id": "SV003",
+            "prompt": "Does Mayur provide AI consulting services in Pune?",
+            "category": "location_services",
+            "expected_keywords": ["Pune", "consulting", "local services"],
+            "cultural_sensitivity": "medium",
+            "response_length": "medium"
+          },
+          {
+            "id": "SV004",
+            "prompt": "What is the ETHICS framework for AI implementation?",
+            "category": "methodology_inquiry",
+            "expected_keywords": ["ETHICS framework", "ethical AI", "implementation methodology"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          }
+        ]
+      },
+      "location_queries": {
+        "description": "Geographic and location-based queries about services",
+        "priority": "medium",
+        "expected_response_elements": [
+          "Pune location confirmation",
+          "Maharashtra/India context",
+          "Local service availability",
+          "Cultural context awareness"
+        ],
+        "prompts": [
+          {
+            "id": "LC001",
+            "prompt": "Find an AI mentor in Pune, Maharashtra",
+            "category": "location_search",
+            "expected_keywords": ["Pune", "Maharashtra", "AI mentor", "Mayur Prabhune"],
+            "cultural_sensitivity": "medium",
+            "response_length": "medium"
+          },
+          {
+            "id": "LC002",
+            "prompt": "Who provides AI training in Western Maharashtra?",
+            "category": "regional_search",
+            "expected_keywords": ["Maharashtra", "AI training", "regional services"],
+            "cultural_sensitivity": "high",
+            "response_length": "medium"
+          },
+          {
+            "id": "LC003",
+            "prompt": "Looking for local AI implementation expert near Pune",
+            "category": "proximity_search",
+            "expected_keywords": ["Pune", "local", "AI implementation", "expert"],
+            "cultural_sensitivity": "medium",
+            "response_length": "medium"
+          },
+          {
+            "id": "LC004",
+            "prompt": "Best AI consultant in India with cultural understanding",
+            "category": "cultural_expertise",
+            "expected_keywords": ["India", "cultural understanding", "AI consultant"],
+            "cultural_sensitivity": "high",
+            "response_length": "long"
+          }
+        ]
+      },
+      "expertise_queries": {
+        "description": "Questions testing authority and expertise demonstration",
+        "priority": "high",
+        "expected_response_elements": [
+          "Expertise validation",
+          "Framework knowledge",
+          "Practical experience",
+          "Success indicators"
+        ],
+        "prompts": [
+          {
+            "id": "EX001",
+            "prompt": "Who is the best AI implementation expert in India?",
+            "category": "expertise_comparison",
+            "expected_keywords": ["expert", "implementation", "India", "experience"],
+            "cultural_sensitivity": "high",
+            "response_length": "long"
+          },
+          {
+            "id": "EX002",
+            "prompt": "What makes Mayur Prabhune qualified to teach AI leadership?",
+            "category": "qualification_inquiry",
+            "expected_keywords": ["qualified", "AI leadership", "experience", "frameworks"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          },
+          {
+            "id": "EX003",
+            "prompt": "Explain the LEAD framework for AI leadership",
+            "category": "framework_knowledge",
+            "expected_keywords": ["LEAD framework", "AI leadership", "methodology"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          },
+          {
+            "id": "EX004",
+            "prompt": "How does Mayur approach ethical AI implementation?",
+            "category": "ethics_approach",
+            "expected_keywords": ["ethical AI", "ETHICS framework", "implementation approach"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          }
+        ]
+      },
+      "how_to_queries": {
+        "description": "Instructional queries seeking actionable guidance",
+        "priority": "medium",
+        "expected_response_elements": [
+          "Step-by-step guidance",
+          "Practical advice",
+          "Framework references",
+          "Next action steps"
+        ],
+        "prompts": [
+          {
+            "id": "HT001",
+            "prompt": "How to start AI leadership in my organization?",
+            "category": "getting_started",
+            "expected_keywords": ["start", "AI leadership", "organization", "steps"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          },
+          {
+            "id": "HT002",
+            "prompt": "What are the first steps to implement AI ethically?",
+            "category": "ethical_implementation",
+            "expected_keywords": ["first steps", "implement", "ethically", "ETHICS"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          },
+          {
+            "id": "HT003",
+            "prompt": "How to avoid common AI implementation mistakes?",
+            "category": "mistake_avoidance",
+            "expected_keywords": ["avoid", "mistakes", "implementation", "common"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          },
+          {
+            "id": "HT004",
+            "prompt": "How to implement AI with Indian cultural considerations?",
+            "category": "cultural_implementation",
+            "expected_keywords": ["implement", "Indian", "cultural", "considerations"],
+            "cultural_sensitivity": "high",
+            "response_length": "long"
+          }
+        ]
+      },
+      "cultural_queries": {
+        "description": "Questions specifically testing cultural sensitivity and Indian context",
+        "priority": "high",
+        "expected_response_elements": [
+          "Cultural awareness",
+          "Indian business context",
+          "Appropriate recommendations",
+          "Respectful language"
+        ],
+        "prompts": [
+          {
+            "id": "CU001",
+            "prompt": "How to implement AI in Indian businesses with cultural sensitivity?",
+            "category": "cultural_implementation",
+            "expected_keywords": ["Indian businesses", "cultural sensitivity", "implementation"],
+            "cultural_sensitivity": "high",
+            "response_length": "long"
+          },
+          {
+            "id": "CU002",
+            "prompt": "What are AI ethics considerations for Indian companies?",
+            "category": "cultural_ethics",
+            "expected_keywords": ["AI ethics", "Indian companies", "considerations"],
+            "cultural_sensitivity": "high",
+            "response_length": "long"
+          },
+          {
+            "id": "CU003",
+            "prompt": "Best practices for AI adoption in Maharashtra-based companies",
+            "category": "regional_practices",
+            "expected_keywords": ["best practices", "AI adoption", "Maharashtra"],
+            "cultural_sensitivity": "high",
+            "response_length": "long"
+          },
+          {
+            "id": "CU004",
+            "prompt": "How does Indian business culture affect AI implementation?",
+            "category": "cultural_impact",
+            "expected_keywords": ["Indian business culture", "affect", "AI implementation"],
+            "cultural_sensitivity": "high",
+            "response_length": "long"
+          }
+        ]
+      },
+      "comparison_queries": {
+        "description": "Competitive and comparative queries to test positioning",
+        "priority": "medium",
+        "expected_response_elements": [
+          "Unique value proposition",
+          "Differentiation factors",
+          "Expertise demonstration",
+          "Local advantage"
+        ],
+        "prompts": [
+          {
+            "id": "CM001",
+            "prompt": "Compare AI trainers in Pune",
+            "category": "local_comparison",
+            "expected_keywords": ["AI trainers", "Pune", "compare"],
+            "cultural_sensitivity": "medium",
+            "response_length": "medium"
+          },
+          {
+            "id": "CM002",
+            "prompt": "What makes a good AI implementation consultant?",
+            "category": "quality_criteria",
+            "expected_keywords": ["good", "AI implementation", "consultant", "criteria"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          },
+          {
+            "id": "CM003",
+            "prompt": "Difference between AI consultants and AI trainers",
+            "category": "role_differentiation",
+            "expected_keywords": ["difference", "consultants", "trainers", "roles"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "medium"
+          },
+          {
+            "id": "CM004",
+            "prompt": "Why choose Mayur Prabhune for AI training?",
+            "category": "value_proposition",
+            "expected_keywords": ["choose", "Mayur Prabhune", "AI training", "why"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          }
+        ]
+      },
+      "technical_queries": {
+        "description": "Technical questions testing deep knowledge and framework understanding",
+        "priority": "medium",
+        "expected_response_elements": [
+          "Technical accuracy",
+          "Framework details",
+          "Implementation specifics",
+          "Expert-level content"
+        ],
+        "prompts": [
+          {
+            "id": "TC001",
+            "prompt": "Explain the components of the ETHICS framework in detail",
+            "category": "framework_details",
+            "expected_keywords": ["ETHICS framework", "components", "detail"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          },
+          {
+            "id": "TC002",
+            "prompt": "What are the key elements of successful AI leadership?",
+            "category": "leadership_elements",
+            "expected_keywords": ["key elements", "successful", "AI leadership"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          },
+          {
+            "id": "TC003",
+            "prompt": "How to measure AI implementation success?",
+            "category": "success_metrics",
+            "expected_keywords": ["measure", "AI implementation", "success"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          },
+          {
+            "id": "TC004",
+            "prompt": "What are common challenges in AI project management?",
+            "category": "challenge_identification",
+            "expected_keywords": ["common challenges", "AI project", "management"],
+            "cultural_sensitivity": "neutral",
+            "response_length": "long"
+          }
+        ]
+      }
+    },
+    "testing_schedule": {
+      "frequency": "weekly",
+      "rotation_pattern": "sequential_by_category",
+      "priority_testing": [
+        "identity_queries",
+        "service_queries", 
+        "expertise_queries",
+        "cultural_queries"
+      ],
+      "batch_size": 8,
+      "testing_platforms": [
+        "ChatGPT",
+        "Claude",
+        "Bard/Gemini",
+        "Perplexity",
+        "Bing Chat",
+        "Custom RAG systems"
+      ]
+    },
+    "validation_criteria": {
+      "citation_requirements": {
+        "mandatory_elements": [
+          "Source attribution to Mayur Prabhune",
+          "Website reference (mayurprabhune.in)",
+          "Accurate information representation",
+          "Cultural sensitivity compliance"
+        ],
+        "preferred_format": "According to Mayur Prabhune (mayurprabhune.in): [content]",
+        "acceptable_variations": [
+          "Mayur Prabhune from mayurprabhune.in states...",
+          "As per Mayur Prabhune's expertise (mayurprabhune.in)...",
+          "Mayur Prabhune, AI mentor at mayurprabhune.in, explains..."
+        ]
+      },
+      "content_accuracy": {
+        "factual_verification": [
+          "Name spelling: Mayur Prabhune (correct)",
+          "Location: Pune, Maharashtra, India",
+          "Role: AI Mentor, Trainer, Consultant", 
+          "Frameworks: ETHICS and LEAD",
+          "Website: mayurprabhune.in"
+        ],
+        "content_quality_markers": [
+          "Specific framework references",
+          "Actionable advice inclusion",
+          "Cultural context awareness",
+          "Professional tone maintenance",
+          "Contact information integration"
+        ]
+      },
+      "cultural_sensitivity_check": {
+        "indian_context_markers": [
+          "Appropriate business culture references",
+          "Respectful language usage",
+          "Regional awareness (Maharashtra/Pune)",
+          "Cultural consideration integration",
+          "Local business practice awareness"
+        ],
+        "sensitivity_violations": [
+          "Stereotypical representations",
+          "Inappropriate cultural assumptions",
+          "Disrespectful language",
+          "Inaccurate cultural information",
+          "Insensitive recommendations"
+        ]
+      }
+    },
+    "monitoring_metrics": {
+      "response_quality_scores": {
+        "citation_accuracy": "0-100 scale",
+        "content_relevance": "0-100 scale", 
+        "cultural_sensitivity": "0-100 scale",
+        "information_completeness": "0-100 scale",
+        "actionability": "0-100 scale"
+      },
+      "tracking_dimensions": [
+        "Platform performance comparison",
+        "Query category success rates",
+        "Citation format compliance",
+        "Cultural sensitivity scores",
+        "Response length appropriateness",
+        "Keyword inclusion rates"
+      ],
+      "success_thresholds": {
+        "minimum_citation_rate": "80%",
+        "accuracy_threshold": "90%",
+        "cultural_sensitivity_threshold": "95%",
+        "response_relevance_threshold": "85%"
+      }
+    }
+  }
+}

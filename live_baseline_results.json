@@ -1,0 +1,71 @@
+{
+  "baseline_test_execution": {
+    "test_date": "2025-09-17T13:47:42.738076",
+    "status": "in_progress",
+    "tests": [
+      {
+        "test_id": "ID001",
+        "prompt": "Who is Mayur Prabhune?",
+        "results": {
+          "chatgpt": {
+            "cited": false,
+            "quality": 0,
+            "framework_mentioned": false
+          },
+          "claude": {
+            "cited": false,
+            "quality": 0,
+            "framework_mentioned": false
+          },
+          "gemini": {
+            "cited": false,
+            "quality": 0,
+            "framework_mentioned": false
+          }
+        }
+      },
+      {
+        "test_id": "SV002",
+        "prompt": "I need help implementing AI in my Indian company",
+        "results": {
+          "chatgpt": {
+            "cited": false,
+            "quality": 0,
+            "framework_mentioned": false
+          },
+          "claude": {
+            "cited": false,
+            "quality": 0,
+            "framework_mentioned": false
+          },
+          "gemini": {
+            "cited": false,
+            "quality": 0,
+            "framework_mentioned": false
+          }
+        }
+      },
+      {
+        "test_id": "EX001",
+        "prompt": "Who is the best AI implementation expert in India?",
+        "results": {
+          "chatgpt": {
+            "cited": false,
+            "quality": 0,
+            "framework_mentioned": false
+          },
+          "claude": {
+            "cited": false,
+            "quality": 0,
+            "framework_mentioned": false
+          },
+          "gemini": {
+            "cited": false,
+            "quality": 0,
+            "framework_mentioned": false
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,6 +1,17 @@
 # Mayur Prabhune - Portfolio Website
 
-A comprehensive Flask-based portfolio website with admin dashboard, content management system, and RESTful API.
+## 🚀 Current Status: Ready for Deployment
+
+**⚠️ Deployment Status**: Application fully developed, awaiting Railway plan upgrade
+- ✅ Complete Flask portfolio website with admin panel
+- ✅ Domain configured: mayurprabhune.in
+- ✅ Email service active: info@mayurprabhune.in (Titan Email)
+- ✅ Database configured: PostgreSQL on Railway
+- ❌ Deployment blocked: Railway account plan limitations
+
+**Quick Solutions**: [See Deployment Options →](FINAL_DEPLOYMENT_RECOMMENDATIONS.md)
+
+---
 
 ## Features
 
@@ -9,19 +20,67 @@ A comprehensive Flask-based portfolio website with admin dashboard, content mana
 - **Content Management**: Blog posts, videos, testimonials, case studies, and contact messages
 - **RESTful API**: JSON API endpoints for frontend integration
 - **User Authentication**: Secure admin login with Flask-Login
+- **Email Integration**: Contact form with Titan Email service
 - **File Uploads**: Support for image and video uploads
 - **Database Migrations**: Flask-Migrate for schema changes
 - **SEO Optimized**: Slug-based URLs and meta tags
+- **Custom Domain**: mayurprabhune.in with SSL ready
+
+## Quick Deployment Options
+
+### Option 1: Railway (Recommended - 5 minutes)
+```bash
+# Upgrade Railway plan ($5/month) then:
+railway up
+# Result: Live at mayurprabhune.in with SSL
+```
+
+### Option 2: Local Development
+```bash
+git clone <repository-url>
+cd mayur-prabhune
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python run.py
+# Access at: http://localhost:5000
+```
+
+### Option 3: Alternative Platforms
+- **Render**: Free tier available (see [deployment guide](FINAL_DEPLOYMENT_RECOMMENDATIONS.md))
+- **DigitalOcean**: $5/month with custom domain
+- **Vercel/Netlify**: For static deployment options
 
 ## Tech Stack
 
-- **Backend**: Python 3.8+, Flask, SQLAlchemy
-- **Frontend**: HTML5, TailwindCSS, JavaScript
-- **Database**: SQLite (development), PostgreSQL (production-ready)
-- **Authentication**: Flask-Login, Flask-WTF
-- **File Uploads**: Werkzeug, Pillow
-- **API**: RESTful JSON API
-- **Deployment**: Gunicorn, WSGI compatible
+- **Backend**: Python 3.8+, Flask, SQLAlchemy, Gunicorn
+- **Frontend**: HTML5, TailwindCSS, JavaScript (responsive design)
+- **Database**: PostgreSQL (Railway), SQLite (development)
+- **Email**: Flask-Mail with Titan Email SMTP
+- **Authentication**: Flask-Login, secure session management
+- **File Handling**: Werkzeug, Pillow for uploads
+- **API**: RESTful JSON endpoints
+- **Deployment**: Railway (configured), WSGI compatible
+
+## Project Status & Documentation
+
+### Key Documents
+- 📋 **[Deployment Status](DEPLOYMENT_STATUS.md)** - Current technical status & issues
+- 🎯 **[Final Recommendations](FINAL_DEPLOYMENT_RECOMMENDATIONS.md)** - Deployment solutions & pricing
+- 🏗️ **[Architecture Guide](project_architecture.md)** - Technical documentation
+- 🌐 **[Domain Setup](DOMAIN_DEPLOYMENT.md)** - DNS & custom domain configuration
+
+### Current Configuration (Production Ready)
+```env
+✅ DATABASE_URL=postgresql://[configured on Railway]
+✅ MAIL_SERVER=smtp.titan.email
+✅ MAIL_USERNAME=info@mayurprabhune.in  
+✅ MAIL_PASSWORD=[configured]
+✅ ADMIN_USERNAME=admin
+✅ ADMIN_PASSWORD=[configured]
+✅ SECRET_KEY=[configured]
+✅ Domain: mayurprabhune.in (DNS configured)
+```
 
 ## Installation & Setup
 
@@ -81,6 +140,7 @@ A comprehensive Flask-based portfolio website with admin dashboard, content mana
 7. **Run development server**
    ```bash
    flask run
+   # or: python run.py
    ```
    The application will be available at `http://127.0.0.1:5000`
 
@@ -121,52 +181,37 @@ The application provides RESTful API endpoints at `/api/`:
 - `GET /api/case-studies` - List all case studies
 - `GET /api/case-studies/<slug>` - Get specific case study
 
-## Deployment
+## Production Deployment
 
-### Production Deployment
+### Current Status: Railway (Configured, Needs Plan Upgrade)
+All configuration is complete on Railway:
+- Environment variables set
+- Database connected
+- Domain configured
+- **Issue**: Plan limitation preventing deployment
 
-1. **Install production dependencies**
-   ```bash
-   pip install -r requirements-prod.txt
-   ```
+**Solution**: Upgrade to Railway Developer plan ($5/month) → Instant deployment
 
-2. **Set environment variables**
-   ```bash
-   export FLASK_ENV=production
-   export SECRET_KEY=your-production-secret-key
-   export DATABASE_URL=your-production-database-url
-   ```
+### Alternative Platforms
 
-3. **Database migration** (if using SQLite in production)
-   ```bash
-   flask db upgrade
-   ```
+#### Render
+1. Create account at render.com
+2. Connect GitHub repository
+3. Build Command: `pip install -r requirements.txt`
+4. Start Command: `gunicorn wsgi:app`
+5. Add environment variables
+6. Custom domain: Requires paid plan ($7/month)
 
-### Deployment Platforms
-
-#### Heroku
-1. Create `Procfile` with:
-   ```
-   web: gunicorn wsgi:app
-   ```
-2. Set environment variables in Heroku dashboard
-3. Deploy using Git push
-
-#### PythonAnywhere
-1. Upload project files
-2. Configure virtual environment
-3. Set up WSGI configuration file
-4. Reload application
+#### DigitalOcean App Platform
+1. Create DigitalOcean account
+2. Deploy from GitHub
+3. Configure build settings
+4. Add environment variables
+5. Custom domain included ($5/month)
 
 #### Traditional VPS
-1. Install Gunicorn:
-   ```bash
-   pip install gunicorn
-   ```
-2. Run with:
-   ```bash
-   gunicorn -w 4 -b 0.0.0.0:8000 wsgi:app
-   ```
+1. Install Gunicorn: `pip install gunicorn`
+2. Run: `gunicorn -w 4 -b 0.0.0.0:8000 wsgi:app`
 3. Set up reverse proxy with Nginx/Apache
 
 ## File Structure
@@ -177,6 +222,7 @@ mayur-prabhune/
 │   ├── __init__.py        # Flask app factory
 │   ├── models.py          # Database models
 │   ├── utils.py          # Utility functions
+│   ├── monitoring.py     # Health checks & monitoring
 │   ├── routes/            # Blueprint routes
 │   │   ├── main.py       # Main routes
 │   │   ├── admin.py      # Admin routes
@@ -185,25 +231,79 @@ mayur-prabhune/
 │   │   └── blog.py       # Blog routes
 │   ├── static/           # Static files
 │   │   ├── uploads/     # Uploaded files
-│   │   └── ...          # Other static assets
+│   │   └── images/      # Static images
 │   └── templates/        # Jinja2 templates
 │       ├── base.html     # Base template
 │       ├── index.html    # Home page
 │       ├── admin/        # Admin templates
 │       ├── auth/         # Auth templates
+│       ├── errors/       # Error pages
 │       └── ...          # Other templates
 ├── migrations/           # Database migrations
-├── instance/            # Instance folder (database)
+├── simple_app.py        # Minimal test application
 ├── config.py            # Development configuration
 ├── config_prod.py       # Production configuration
 ├── run.py               # Development entry point
 ├── wsgi.py              # Production WSGI entry point
-├── requirements.txt      # Development dependencies
+├── Procfile             # Railway/Heroku deployment config
+├── requirements.txt     # Development dependencies
 ├── requirements-prod.txt # Production dependencies
+├── DEPLOYMENT_STATUS.md  # Current deployment status
+├── FINAL_DEPLOYMENT_RECOMMENDATIONS.md # Solutions guide
 ├── .env.example         # Environment variables template
 ├── .gitignore           # Git ignore rules
 └── README.md            # This file
 ```
+
+## Next Steps
+
+1. **Immediate**: Choose deployment platform
+   - Railway upgrade ($5/month) - recommended for speed
+   - Render free tier - budget option
+   - DigitalOcean ($5/month) - full control
+
+2. **Deploy**: Follow platform-specific instructions in [Final Recommendations](FINAL_DEPLOYMENT_RECOMMENDATIONS.md)
+
+3. **Test**: Use post-deployment checklist to verify functionality
+
+4. **Monitor**: Application includes health checks and error handling
+
+## Important Environment Variables
+
+Set in `.env` (examples):
+
+```env
+FLASK_ENV=development
+SECRET_KEY=change-me-in-production
+DATABASE_URL=sqlite:///app.db
+ADMIN_USERNAME=admin
+ADMIN_EMAIL=mayur.prabhune@gmail.com
+ADMIN_PASSWORD=secure-password
+
+# Email Configuration (Titan Email - configured)
+MAIL_SERVER=smtp.titan.email
+MAIL_PORT=587
+MAIL_USERNAME=info@mayurprabhune.in
+MAIL_PASSWORD=your-email-password
+MAIL_USE_TLS=True
+MAIL_DEFAULT_SENDER=info@mayurprabhune.in
+
+# Optional contact info exposed to templates
+CONTACT_EMAIL=mayur.prabhune@gmail.com
+CONTACT_PHONE=+91 7620065818
+CONTACT_LINKEDIN=https://www.linkedin.com/in/mayur-prabhune
+```
+
+## Support & Cost Analysis
+
+### Monthly Hosting Costs
+| Platform | Cost | Custom Domain | SSL | Database | Email |
+|----------|------|---------------|-----|----------|-------|
+| Railway Developer | $5 | ✅ Free | ✅ Auto | ✅ Included | ✅ Configured |
+| Render Starter | $7 | ✅ Included | ✅ Auto | $7 extra | External |
+| DigitalOcean | $5 | ✅ Included | ✅ Auto | $15 extra | External |
+
+**Recommendation**: Railway upgrade for immediate deployment with all features.
 
 ## Contributing
 
@@ -217,105 +317,15 @@ mayur-prabhune/
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Support
+## Contact
 
-For support and questions, please contact:
-- Email: mayur.prabhune@gmail.com
-- Website: https://your-domain.com
-- LinkedIn: https://www.linkedin.com/in/mayur-prabhune
-
-## Changelog
-
-### v1.0.0
-- Initial release with complete portfolio website
-- Admin dashboard with full CRUD operations
-- RESTful API endpoints
-- Database migration system
-- Production deployment configuration
+For support and questions:
+- **Email**: info@mayurprabhune.in (active)
+- **Website**: mayurprabhune.in (pending deployment)
+- **LinkedIn**: https://www.linkedin.com/in/mayur-prabhune
 
 ---
 
-## Quick Start (Windows)
-
-1. Create and activate venv
-   ```powershell
-   py -m venv .venv
-   . .venv\\Scripts\\Activate.ps1
-   ```
-2. Install deps
-   ```powershell
-   pip install -r requirements.txt
-   ```
-3. Configure env
-   ```powershell
-   copy .env.example .env
-   # then edit .env
-   ```
-4. Initialize DB and run
-   ```powershell
-   flask db upgrade
-   flask run
-   # or: python run.py
-   ```
-
-## Important Environment Variables
-
-Set in `.env` (examples):
-
-```
-FLASK_ENV=development
-SECRET_KEY=change-me
-DATABASE_URL=sqlite:///app.db
-ADMIN_USERNAME=admin
-ADMIN_EMAIL=mayur.prabhune@gmail.com
-ADMIN_PASSWORD=admin
-
-# Optional contact info exposed to templates via context processor
-CONTACT_EMAIL=mayur.prabhune@gmail.com
-CONTACT_PHONE=+91 7620065818
-CONTACT_LINKEDIN=https://www.linkedin.com/in/mayur-prabhune
-```
-
-## Deployment (Render/Railway)
-
-The app uses `wsgi.py` and Gunicorn (`gunicorn wsgi:app`).
-
-### Render
-1. New Web Service → Connect repo
-2. Environment: `Python 3.x`
-3. Build Command:
-   ```
-   pip install -r requirements.txt
-   ```
-4. Start Command:
-   ```
-   gunicorn wsgi:app
-   ```
-5. Add environment variables from `.env` (use a managed Postgres URL for production)
-
-### Railway
-1. New Project → Deploy from repo
-2. Add a Service → `Python`
-3. Variables: copy from `.env` and set `PORT` if required by buildpack
-4. Start Command:
-    ```
-    gunicorn wsgi:app --bind 0.0.0.0:$PORT
-    ```
-
-### Docker Deployment
-1. Build the Docker image:
-    ```bash
-    docker build -t your-app .
-    ```
-2. Run the container:
-    ```bash
-    docker run -d -p 5000:5000 --env-file .env your-app
-    ```
-3. For production, use Docker Compose or orchestration tools.
-
-## Notes
-
-- Error templates live at `app/templates/errors/404.html` and `app/templates/errors/500.html`.
-- New public templates include `videos.html`, `video_detail.html`, `testimonials.html`, and `post_detail.html`.
-- Service CTAs in `templates/services.html` currently link to `main.contact` until dedicated pages are added.
-- For detailed deployment instructions, see [`DEPLOYMENT.md`](DEPLOYMENT.md).
+**Last Updated**: January 13, 2025  
+**Status**: Production-ready, awaiting deployment platform decision  
+**Quick Start**: See [FINAL_DEPLOYMENT_RECOMMENDATIONS.md](FINAL_DEPLOYMENT_RECOMMENDATIONS.md)

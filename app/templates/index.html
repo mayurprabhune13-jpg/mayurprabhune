@@ -246,7 +246,7 @@
         </div>
         {% else %}
         <div class="aspect-video w-full max-w-4xl mx-auto rounded-xl overflow-hidden border-2 border-[var(--primary-fuchsia)]/50 glow-effect">
-            <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full" frameborder="0" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player"></iframe>
+            <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full" frameborder="0" src="https://www.youtube.com/embed/f_Px9x503N0" title="YouTube video player"></iframe>
         </div>
         {% endif %}
         <div class="text-center mt-12">
@@ -266,9 +266,30 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             {% for post in posts %}
             <div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-cyan)] border border-transparent transition-all duration-300">
+                {% if post.get('is_external') %}
+                <!-- LinkedIn post -->
+                <div class="flex items-center gap-2 mb-2">
+                    <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    <span class="text-blue-500 text-sm font-medium">LinkedIn</span>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-cyan)]">{{ post.title }}</h3>
+                <p class="text-gray-400 mb-4">{{ post.excerpt|truncate(120) }}</p>
+                <div class="flex justify-between items-center">
+                    <a href="{{ post.url }}" target="_blank" rel="noopener noreferrer" class="font-semibold text-[var(--primary-cyan)] hover:underline">Read on LinkedIn</a>
+                    {% if post.engagement %}
+                    <div class="text-sm text-gray-500">
+                        {{ post.engagement.likes }} likes
+                    </div>
+                    {% endif %}
+                </div>
+                {% else %}
+                <!-- Regular blog post -->
                 <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-cyan)]">{{ post.title }}</h3>
                 <p class="text-gray-400 mb-4">{{ post.excerpt|truncate(120) }}</p>
                 <a href="{{ url_for('blog.post_detail', slug=post.slug) }}" class="font-semibold text-[var(--primary-cyan)] hover:underline">Read More</a>
+                {% endif %}
             </div>
             {% else %}
             <div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-cyan)] border border-transparent transition-all duration-300">

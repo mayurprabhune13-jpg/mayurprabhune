@@ -24,22 +24,17 @@ Create these environment variables in Railway:
 
 ### Option A: Deploy from GitHub (Recommended)
 
-1. **Push to GitHub**:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit with GEO optimization"
-   git branch -M main
-   git remote add origin https://github.com/yourusername/mayur-prabhune-ai-mentor.git
-   git push -u origin main
-   ```
+1. **Repository Ready**:
+   ✅ Code already pushed to: https://github.com/mayurprabhune13-jpg/mayurprabhune.git
+   ✅ Python 3.11 compatibility fixes applied
+   ✅ Docker configuration included
 
 2. **Deploy on Railway**:
    - Visit https://railway.app
    - Click "New Project"
    - Select "Deploy from GitHub repo"
-   - Choose your repository
-   - Railway will automatically detect it's a Python Flask app
+   - Choose repository: `mayurprabhune13-jpg/mayurprabhune`
+   - Railway will use the Dockerfile for Python 3.11 deployment
 
 ### Option B: Deploy with Railway CLI
 

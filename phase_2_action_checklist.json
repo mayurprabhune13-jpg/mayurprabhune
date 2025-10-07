@@ -1,0 +1,41 @@
+{
+  "linkedin_optimization": {
+    "priority": "HIGH",
+    "time_required": "2 hours",
+    "tasks": [
+      "Update headline with AI mentor keywords",
+      "Add ETHICS and LEAD frameworks to experience",
+      "Include Pune, Maharashtra location prominently",
+      "Add AI implementation keywords throughout profile",
+      "Create posts about AI ethics and cultural sensitivity",
+      "Connect with Indian business leaders and AI professionals"
+    ],
+    "guide": "linkedin-optimization-guide.md"
+  },
+  "google_business_profile": {
+    "priority": "HIGH",
+    "time_required": "1 hour",
+    "tasks": [
+      "Create Google Business Profile for 'Mayur Prabhune AI Mentorship'",
+      "Add Pune, Maharashtra location",
+      "Include AI mentor, consultant, trainer in description",
+      "Add business hours and contact information",
+      "Upload professional photos",
+      "Encourage client reviews mentioning AI expertise"
+    ],
+    "guide": "google-business-profile-setup.md"
+  },
+  "directory_submissions": {
+    "priority": "MEDIUM",
+    "time_required": "3 hours",
+    "tasks": [
+      "Submit to Indian business directories",
+      "Add to AI and consulting professional directories",
+      "Include Maharashtra/Pune regional directories",
+      "Maintain consistent NAP (Name, Address, Phone)",
+      "Use AI mentor keywords in all descriptions",
+      "Focus on cultural sensitivity and Indian expertise"
+    ],
+    "guide": "industry-directory-strategy.md"
+  }
+}
