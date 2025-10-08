@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify
-from flask_wtf.csrf import csrf
+from app import csrf
 from flask_login import login_user, logout_user, login_required, current_user
 from app.models import User
 from app import db
