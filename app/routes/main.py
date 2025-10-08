@@ -207,6 +207,7 @@ def blog():
     
     posts = None
     categories = []
+    linkedin_posts = []
     
     try:
         query = Post.query.filter_by(status='published')
@@ -221,16 +222,20 @@ def blog():
         categories = db.session.query(Post.category)\
             .filter(Post.category.isnot(None), Post.status=='published')\
             .distinct().all()
+
+        # Get LinkedIn blog content (only for first page and no category filter)
+        if page == 1 and not category:
+            try:
+                linkedin_posts = get_linkedin_blog_content(limit=3)
+            except Exception as e:
+                current_app.logger.warning(f"Could not fetch LinkedIn posts: {str(e)}")
+                linkedin_posts = []
+
     except Exception as e:
         current_app.logger.warning(f"Could not fetch posts: {str(e)}")
         # Create empty pagination object
         from flask_sqlalchemy import Pagination
         posts = Pagination(page=page, per_page=6, total=0, items=[])
-    
-    # Get LinkedIn blog content (only for first page and no category filter)
-    linkedin_posts = []
-    if page == 1 and not category:
-        linkedin_posts = get_linkedin_blog_content(limit=3)
     
     return render_template('blog.html',
                          posts=posts,
