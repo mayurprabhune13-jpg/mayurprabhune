@@ -103,3 +103,16 @@ class CaseStudy(db.Model):
     
     def __repr__(self):
         return f'<CaseStudy {self.title}>'
+
+class ClientLogo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    client_name = db.Column(db.String(100), nullable=False)
+    logo_url = db.Column(db.String(500), nullable=False)
+    website_url = db.Column(db.String(500))
+    description = db.Column(db.Text)
+    display_order = db.Column(db.Integer, default=0)
+    status = db.Column(db.String(20), default='active')  # active, inactive
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    def __repr__(self):
+        return f'<ClientLogo {self.client_name}>'

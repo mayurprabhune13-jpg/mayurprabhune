@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from datetime import datetime
 import os
 from app import db
-from app.models import Video, Testimonial, Post, Contact, CaseStudy
+from app.models import Video, Testimonial, Post, Contact, CaseStudy, ClientLogo
 from config import Config
 from app.utils import generate_slug
 
@@ -243,6 +243,52 @@ def case_studies():
         
     case_studies = CaseStudy.query.order_by(CaseStudy.created_at.desc()).all()
     return render_template('admin/case_studies.html', case_studies=case_studies)
+    
+    @bp.route('/client-logos', methods=['GET', 'POST'])
+    def client_logos():
+        """Manage client logos"""
+        if request.method == 'POST':
+            client_name = request.form.get('client_name')
+            website_url = request.form.get('website_url')
+            description = request.form.get('description')
+            display_order = request.form.get('display_order', 0)
+            status = request.form.get('status', 'active')
+            logo = request.files.get('logo')
+            
+            if not client_name:
+                flash('Client name is required', 'error')
+                return redirect(url_for('admin.client_logos'))
+                
+            logo_url = None
+            if logo and allowed_file(logo.filename):
+                filename = secure_filename(logo.filename)
+                logo.save(os.path.join(Config.UPLOAD_FOLDER, filename))
+                logo_url = f'/static/uploads/{filename}'
+            else:
+                flash('Valid logo image is required', 'error')
+                return redirect(url_for('admin.client_logos'))
+                
+            client_logo = ClientLogo(
+                client_name=client_name,
+                logo_url=logo_url,
+                website_url=website_url,
+                description=description,
+                display_order=int(display_order) if display_order else 0,
+                status=status
+            )
+            
+            try:
+                db.session.add(client_logo)
+                db.session.commit()
+                flash('Client logo added successfully', 'success')
+            except:
+                db.session.rollback()
+                flash('Error adding client logo', 'error')
+                
+            return redirect(url_for('admin.client_logos'))
+            
+        client_logos = ClientLogo.query.order_by(ClientLogo.display_order.asc(), ClientLogo.created_at.desc()).all()
+        return render_template('admin/client_logos.html', client_logos=client_logos)
 
 @bp.route('/messages')
 def messages():
@@ -304,3 +350,17 @@ def delete_post(id):
 def delete_case_study(id):
     """Delete a case study"""
     return delete_resource(CaseStudy, id, 'admin.case_studies')
+
+@bp.route('/client-logo/<int:id>/delete')
+def delete_client_logo(id):
+    """Delete a client logo"""
+    return delete_resource(ClientLogo, id, 'admin.client_logos')
+
+@bp.route('/client-logo/<int:id>/toggle-status')
+def toggle_client_logo_status(id):
+    """Toggle client logo status between active and inactive"""
+    logo = ClientLogo.query.get_or_404(id)
+    logo.status = 'inactive' if logo.status == 'active' else 'active'
+    db.session.commit()
+    flash(f'Client logo status updated to {logo.status}', 'success')
+    return redirect(url_for('admin.client_logos'))
