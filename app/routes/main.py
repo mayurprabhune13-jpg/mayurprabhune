@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app
+from flask_sqlalchemy.pagination import Pagination
 from app.models import Post, Testimonial, Video, Contact, CaseStudy
 from app.utils import is_valid_email, format_datetime, reading_time, send_email
 from app import db
@@ -6,6 +7,45 @@ from app.monitoring import log_function_call, log_db_query
 from app.linkedin_integration import get_linkedin_blog_content
 
 bp = Blueprint('main', __name__)
+
+@bp.route('/setup-db')
+def setup_db():
+    """Initialize database tables and create admin user"""
+    try:
+        # Create all database tables
+        db.create_all()
+        
+        # Check if admin user exists
+        from app.models import User
+        admin = User.query.filter_by(email='admin@example.com').first()
+        if not admin:
+            admin = User(
+                username='admin',
+                email='admin@example.com',
+                is_admin=True
+            )
+            admin.set_password('AdminPass123!')
+            db.session.add(admin)
+            
+            # Add a sample blog post
+            from app.models import Post
+            from app.utils import generate_slug
+            post = Post(
+                title='Welcome to My Blog',
+                slug=generate_slug('Welcome to My Blog'),
+                content='This is my first blog post.',
+                excerpt='An introduction to my blog.',
+                status='published',
+                author=admin
+            )
+            db.session.add(post)
+            
+            db.session.commit()
+            return 'Database initialized with admin user and sample post.'
+        return 'Database tables created.'
+    except Exception as e:
+        db.session.rollback()
+        return f'Error setting up database: {str(e)}'
 
 @bp.route('/')
 @log_function_call
@@ -233,9 +273,8 @@ def blog():
 
     except Exception as e:
         current_app.logger.warning(f"Could not fetch posts: {str(e)}")
-        # Create empty pagination object
-        from flask_sqlalchemy import Pagination
-        posts = Pagination(page=page, per_page=6, total=0, items=[])
+        # Create empty pagination object for posts
+        posts = Pagination(None, page=page, per_page=6, total=0, items=[])
     
     return render_template('blog.html',
                          posts=posts,
@@ -283,8 +322,8 @@ def success_stories():
     except Exception as e:
         current_app.logger.warning(f"Could not fetch case studies: {str(e)}")
         # Create empty pagination object
-        from flask_sqlalchemy import Pagination
-        case_studies = Pagination(page=page, per_page=6, total=0, items=[])
+        # Create empty pagination object for case studies
+        case_studies = Pagination(None, page=page, per_page=6, total=0, items=[])
     
     return render_template('success_stories.html',
                          case_studies=case_studies,
