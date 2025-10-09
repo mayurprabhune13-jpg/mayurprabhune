@@ -25,6 +25,33 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        {% if linkedin_posts %}
+            {% for post in linkedin_posts %}
+            <div class="flex flex-col gap-4 bg-[#1a1f24] p-6 rounded-lg border border-[#293038] shadow-lg blog-post-card">
+                {% if post.image_url %}
+                <img alt="{{ post.title }}"
+                     class="w-full h-48 object-cover rounded-md mb-4"
+                     src="{{ post.image_url }}"/>
+                {% endif %}
+                <div class="flex flex-col gap-2">
+                    <p class="text-sm font-medium text-[var(--cyan-accent)]">LinkedIn • {{ post.published_at|datetime }}</p>
+                    <h3 class="text-white text-xl font-bold">{{ post.title }}</h3>
+                    {% if post.excerpt %}
+                    <p class="text-[#9dabb8] text-base leading-relaxed line-clamp-3">{{ post.excerpt }}</p>
+                    {% endif %}
+                </div>
+                <a href="{{ post.url }}" target="_blank"
+                   class="inline-flex items-center text-sm font-medium text-white hover:text-[var(--fuchsia-accent)] mt-auto group">
+                    Read on LinkedIn
+                    <svg class="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1"
+                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </a>
+            </div>
+            {% endfor %}
+        {% endif %}
+        
         {% for post in posts.items %}
         <div class="flex flex-col gap-4 bg-[#1a1f24] p-6 rounded-lg border border-[#293038] shadow-lg blog-post-card">
             {% if post.image_url %}
@@ -36,7 +63,7 @@
                 <p class="text-sm font-medium text-[var(--cyan-accent)]">{{ post.category }} • {{ post.published_at|datetime or post.created_at|datetime }}</p>
                 <h3 class="text-white text-xl font-bold">{{ post.title }}</h3>
                 {% if post.excerpt %}
-                <p class="text-[#9dabb8] text-base leading-relaxed">{{ post.excerpt }}</p>
+                <p class="text-[#9dabb8] text-base leading-relaxed line-clamp-3">{{ post.excerpt }}</p>
                 {% endif %}
             </div>
             <a href="{{ url_for('main.post_detail', slug=post.slug) }}" 

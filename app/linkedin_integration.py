@@ -120,13 +120,15 @@ def format_linkedin_content_for_blog(linkedin_content):
             'title': content['title'],
             'excerpt': content['excerpt'],
             'url': content['url'],
-            'published_date': content['published_date'],
+            'published_at': content['published_date'],  # Changed to match template
+            'created_at': content['published_date'],    # Added for consistency
             'author': content['author'],
             'source': 'LinkedIn',
             'engagement': content.get('engagement', {}),
             'tags': content.get('tags', []),
             'read_time': content.get('read_time', '5 min read'),
-            'is_external': True  # Flag to indicate this is from external source
+            'is_external': True,  # Flag to indicate this is from external source
+            'image_url': None  # Added to match template expectations
         }
         formatted_posts.append(formatted_post)
     
