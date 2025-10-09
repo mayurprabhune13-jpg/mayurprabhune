@@ -23,6 +23,7 @@ class LinkedInBlogFetcher:
         In production, you would integrate with LinkedIn's API or use authorized RSS feeds
         """
         try:
+            logger.info("Fetching sample LinkedIn posts")
             # For now, return sample blog posts that would be typical for an AI mentor
             sample_posts = [
                 {
@@ -140,9 +141,13 @@ def get_linkedin_blog_content(limit=3):
     Main function to get LinkedIn content for blog display
     """
     try:
+        logger.info("Starting LinkedIn blog content fetch")
         fetcher = LinkedInBlogFetcher()
         linkedin_content = fetcher.get_combined_content(limit)
-        return format_linkedin_content_for_blog(linkedin_content)
+        logger.info(f"Got {len(linkedin_content)} raw LinkedIn content items")
+        formatted_content = format_linkedin_content_for_blog(linkedin_content)
+        logger.info(f"Formatted {len(formatted_content)} LinkedIn posts for blog")
+        return formatted_content
     except Exception as e:
-        logger.error(f"Error getting LinkedIn blog content: {str(e)}")
+        logger.error(f"Error getting LinkedIn blog content: {str(e)}", exc_info=True)
         return []

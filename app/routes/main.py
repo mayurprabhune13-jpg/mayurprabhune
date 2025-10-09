@@ -267,8 +267,11 @@ def blog():
         if page == 1 and not category:
             try:
                 linkedin_posts = get_linkedin_blog_content(limit=3)
+                current_app.logger.info(f"Successfully fetched {len(linkedin_posts)} LinkedIn posts")
+                if not linkedin_posts:
+                    current_app.logger.warning("No LinkedIn posts were returned")
             except Exception as e:
-                current_app.logger.warning(f"Could not fetch LinkedIn posts: {str(e)}")
+                current_app.logger.error(f"Could not fetch LinkedIn posts: {str(e)}")
                 linkedin_posts = []
 
     except Exception as e:
