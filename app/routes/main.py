@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app, Response
 from urllib.parse import urlsplit
 from flask_sqlalchemy.pagination import Pagination
+from sqlalchemy import case
 from app.models import Post, Testimonial, Video, Contact, CaseStudy, ClientLogo, SocialPost
 from app.utils import is_valid_email, format_datetime, reading_time, send_email
 from app import db
@@ -22,7 +23,8 @@ def get_recent_social_posts(platform=None, limit=3):
         query = SocialPost.query.filter_by(is_visible=True)
         if platform:
             query = query.filter_by(platform=platform)
-        return query.order_by(SocialPost.published_at.desc()).limit(limit).all()
+        curated_first = case((SocialPost.external_id.like('manual:%'), 0), else_=1)
+        return query.order_by(curated_first, SocialPost.published_at.desc()).limit(limit).all()
     except Exception as error:
         db.session.rollback()
         current_app.logger.warning('Could not load cached social feed (%s).', type(error).__name__)

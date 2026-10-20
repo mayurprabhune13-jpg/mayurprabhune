@@ -104,7 +104,8 @@ class SocialPost(db.Model):
 
     @property
     def excerpt(self):
-        return (self.caption or '').strip()
+        lines = (self.caption or '').strip().splitlines()
+        return '\n'.join(lines[1:]).strip() if len(lines) > 1 else (lines[0] if lines else '')
 
     @property
     def url(self):

@@ -190,8 +190,8 @@
                 {% if linkedin_posts %}
                 <div class="social-posts" aria-label="Latest LinkedIn posts">
                     {% for post in linkedin_posts %}
-                    <a class="social-post reveal" href="{{ post.permalink }}" target="_blank" rel="noopener noreferrer">
-                        <div class="social-post__top"><span class="social-post__date">{{ post.published_at|datetime }}</span><span class="social-post__arrow" aria-hidden="true">↗</span></div>
+                    <a class="social-post{% if loop.first %} social-post--featured{% endif %} reveal" href="{{ post.permalink }}" target="_blank" rel="noopener noreferrer">
+                        <div class="social-post__top"><span class="social-post__date">{% if post.external_id.startswith('manual:') %}<span class="social-post__featured-label"><span aria-hidden="true">✦</span> Featured insight</span>{% else %}{{ post.published_at|datetime }}{% endif %}</span><span class="social-post__arrow" aria-hidden="true">↗</span></div>
                         <h4>{{ post.title|truncate(100, true, '…') }}</h4>
                         <p>{{ post.excerpt|truncate(200, true, '…') }}</p>
                         <span class="social-post__link">Read on LinkedIn <span aria-hidden="true">→</span></span>

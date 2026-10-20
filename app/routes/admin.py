@@ -2,9 +2,11 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for,
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 from datetime import datetime
+from hashlib import sha256
 import os
+from urllib.parse import urlsplit
 from app import db
-from app.models import Video, Testimonial, Post, Contact, CaseStudy, ClientLogo, SiteSettings
+from app.models import Video, Testimonial, Post, Contact, CaseStudy, ClientLogo, SiteSettings, SocialPost
 from config import Config
 from app.utils import generate_slug
 
@@ -105,6 +107,87 @@ def site_settings():
             flash('Could not save site settings. Please try again.', 'error')
 
     return render_template('admin/site_settings.html', settings=settings)
+
+@bp.route('/social-posts', methods=['GET', 'POST'])
+def social_posts():
+    """Manually curate LinkedIn and Instagram links for the homepage feed."""
+    if request.method == 'POST':
+        platform = request.form.get('platform', '').strip().lower()
+        permalink = request.form.get('permalink', '').strip()
+        caption = request.form.get('caption', '').strip()
+        media_url = request.form.get('media_url', '').strip()
+        published_date = request.form.get('published_date', '').strip()
+        parsed = urlsplit(permalink)
+        host = (parsed.hostname or '').lower()
+        allowed_hosts = {
+            'linkedin': ('linkedin.com',),
+            'instagram': ('instagram.com',),
+        }
+        valid_host = platform in allowed_hosts and any(
+            host == domain or host.endswith('.' + domain)
+            for domain in allowed_hosts.get(platform, ())
+        )
+        if parsed.scheme != 'https' or not valid_host:
+            flash('Enter a public HTTPS post URL from LinkedIn or Instagram that matches the selected platform.', 'error')
+            return redirect(url_for('admin.social_posts'))
+        if len(permalink) > 1000 or len(caption) > 10000 or len(media_url) > 2048:
+            flash('One of the values is too long. Please shorten it and try again.', 'error')
+            return redirect(url_for('admin.social_posts'))
+        if media_url:
+            media_parts = urlsplit(media_url)
+            if not (media_url.startswith('/static/') or (media_parts.scheme == 'https' and media_parts.netloc)):
+                flash('Use a /static/ image path or an HTTPS image URL.', 'error')
+                return redirect(url_for('admin.social_posts'))
+        try:
+            published_at = datetime.strptime(published_date, '%Y-%m-%d') if published_date else datetime.utcnow()
+        except ValueError:
+            flash('Enter a valid post date.', 'error')
+            return redirect(url_for('admin.social_posts'))
+
+        external_id = 'manual:' + sha256(permalink.encode('utf-8')).hexdigest()
+        post = SocialPost.query.filter_by(platform=platform, external_id=external_id).first()
+        if post is None:
+            post = SocialPost(platform=platform, external_id=external_id)
+            db.session.add(post)
+        post.permalink = permalink
+        post.caption = caption
+        post.media_url = media_url or None
+        post.thumbnail_url = media_url or None
+        post.media_type = 'IMAGE' if media_url else None
+        post.media_product_type = 'REELS' if platform == 'instagram' and '/reel/' in permalink.lower() else None
+        post.published_at = published_at
+        post.synced_at = datetime.utcnow()
+        post.is_visible = True
+        try:
+            db.session.commit()
+            flash('Social post saved. It is now eligible to appear in the homepage feed.', 'success')
+        except Exception:
+            db.session.rollback()
+            flash('Could not save this social post. Please try again.', 'error')
+        return redirect(url_for('admin.social_posts'))
+
+    posts = SocialPost.query.order_by(SocialPost.published_at.desc()).all()
+    return render_template('admin/social_posts.html', social_posts=posts)
+
+@bp.route('/social-post/<int:id>/toggle', methods=['POST'])
+def toggle_social_post(id):
+    post = SocialPost.query.get_or_404(id)
+    post.is_visible = not post.is_visible
+    db.session.commit()
+    flash('Social post visibility updated.', 'success')
+    return redirect(url_for('admin.social_posts'))
+
+@bp.route('/social-post/<int:id>/delete', methods=['POST'])
+def delete_social_post(id):
+    post = SocialPost.query.get_or_404(id)
+    try:
+        db.session.delete(post)
+        db.session.commit()
+        flash('Social post removed.', 'success')
+    except Exception:
+        db.session.rollback()
+        flash('Could not remove this social post. Please try again.', 'error')
+    return redirect(url_for('admin.social_posts'))
 
 @bp.route('/videos', methods=['GET', 'POST'])
 def videos():

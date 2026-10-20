@@ -162,6 +162,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .social-channel__heading h3 { margin: 0; font-size: 22px; font-weight: 540; letter-spacing: -.045em; }
 .social-posts { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
 .social-post { position: relative; min-height: 220px; display: flex; flex-direction: column; padding: 20px; overflow: hidden; border: 1px solid var(--line); border-radius: 13px; background: linear-gradient(145deg,rgba(19,29,43,.98),rgba(13,19,29,.98)); transition: transform .25s ease,border-color .25s ease,box-shadow .25s ease; }
+.social-post--featured { grid-column: 1 / -1; min-height: 250px; padding: clamp(22px,3vw,34px); border-color: rgba(101,220,255,.36); background: radial-gradient(ellipse at 94% 4%,rgba(85,230,255,.16),transparent 38%),linear-gradient(135deg,rgba(27,42,65,.98),rgba(14,21,34,.99) 62%,rgba(35,24,59,.98)); box-shadow: inset 3px 0 0 rgba(85,230,255,.68),0 14px 40px rgba(0,0,0,.14); }
+.social-post--featured::before { position: absolute; right: 12%; bottom: -90px; width: 210px; height: 210px; border: 1px solid rgba(155,140,255,.14); border-radius: 50%; box-shadow: 0 0 0 22px rgba(155,140,255,.035),0 0 0 46px rgba(85,230,255,.025); content: ""; pointer-events: none; }
 .social-post::after { position: absolute; top: -55px; right: -38px; width: 120px; height: 120px; border: 1px solid rgba(85,230,255,.08); border-radius: 50%; box-shadow: 0 0 0 17px rgba(85,230,255,.025),0 0 0 35px rgba(155,140,255,.02); content: ""; pointer-events: none; }
 .social-post:hover { transform: translateY(-4px); border-color: rgba(85,230,255,.42); box-shadow: 0 18px 40px rgba(0,0,0,.2); }
 .social-post--wide { grid-column: 1 / -1; min-height: 185px; }
@@ -172,6 +174,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .social-post:hover .social-post__arrow { color: var(--cyan); transform: translate(2px,-2px); }
 .social-post h3,.social-post h4 { max-width: 470px; margin: 22px 0 9px; font-size: clamp(17px,1.7vw,22px); font-weight: 540; letter-spacing: -.045em; line-height: 1.25; }
 .social-post__date { color: #8796a9; font-size: 8px; letter-spacing: .07em; text-transform: uppercase; }
+.social-post__featured-label { display: inline-flex; align-items: center; gap: 7px; color: #a5efff; font-size: 9px; font-weight: 700; letter-spacing: .12em; }
+.social-post__featured-label span { display: grid; width: 20px; height: 20px; place-items: center; border: 1px solid rgba(85,230,255,.28); border-radius: 50%; background: rgba(85,230,255,.1); color: #8ceaff; font-size: 12px; }
 .social-post p { max-width: 490px; margin: 0 0 20px; color: var(--muted); font-size: 10px; line-height: 1.8; }
 .social-post__link { margin-top: auto; color: var(--cyan); font-size: 9px; font-weight: 650; letter-spacing: .04em; }
 .social-post__link span { display: inline-block; margin-left: 4px; transition: transform .2s ease; }

@@ -1,0 +1,56 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Social Posts{% endblock %}
+{% block header %}Social Posts{% endblock %}
+
+{% block content %}
+<div class="grid gap-6 xl:grid-cols-[minmax(320px,0.8fr)_minmax(0,1.2fr)]">
+    <section class="h-fit rounded-xl border border-gray-700 bg-gray-800 p-6">
+        <h3 class="mb-1 text-lg font-semibold">Add a post link</h3>
+        <p class="mb-5 text-sm leading-6 text-gray-400">Add a public post URL and optional caption and image. The site will show it as a branded card that opens the original post.</p>
+        <form method="POST" class="space-y-4">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <label class="block text-sm text-gray-200">Platform
+                <select name="platform" required class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white">
+                    <option value="linkedin">LinkedIn</option><option value="instagram">Instagram</option>
+                </select>
+            </label>
+            <label class="block text-sm text-gray-200">Public post or Reel URL
+                <input name="permalink" type="url" required maxlength="1000" placeholder="https://www.linkedin.com/feed/update/..." class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white">
+            </label>
+            <label class="block text-sm text-gray-200">Caption or highlight <span class="text-gray-500">(optional)</span>
+                <textarea name="caption" maxlength="10000" rows="4" placeholder="Add a short title or excerpt for the card." class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white"></textarea>
+            </label>
+            <label class="block text-sm text-gray-200">Preview image URL <span class="text-gray-500">(optional)</span>
+                <input name="media_url" type="text" maxlength="2048" placeholder="https://... or /static/uploads/image.jpg" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white">
+                <span class="mt-1 block text-xs text-gray-500">Use an HTTPS image URL or an image already uploaded under /static/.</span>
+            </label>
+            <label class="block text-sm text-gray-200">Post date <span class="text-gray-500">(optional)</span>
+                <input name="published_date" type="date" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white">
+            </label>
+            <button type="submit" class="rounded-lg bg-cyan-300 px-5 py-3 font-semibold text-gray-950 hover:bg-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-100">Save post card</button>
+        </form>
+        <p class="mt-5 rounded-lg border border-amber-400/20 bg-amber-400/5 p-3 text-xs leading-5 text-amber-100/80">A pasted URL does not grant permission to import the platform’s caption or media automatically. Add those details here if you want them shown; the card always links to the original post.</p>
+    </section>
+
+    <section class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+        <div class="mb-4 flex items-center justify-between gap-3"><div><h3 class="text-lg font-semibold">Homepage feed cards</h3><p class="mt-1 text-sm text-gray-400">Visible cards appear in the public homepage feed.</p></div><span class="rounded-full bg-gray-700 px-3 py-1 text-xs text-gray-300">{{ social_posts|length }} total</span></div>
+        <div class="space-y-3">
+            {% for post in social_posts %}
+            <article class="flex flex-col gap-4 rounded-lg border border-gray-700 bg-gray-900/60 p-4 sm:flex-row sm:items-start sm:justify-between">
+                <div class="min-w-0">
+                    <div class="mb-2 flex flex-wrap items-center gap-2"><span class="rounded-full {% if post.platform == 'linkedin' %}bg-sky-900/70 text-sky-200{% else %}bg-fuchsia-900/60 text-fuchsia-200{% endif %} px-2.5 py-1 text-xs font-medium">{{ post.platform|title }}</span><span class="text-xs text-gray-500">{{ 'Curated highlight' if post.external_id.startswith('manual:') else post.published_at|datetime }}</span><span class="rounded-full px-2 py-1 text-xs {% if post.is_visible %}bg-emerald-900/60 text-emerald-200{% else %}bg-gray-700 text-gray-300{% endif %}">{{ 'Visible' if post.is_visible else 'Hidden' }}</span></div>
+                    <p class="break-words font-medium text-white">{{ post.title }}</p>
+                    {% if post.excerpt %}<p class="mt-1 line-clamp-2 text-sm text-gray-400">{{ post.excerpt }}</p>{% endif %}
+                    <a class="mt-2 inline-block max-w-full break-all text-xs text-cyan-300 hover:text-cyan-200" href="{{ post.permalink }}" target="_blank" rel="noopener noreferrer">{{ post.permalink }}</a>
+                </div>
+                <div class="flex shrink-0 gap-2">
+                    <form method="POST" action="{{ url_for('admin.toggle_social_post', id=post.id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="rounded-lg border border-gray-600 px-3 py-2 text-sm text-gray-200 hover:border-cyan-300" type="submit">{{ 'Hide' if post.is_visible else 'Show' }}</button></form>
+                    <form method="POST" action="{{ url_for('admin.delete_social_post', id=post.id) }}" onsubmit="return confirm('Remove this post from the site?')"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="rounded-lg border border-rose-500/40 px-3 py-2 text-sm text-rose-200 hover:bg-rose-500/10" type="submit">Delete</button></form>
+                </div>
+            </article>
+            {% else %}<p class="rounded-lg border border-dashed border-gray-600 p-5 text-sm text-gray-400">No post cards yet. Add a LinkedIn or Instagram URL to feature it on the homepage.</p>{% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}

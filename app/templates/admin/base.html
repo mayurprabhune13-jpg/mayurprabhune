@@ -54,6 +54,10 @@
                    class="flex items-center gap-3 px-6 py-3 {% if request.endpoint == 'admin.posts' %}text-[var(--primary-cyan)] border-r-4 border-[var(--primary-cyan)] bg-gray-900{% else %}text-gray-400 hover:bg-gray-700{% endif %}">
                     Insights
                 </a>
+                <a href="{{ url_for('admin.social_posts') }}"
+                   class="flex items-center gap-3 px-6 py-3 {% if request.endpoint in ('admin.social_posts', 'admin.toggle_social_post', 'admin.delete_social_post') %}text-[var(--primary-cyan)] border-r-4 border-[var(--primary-cyan)] bg-gray-900{% else %}text-gray-400 hover:bg-gray-700{% endif %}">
+                    Social Posts
+                </a>
                 <a href="{{ url_for('admin.case_studies') }}"
                    class="flex items-center gap-3 px-6 py-3 {% if request.endpoint == 'admin.case_studies' %}text-[var(--primary-cyan)] border-r-4 border-[var(--primary-cyan)] bg-gray-900{% else %}text-gray-400 hover:bg-gray-700{% endif %}">
                     Case studies

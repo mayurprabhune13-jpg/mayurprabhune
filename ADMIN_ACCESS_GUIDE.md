@@ -51,6 +51,10 @@ Once logged in, access your dashboard at:
 
 Instagram and LinkedIn access tokens remain in Railway Variables; they are not displayed or stored in the admin database.
 
+### **7. Curate LinkedIn and Instagram highlights** (`/admin/social-posts`)
+
+Add a public post/Reel URL, an optional caption, an optional HTTPS or `/static/` preview image, and an optional publication date. Visible entries appear as branded cards in the homepage social highlights. The URL is linked to the original platform post; it does not grant permission to import the post's content automatically. Existing seeded highlights can be hidden or deleted from this page.
+
 ---
 
 ## 🎯 **Quick Start Checklist**
