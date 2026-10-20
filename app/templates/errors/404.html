@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Page Not Found{% endblock %}
+{% block meta_description %}The page you’re looking for may have moved. Return to Mayur Prabhune’s homepage to explore AI learning and sales enablement.{% endblock %}
 {% block content %}
-<div class="max-w-2xl mx-auto text-center py-24">
-  <h1 class="text-5xl font-bold text-white mb-4">404</h1>
-  <p class="text-white/70 mb-8">Sorry, we couldn't find that page.</p>
-  <a class="px-4 py-2 rounded bg-white/10 border border-white/20 text-white" href="{{ url_for('main.index') }}">Go Home</a>
+<div class="experience-page error-page">
+  <section class="error-panel" aria-labelledby="error-title">
+    <span class="eyebrow">Page not found · 404</span>
+    <div class="error-panel__number" aria-hidden="true">404</div>
+    <h1 id="error-title">This page took a different path.</h1>
+    <p>The address may have changed or the page may no longer be available. Head back to the homepage or explore the site from there.</p>
+    <div class="hero__actions"><a class="button" href="{{ url_for('main.index') }}">Go to homepage <span aria-hidden="true">↗</span></a><a class="button button--secondary" href="{{ url_for('main.contact') }}">Contact Mayur</a></div>
+  </section>
 </div>
 {% endblock %}

@@ -1,671 +1,235 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}Home - Mayur Prabhune{% endblock %}
-
-{% block styles %}
-    {{ super() }}
-    <link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet"/>
-    <style type="text/tailwindcss">
-        :root {
-            --primary-cyan: #00ffff;
-            --primary-fuchsia: #ff00ff;
-        }
-        .glow-effect {
-            box-shadow: 0 0 5px var(--primary-cyan), 0 0 10px var(--primary-cyan), 0 0 15px var(--primary-fuchsia), 0 0 20px var(--primary-fuchsia);
-        }
-        .logo-carousel {
-            display: flex;
-            animation: scroll 40s linear infinite;
-        }
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .swiper-pagination-bullet {
-            background-color: #6b7280 !important;
-            opacity: 1 !important;
-            width: 10px !important;
-            height: 10px !important;
-            transition: all 0.3s ease;
-        }
-        .swiper-pagination-bullet-active {
-            background-color: var(--primary-fuchsia) !important;
-            width: 24px !important;
-            border-radius: 9999px !important;
-        }
-        .swiper-button-prev, .swiper-button-next {
-            color: var(--primary-cyan) !important;
-            background-color: rgba(31, 41, 55, 0.7);
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .swiper-button-prev:hover, .swiper-button-next:hover {
-             background-color: rgba(55, 65, 81, 0.9);
-        }
-        .swiper-button-prev:after, .swiper-button-next:after {
-            font-size: 20px !important;
-            font-weight: bold;
-        }
-    </style>
-{% endblock %}
+{% block title %}{{ site_settings.seo_title }}{% endblock %}
+{% block meta_description %}{{ site_settings.seo_description }}{% endblock %}
 
 {% block content %}
-<section class="relative min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-96px)] flex items-center justify-center py-20 overflow-hidden">
-    <div class="absolute inset-0 z-0">
-        <video autoplay class="w-full h-full object-cover" loop muted playsinline poster="https://lh3.googleusercontent.com/aida-public/AB6AXuC2pC9ja_JsXe9PVBgPe0Jv0pHqhHObLSVPchV6O7NeTqbFqKtlsUkqM6xmRQbN2BeiseoDhzNE0WhlNjsuyyM9O8zMxHl4zDrH25zb2XxnuWmH7YH3tSgtQ9iZW_FzS3OHcjuxvfzmG-xmFQBfyp6W0kvUqdD8HJfpzYfucAOkBEooOwM06ypRuir64mqMXSyljGc27jfmUGkyilDlrTZZt2LyZVkJHyQzQyoX2zz0xqXj836mn78MXB9DJDiOPtAAgb1CRF2FaOxB">
-            <source src="https://storage.googleapis.com/aida-test-videos/hero-background.mp4" type="video/mp4"/> Your browser does not support the video tag. 
-        </video>
-        <div class="absolute inset-0 bg-gray-900/80"></div>
-    </div>
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-10 flex flex-col md:flex-row items-center gap-12">
-        <div class="w-full md:w-1/2 flex justify-center">
-            <img alt="Mayur Prabhune Headshot" class="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full object-cover border-4 border-[var(--primary-cyan)] glow-effect" src="{{ url_for('static', filename='images/Profile1.jpg') }}"/>
+<section class="container hero" aria-labelledby="home-title">
+    <div class="hero__copy">
+        <span class="eyebrow">{{ site_settings.homepage_eyebrow }}</span>
+        <h1 class="hero__title" id="home-title">{{ site_settings.homepage_headline }}</h1>
+        <p class="hero__support">{{ site_settings.homepage_support }}</p>
+        <p class="hero__intro">{{ site_settings.homepage_intro }}</p>
+        <div class="hero__actions">
+            <a class="button" data-magnetic href="#expertise">Explore my work <span aria-hidden="true">↘</span></a>
+            <a class="button button--secondary" href="{{ url_for('main.contact') }}">Let’s connect <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="w-full md:w-1/2 text-center md:text-left flex flex-col items-center md:items-start">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)]"> Empowering Leaders with AI </h1>
-            <p class="max-w-xl text-gray-300 text-base md:text-lg mb-8"> Mayur Prabhune is an AI Mentor dedicated to helping leaders harness the power of artificial intelligence to drive innovation and achieve their strategic goals. With a focus on practical applications and ethical considerations, Mayur provides tailored guidance and workshops to equip leaders with the knowledge and skills needed to navigate the AI landscape effectively. </p>
-            <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <a href="{{ url_for('main.contact') }}" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-[var(--primary-cyan)] text-gray-900 text-base font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors duration-300 ease-in-out transform hover:scale-105 glow-effect">
-                    <span class="truncate">Book a Workshop</span>
-                </a>
-                <a href="https://www.linkedin.com/in/mayur-prabhune" target="_blank" rel="noopener noreferrer" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 border-2 border-[var(--primary-fuchsia)] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-fuchsia)] hover:text-gray-900 transition-colors duration-300 ease-in-out transform hover:scale-105">
-                    <span class="truncate">Connect on LinkedIn</span>
-                </a>
+        <div class="hero__meta"><span class="status-dot" aria-hidden="true"></span> Pune, India <span aria-hidden="true">·</span> Practical learning for people and teams</div>
+    </div>
+    <div class="hero-art">
+        <div class="hero-art__glow"></div><div class="hero-art__grid"></div>
+        <div class="neural-orb" aria-hidden="true">
+            <span class="neural-orb__ring"></span><span class="neural-orb__ring neural-orb__ring--two"></span><span class="neural-orb__ring neural-orb__ring--three"></span>
+            <i class="neural-orb__node neural-orb__node--a"></i><i class="neural-orb__node neural-orb__node--b"></i><i class="neural-orb__node neural-orb__node--c"></i><i class="neural-orb__node neural-orb__node--d"></i>
+        </div>
+        <figure class="hero-portrait">
+            <img src="{{ site_settings.homepage_photo_url or url_for('static', filename='images/Profile1.jpg') }}" alt="Portrait of {{ site_settings.site_name }}" fetchpriority="high">
+            <figcaption><strong>{{ site_settings.site_name }}</strong><span>AI · Learning · Sales Capability</span></figcaption>
+        </figure>
+        <div class="orbit-label orbit-label--one"><strong>Explore</strong>Generative &amp; agentic AI</div>
+        <div class="orbit-label orbit-label--two"><strong>Enable</strong>Sales &amp; frontline teams</div>
+        <div class="orbit-label orbit-label--three"><strong>Build</strong>Practical capability</div>
+        <span class="hero-art__caption">People at the centre of progress</span>
+    </div>
+    <a class="scroll-cue" href="#expertise">Scroll to explore</a>
+</section>
+
+<section class="section section--line" id="expertise" data-nav-section>
+    <div class="container expertise-shell">
+        <div class="expertise-rail reveal">
+            <span class="eyebrow">Areas of focus</span>
+            <h2 class="expertise-rail__title">Where technology meets human capability.</h2>
+            <div class="expertise-tabs" role="tablist" aria-label="Areas of expertise">
+                <button class="expertise-tab" type="button" role="tab" id="expertise-tab-ai" aria-controls="expertise-panel-ai" aria-selected="true" data-expertise-tab="ai"><span class="expertise-tab__number">01</span> AI &amp; technology</button>
+                <button class="expertise-tab" type="button" role="tab" id="expertise-tab-learning" aria-controls="expertise-panel-learning" aria-selected="false" data-expertise-tab="learning"><span class="expertise-tab__number">02</span> Learning &amp; development</button>
+                <button class="expertise-tab" type="button" role="tab" id="expertise-tab-sales" aria-controls="expertise-panel-sales" aria-selected="false" data-expertise-tab="sales"><span class="expertise-tab__number">03</span> Retail &amp; sales enablement</button>
             </div>
+        </div>
+        <div class="expertise-stage reveal">
+            <article class="expertise-detail" id="expertise-panel-ai" role="tabpanel" aria-labelledby="expertise-tab-ai" tabindex="0" data-expertise-panel="ai">
+                <div class="expertise-detail__top"><span>Capability area</span><span class="expertise-detail__index">01 / 03</span></div>
+                <h3>Make AI useful, understandable, and grounded in the work.</h3>
+                <p>Explore generative and agentic AI through practical learning, guided experimentation, and conversations about where these tools fit into real workflows.</p>
+                <div class="skill-list"><span class="skill-chip">Generative AI</span><span class="skill-chip">Agentic AI</span><span class="skill-chip">Workforce adoption</span><span class="skill-chip">Responsible use</span></div>
+                <a class="text-link" href="{{ url_for('main.services') }}">Explore AI training <span aria-hidden="true">→</span></a>
+            </article>
+            <article class="expertise-detail" id="expertise-panel-learning" role="tabpanel" aria-labelledby="expertise-tab-learning" tabindex="0" data-expertise-panel="learning" hidden>
+                <div class="expertise-detail__top"><span>Capability area</span><span class="expertise-detail__index">02 / 03</span></div>
+                <h3>Turn new ideas into learning people can apply.</h3>
+                <p>Shape workforce learning around the audience, the day-to-day context, and the capabilities a team wants to develop.</p>
+                <div class="skill-list"><span class="skill-chip">Corporate training</span><span class="skill-chip">Learning &amp; development</span><span class="skill-chip">Facilitation</span><span class="skill-chip">Capability development</span></div>
+                <a class="text-link" href="{{ url_for('main.services') }}">Explore learning programs <span aria-hidden="true">→</span></a>
+            </article>
+            <article class="expertise-detail" id="expertise-panel-sales" role="tabpanel" aria-labelledby="expertise-tab-sales" tabindex="0" data-expertise-panel="sales" hidden>
+                <div class="expertise-detail__top"><span>Capability area</span><span class="expertise-detail__index">03 / 03</span></div>
+                <h3>Help customer-facing teams build confidence through practice.</h3>
+                <p>Support sales and frontline learning with customer conversations, product understanding, role-play, and relevant recommendations.</p>
+                <div class="skill-list"><span class="skill-chip">Sales enablement</span><span class="skill-chip">Premium product learning</span><span class="skill-chip">Customer conversations</span><span class="skill-chip">Role-play</span></div>
+                <a class="text-link" href="{{ url_for('main.premium_product_sales_training') }}">Explore product sales training <span aria-hidden="true">→</span></a>
+            </article>
         </div>
     </div>
 </section>
 
-<section class="bg-gray-800 py-16 md:py-24">
-    <div class="max-w-7xl mx-auto px-4 md:px-10">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">My Services</h2>
-            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Tailored AI mentorship and workshops to empower your leadership and organization.</p>
+<section class="section" id="approach" data-nav-section>
+    <div class="container">
+        <div class="section-intro reveal">
+            <div><span class="eyebrow">How I work</span><h2 class="section-heading">Learning moves forward when people can try it.</h2></div>
+            <div class="section-intro__copy"><p>Start with the audience and their real context. Then make space to learn, practice, and connect the experience to what happens next at work.</p></div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-gray-900 p-8 rounded-xl border border-[var(--primary-cyan)]/30 transform hover:scale-105 transition-transform duration-300">
-                <h3 class="text-2xl font-bold text-[var(--primary-cyan)] mb-4">Executive AI Coaching</h3>
-                <p class="text-gray-400">One-on-one mentorship for leaders to develop AI strategies that align with business goals and drive innovation.</p>
-            </div>
-            <div class="bg-gray-900 p-8 rounded-xl border border-[var(--primary-fuchsia)]/30 transform hover:scale-105 transition-transform duration-300">
-                <h3 class="text-2xl font-bold text-[var(--primary-fuchsia)] mb-4">Team AI Workshops</h3>
-                <p class="text-gray-400">Customized workshops for teams to build foundational AI knowledge and practical skills for real-world application.</p>
-            </div>
-            <div class="bg-gray-900 p-8 rounded-xl border border-[var(--primary-cyan)]/30 transform hover:scale-105 transition-transform duration-300">
-                <h3 class="text-2xl font-bold text-[var(--primary-cyan)] mb-4">AI Strategy Consulting</h3>
-                <p class="text-gray-400">Expert guidance on integrating AI ethically and effectively into your organization's roadmap.</p>
-            </div>
-        </div>
-        <div class="text-center mt-12">
-            <a href="{{ url_for('main.services') }}" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-transparent border-2 border-[var(--primary-cyan)] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-cyan)] hover:text-gray-900 transition-colors duration-300 ease-in-out transform hover:scale-105 mx-auto">
-                <span class="truncate">View All Services</span>
-            </a>
+        <div class="method-grid">
+            <article class="method-card reveal"><span class="method-card__index">01 / UNDERSTAND</span><h3>Begin with the work</h3><p>Get clear on the audience, current challenges, and what the team wants to be able to do.</p></article>
+            <article class="method-card reveal"><span class="method-card__index">02 / LEARN</span><h3>Make it relevant</h3><p>Shape examples and learning activities around the people, tools, products, and context involved.</p></article>
+            <article class="method-card reveal"><span class="method-card__index">03 / PRACTICE</span><h3>Build confidence</h3><p>Use guided practice and reflection to help people explore how learning may transfer to their work.</p></article>
         </div>
     </div>
 </section>
 
-<section class="bg-gray-900 py-16 md:py-24">
-    <div class="max-w-7xl mx-auto px-4 md:px-10">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">Upcoming Events & Webinars</h2>
-            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Join me for upcoming workshops and webinars to stay ahead in the AI landscape.</p>
-        </div>
-        <div class="space-y-8">
-            <div class="bg-gray-800 p-8 rounded-xl border border-transparent hover:border-[var(--primary-cyan)]/50 transition-all duration-300 flex flex-col md:flex-row items-start gap-8">
-                <div class="w-full md:w-1/4">
-                    <p class="text-lg font-bold text-[var(--primary-cyan)]">October 25, 2024</p>
-                    <p class="text-sm text-gray-400">Online Webinar</p>
-                </div>
-                <div class="w-full md:w-1/2">
-                    <h3 class="text-2xl font-bold text-white mb-2">AI for Product Managers</h3>
-                    <p class="text-gray-400">An in-depth workshop on leveraging AI to build better products, from ideation to launch.</p>
-                </div>
-                <div class="w-full md:w-1/4 flex flex-col md:items-end mt-4 md:mt-0">
-                    <button class="flex w-full md:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[var(--primary-cyan)] text-gray-900 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors">
-                        <span class="truncate">Register Now</span>
-                    </button>
-                </div>
-            </div>
-            <div class="bg-gray-800 p-8 rounded-xl border border-transparent hover:border-[var(--primary-fuchsia)]/50 transition-all duration-300 flex flex-col md:flex-row items-start gap-8">
-                <div class="w-full md:w-1/4">
-                    <p class="text-lg font-bold text-[var(--primary-fuchsia)]">November 12, 2024</p>
-                    <p class="text-sm text-gray-400">Speaking Engagement</p>
-                </div>
-                <div class="w-full md:w-1/2">
-                    <h3 class="text-2xl font-bold text-white mb-2">Keynote at AI Innovators Summit</h3>
-                    <p class="text-gray-400">Join me as I discuss the future of AI and its impact on global business leadership.</p>
-                </div>
-                <div class="w-full md:w-1/4 flex flex-col md:items-end mt-4 md:mt-0">
-                    <button class="flex w-full md:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 border-2 border-[var(--primary-fuchsia)] text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-fuchsia)] hover:text-gray-900 transition-colors">
-                        <span class="truncate">Learn More</span>
-                    </button>
-                </div>
-            </div>
-            <div class="bg-gray-800 p-8 rounded-xl border border-transparent hover:border-[var(--primary-cyan)]/50 transition-all duration-300 flex flex-col md:flex-row items-start gap-8">
-                <div class="w-full md:w-1/4">
-                    <p class="text-lg font-bold text-[var(--primary-cyan)]">December 5, 2024</p>
-                    <p class="text-sm text-gray-400">Exclusive Workshop</p>
-                </div>
-                <div class="w-full md:w-1/2">
-                    <h3 class="text-2xl font-bold text-white mb-2">Leading with GenAI: Executive Playbook</h3>
-                    <p class="text-gray-400">A hands-on workshop designed for C-suite leaders to craft and implement a winning Generative AI strategy.</p>
-                </div>
-                <div class="w-full md:w-1/4 flex flex-col md:items-end mt-4 md:mt-0">
-                    <button class="flex w-full md:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[var(--primary-cyan)] text-gray-900 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors">
-                        <span class="truncate">Register Now</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="text-center mt-12">
-            <button class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 border-2 border-[var(--primary-cyan)] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-cyan)] hover:text-gray-900 transition-colors duration-300 ease-in-out transform hover:scale-105 mx-auto">
-                <span class="truncate">View All Events</span>
-            </button>
-        </div>
+{% if client_logos %}
+<section class="section section--compact client-trust" aria-label="Selected client organizations">
+    <div class="container">
+        <p class="eyebrow">Selected organizations</p>
+        <ul class="client-trust__list">
+            {% for logo in client_logos %}
+            <li class="client-trust__item">
+                {% if logo.website_url %}<a href="{{ logo.website_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ logo.client_name }} website">{% endif %}
+                    <img src="{{ logo.logo_url|media_url }}" alt="{{ logo.client_name }}" loading="lazy">
+                {% if logo.website_url %}</a>{% endif %}
+            </li>
+            {% endfor %}
+        </ul>
     </div>
 </section>
+{% endif %}
 
-<section class="bg-gray-800 py-16 md:py-24 overflow-hidden">
-    <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-12 px-4 md:px-10">
-            <h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">Trusted by Industry Leaders</h2>
-            <p class="text-lg text-gray-400 max-w-3xl mx-auto">I've had the privilege of working with a diverse range of innovative companies.</p>
+{% if case_studies %}
+<section class="section section--line" id="projects" data-nav-section>
+    <div class="container">
+        <div class="section-intro reveal">
+            <div><span class="eyebrow">Selected work</span><h2 class="section-heading">Work shaped around real challenges.</h2></div>
+            <div class="section-intro__copy"><p>Published project stories and case studies. Details are shown from the existing content system.</p><a class="text-link" href="{{ url_for('main.success_stories') }}">View all projects <span aria-hidden="true">→</span></a></div>
         </div>
-        <div class="relative w-full overflow-hidden mask-gradient-to-r">
-            <div class="logo-carousel">
-                {% for i in range(12) %}
-                <div class="flex-shrink-0 flex items-center justify-center w-64 mx-8">
-                    <img alt="Client Logo {{ i+1 }}" class="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9j0o2J6u9y7l8a5j-l3k5g2i7h4k1o-l8g3k2j1o-l2k4g-l3j4h5g-i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z"/>
+        <div class="project-grid">
+            {% for case_study in case_studies %}
+            <article class="project-card reveal" data-tilt>
+                <div class="project-card__visual">
+                    {% if case_study.image_url %}<img src="{{ case_study.image_url|media_url }}" alt="{{ case_study.title }} project visual" loading="lazy">
+                    {% else %}<svg viewBox="0 0 420 180" role="img" aria-label="Abstract project illustration"><defs><linearGradient id="case-{{ case_study.id }}" x1="0" x2="1"><stop stop-color="#55e6ff" stop-opacity=".06"/><stop offset=".5" stop-color="#55e6ff" stop-opacity=".65"/><stop offset="1" stop-color="#9b8cff" stop-opacity=".12"/></linearGradient></defs><g fill="none" stroke="url(#case-{{ case_study.id }})" stroke-width="1.5"><path d="M12 90h94l36-48 76 96 48-64 44 35h92"/><circle cx="106" cy="90" r="5"/><circle cx="142" cy="42" r="5"/><circle cx="218" cy="138" r="5"/><circle cx="266" cy="74" r="5"/><circle cx="310" cy="109" r="5"/></g><circle cx="210" cy="90" r="39" fill="#55e6ff" fill-opacity=".08" stroke="#55e6ff" stroke-opacity=".45"/><circle cx="210" cy="90" r="24" fill="#9b8cff" fill-opacity=".12" stroke="#9b8cff" stroke-opacity=".5"/></svg>{% endif %}
                 </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="bg-gray-900 py-16 md:py-24">
-    <div class="max-w-7xl mx-auto px-4 md:px-10">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">What Leaders Are Saying</h2>
-            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Real stories from leaders who have transformed their organizations with AI.</p>
-        </div>
-        <div class="swiper testimonial-carousel relative">
-            <div class="swiper-wrapper">
-                {% for testimonial in testimonials %}
-                <div class="swiper-slide">
-                    <div class="bg-gray-800 p-8 rounded-xl border border-gray-700/50 max-w-3xl mx-auto text-center">
-                        <blockquote class="text-xl italic text-gray-300 leading-relaxed">"{{ testimonial.content }}"</blockquote>
-                        <cite class="block text-[var(--primary-fuchsia)] font-bold mt-6 not-italic text-lg">{{ testimonial.author }}</cite>
-                        <span class="text-gray-400">{{ testimonial.role }}</span>
-                    </div>
-                </div>
-                {% else %}
-                <div class="swiper-slide">
-                    <div class="bg-gray-800 p-8 rounded-xl border border-gray-700/50 max-w-3xl mx-auto text-center">
-                        <blockquote class="text-xl italic text-gray-300 leading-relaxed">"Mayur's guidance was a game-changer for our AI strategy. His deep expertise and practical approach helped us navigate the complexities of AI with confidence and clarity."</blockquote>
-                        <cite class="block text-[var(--primary-fuchsia)] font-bold mt-6 not-italic text-lg">Jane Doe</cite>
-                        <span class="text-gray-400">CEO, Tech Innovations Inc.</span>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="bg-gray-800 p-8 rounded-xl border border-gray-700/50 max-w-3xl mx-auto text-center">
-                        <blockquote class="text-xl italic text-gray-300 leading-relaxed">"The workshop on AI for Product Managers was incredibly insightful. Mayur has a unique ability to break down complex topics into actionable insights."</blockquote>
-                        <cite class="block text-[var(--primary-fuchsia)] font-bold mt-6 not-italic text-lg">John Smith</cite>
-                        <span class="text-gray-400">Head of Product, Future Solutions</span>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="bg-gray-800 p-8 rounded-xl border border-gray-700/50 max-w-3xl mx-auto text-center">
-                        <blockquote class="text-xl italic text-gray-300 leading-relaxed">"Working with Mayur helped us build a strong, ethical framework for our AI initiatives. His consulting was invaluable for our long-term vision."</blockquote>
-                        <cite class="block text-[var(--primary-fuchsia)] font-bold mt-6 not-italic text-lg">Samantha Lee</cite>
-                        <span class="text-gray-400">Chief Strategy Officer, Global Enterprises</span>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <div class="swiper-button-prev -left-4 md:-left-16"></div>
-            <div class="swiper-button-next -right-4 md:-right-16"></div>
-            <div class="swiper-pagination mt-8 !relative"></div>
-        </div>
-    </div>
-</section>
-
-<section class="bg-gray-800 py-16 md:py-24">
-    <div class="max-w-7xl mx-auto px-4 md:px-10">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">Featured Video</h2>
-            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Get a glimpse into the world of AI leadership with this featured talk.</p>
-        </div>
-        {% if videos %}
-        <div class="aspect-video w-full max-w-4xl mx-auto rounded-xl overflow-hidden border-2 border-[var(--primary-fuchsia)]/50 glow-effect">
-            <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full" frameborder="0" src="https://www.youtube.com/embed/{{ videos[0].video_url.split('v=')[1] if videos[0].video_url else '' }}" title="{{ videos[0].title }}"></iframe>
-        </div>
-        {% else %}
-        <div class="aspect-video w-full max-w-4xl mx-auto rounded-xl overflow-hidden border-2 border-[var(--primary-fuchsia)]/50 glow-effect">
-            <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full" frameborder="0" src="https://www.youtube.com/embed/f_Px9x503N0" title="YouTube video player"></iframe>
-        </div>
-        {% endif %}
-        <div class="text-center mt-12">
-            <a href="{{ url_for('main.videos') }}" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-[var(--primary-cyan)] text-gray-900 text-base font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors duration-300 ease-in-out transform hover:scale-105 mx-auto">
-                <span class="truncate">Explore More Videos</span>
-            </a>
-        </div>
-    </div>
-</section>
-
-<section class="bg-gray-900 py-16 md:py-24">
-    <div class="max-w-7xl mx-auto px-4 md:px-10">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)] mb-4">From the Blog</h2>
-            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Stay updated with the latest insights on AI leadership and innovation.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for post in posts %}
-            <div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-cyan)] border border-transparent transition-all duration-300">
-                {% if post.get('is_external') %}
-                <!-- LinkedIn post -->
-                <div class="flex items-center gap-2 mb-2">
-                    <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                    <span class="text-blue-500 text-sm font-medium">LinkedIn</span>
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-cyan)]">{{ post.title }}</h3>
-                <p class="text-gray-400 mb-4">{{ post.excerpt|truncate(120) }}</p>
-                <div class="flex justify-between items-center">
-                    <a href="{{ post.url }}" target="_blank" rel="noopener noreferrer" class="font-semibold text-[var(--primary-cyan)] hover:underline">Read on LinkedIn</a>
-                    {% if post.engagement %}
-                    <div class="text-sm text-gray-500">
-                        {{ post.engagement.likes }} likes
-                    </div>
-                    {% endif %}
-                </div>
-                {% else %}
-                <!-- Regular blog post -->
-                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-cyan)]">{{ post.title }}</h3>
-                <p class="text-gray-400 mb-4">{{ post.excerpt|truncate(120) }}</p>
-                <a href="{{ url_for('blog.post_detail', slug=post.slug) }}" class="font-semibold text-[var(--primary-cyan)] hover:underline">Read More</a>
-                {% endif %}
-            </div>
-            {% else %}
-            <div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-cyan)] border border-transparent transition-all duration-300">
-                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-cyan)]">The 5 Pillars of a Successful AI Strategy</h3>
-                <p class="text-gray-400 mb-4">Discover the key components that every leader needs to consider when building a robust AI roadmap for their organization.</p>
-                <a href="#" class="font-semibold text-[var(--primary-cyan)] hover:underline">Read More</a>
-            </div>
-            <div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-fuchsia)] border border-transparent transition-all duration-300">
-                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-fuchsia)]">Ethical AI: A Leader's Responsibility</h3>
-                <p class="text-gray-400 mb-4">Navigating the ethical landscape of AI is crucial. Learn how to lead with integrity and build trust in your AI initiatives.</p>
-                <a href="#" class="font-semibold text-[var(--primary-fuchsia)] hover:underline">Read More</a>
-            </div>
-            <div class="bg-gray-800 p-6 rounded-lg group hover:border-[var(--primary-cyan)] border border-transparent transition-all duration-300">
-                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[var(--primary-cyan)]">Demystifying AI for the C-Suite</h3>
-                <p class="text-gray-400 mb-4">A practical guide for executives to understand AI's potential and limitations, enabling informed decision-making.</p>
-                <a href="#" class="font-semibold text-[var(--primary-cyan)] hover:underline">Read More</a>
-            </div>
+                <div class="project-card__body"><span class="project-card__label">{{ case_study.industry }}</span><h3>{{ case_study.title }}</h3><p>{{ case_study.description|truncate(170) }}</p><div class="project-card__footer"><small>{% if case_study.client %}{{ case_study.client }}{% else %}Project story{% endif %}</small><a class="text-link" href="{{ url_for('main.case_study_detail', slug=case_study.slug) }}">Explore <span aria-hidden="true">↗</span></a></div></div>
+            </article>
             {% endfor %}
         </div>
-        <div class="text-center mt-12">
-            <a href="{{ url_for('main.blog') }}" class="flex min-w-[180px] w-full sm:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 border-2 border-[var(--primary-fuchsia)] text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-[var(--primary-fuchsia)] hover:text-gray-900 transition-colors duration-300 ease-in-out transform hover:scale-105 mx-auto">
-                <span class="truncate">Visit the Blog</span>
-            </a>
+    </div>
+</section>
+{% endif %}
+
+{% if testimonials %}
+<section class="section section--line" aria-labelledby="testimonials-title">
+    <div class="container">
+        <div class="section-intro reveal"><div><span class="eyebrow">Words from collaborators</span><h2 class="section-heading" id="testimonials-title">What people say about the work.</h2></div></div>
+        <div class="quote-grid">
+            {% for testimonial in testimonials %}
+            <figure class="quote-card reveal"><blockquote>“{{ testimonial.content }}”</blockquote><figcaption>{{ testimonial.author }}{% if testimonial.role %}<span>{{ testimonial.role }}</span>{% endif %}</figcaption></figure>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if videos %}
+<section class="section section--line" aria-labelledby="videos-title">
+    <div class="container">
+        <div class="section-intro reveal"><div><span class="eyebrow">Watch &amp; learn</span><h2 class="section-heading" id="videos-title">Ideas in conversation.</h2></div><div class="section-intro__copy"><p>Videos and talks published in the site’s content library.</p><a class="text-link" href="{{ url_for('main.videos') }}">Browse all videos <span aria-hidden="true">→</span></a></div></div>
+        <div class="project-grid">
+            {% for video in videos[:2] %}<article class="project-card reveal"><a href="{{ url_for('main.video_detail', slug=video.slug) }}"><div class="project-card__visual{% if not video.thumbnail_url %} project-card__visual--abstract video-card__visual{% endif %}">{% if video.thumbnail_url %}<img src="{{ video.thumbnail_url|media_url }}" alt="" loading="lazy">{% else %}<span class="video-card__play" aria-hidden="true">▶</span>{% endif %}</div><div class="project-card__body"><span class="project-card__label">{{ video.category or 'Featured video' }}</span><h3>{{ video.title }}</h3><p>{{ video.description|default('', true)|truncate(160) }}</p><div class="project-card__footer"><small>Watch the video</small><span class="text-link">Play <span aria-hidden="true">↗</span></span></div></div></a></article>{% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section class="section section--line featured-video-section" aria-labelledby="featured-video-title">
+    <div class="container">
+        <div class="section-intro reveal">
+            <div><span class="eyebrow">Watch · Featured talk</span><h2 class="section-heading" id="featured-video-title">A glimpse into AI leadership.</h2></div>
+            <div class="section-intro__copy"><p>{{ featured_video.description }}</p><a class="text-link" href="{{ url_for('main.videos') }}">Explore more videos <span aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="featured-video reveal">
+            <div class="featured-video__player"><iframe src="{{ featured_video.embed_url }}" title="{{ featured_video.title }} by Mayur Prabhune" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+            <div class="featured-video__caption"><span class="featured-video__badge"><span class="status-dot" aria-hidden="true"></span> Featured on YouTube</span><h3>{{ featured_video.title }}</h3><p>{{ featured_video.description }}</p><a class="text-link" href="{{ featured_video.watch_url }}" target="_blank" rel="noopener noreferrer">Watch on YouTube <span aria-hidden="true">↗</span></a></div>
         </div>
     </div>
 </section>
 
-<section class="bg-gray-900 py-16 md:py-24">
-    <div class="max-w-4xl mx-auto px-4 md:px-10">
-        <h2 class="text-3xl md:text-4xl font-black text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-cyan)] to-[var(--primary-fuchsia)]">Frequently Asked Questions</h2>
-        
-        <div class="space-y-8">
-            <div class="bg-gray-800 p-6 rounded-xl">
-                <h3 class="text-xl font-bold text-[var(--primary-cyan)] mb-3">Who is Mayur Prabhune?</h3>
-                <p class="text-gray-300">Mayur Prabhune is a leading AI mentor and strategy consultant based in Pune, India, specializing in helping C-suite executives and tech leaders implement ethical AI solutions that drive business growth and innovation.</p>
-            </div>
-            
-            <div class="bg-gray-800 p-6 rounded-xl">
-                <h3 class="text-xl font-bold text-[var(--primary-cyan)] mb-3">What AI mentorship services does Mayur offer?</h3>
-                <p class="text-gray-300">Mayur provides three core services: Executive AI Coaching (1-on-1 strategic guidance), Team AI Workshops (group training for practical skills), and AI Strategy Consulting (organizational AI roadmap development).</p>
-            </div>
-            
-            <div class="bg-gray-800 p-6 rounded-xl">
-                <h3 class="text-xl font-bold text-[var(--primary-cyan)] mb-3">Where is Mayur Prabhune located?</h3>
-                <p class="text-gray-300">Mayur is based in Pune, Maharashtra, India, and serves clients globally through both in-person and virtual sessions.</p>
-            </div>
-            
-            <div class="bg-gray-800 p-6 rounded-xl">
-                <h3 class="text-xl font-bold text-[var(--primary-cyan)] mb-3">How can I book an AI workshop with Mayur?</h3>
-                <p class="text-gray-300">You can book a workshop by contacting Mayur at <a href="mailto:info@mayurprabhune.in" class="text-[var(--primary-fuchsia)] hover:underline">info@mayurprabhune.in</a> or through the contact form. Initial consultations are available to discuss your specific AI needs.</p>
-            </div>
-            
-            <div class="bg-gray-800 p-6 rounded-xl">
-                <h3 class="text-xl font-bold text-[var(--primary-cyan)] mb-3">What makes Mayur's AI approach different?</h3>
-                <p class="text-gray-300">Mayur focuses on ethical AI implementation with practical business applications, combining technical expertise with strategic business acumen to ensure AI initiatives deliver measurable ROI while maintaining ethical standards.</p>
-            </div>
-
-            <div class="bg-gray-800 p-6 rounded-xl">
-                <h3 class="text-xl font-bold text-[var(--primary-cyan)] mb-3">What industries does Mayur work with?</h3>
-                <p class="text-gray-300">Mayur works across various industries including technology, healthcare, finance, manufacturing, and education, helping organizations of all sizes implement AI solutions responsibly and effectively.</p>
-            </div>
+{% if posts %}
+<section class="section section--line" id="insights" data-nav-section>
+    <div class="container">
+        <div class="section-intro reveal"><div><span class="eyebrow">Notes &amp; insights</span><h2 class="section-heading">Ideas for people building what’s next.</h2></div><div class="section-intro__copy"><p>Perspectives on practical AI, workforce learning, and the customer-facing work that makes an experience matter.</p><a class="text-link" href="{{ url_for('main.blog') }}">Explore all insights <span aria-hidden="true">→</span></a></div></div>
+        <div class="insight-list">
+            {% for post in posts[:3] %}
+                {% if post is mapping and post.get('is_external') %}
+                <article class="insight-row reveal"><div><span class="insight-row__meta">LinkedIn · {{ post.category|default('Field note', true) }}</span><h3>{{ post.title }}</h3><p>{{ post.excerpt|default('', true)|truncate(180) }}</p></div><a class="text-link" href="{{ post.url }}" target="_blank" rel="noopener noreferrer">Read on LinkedIn <span aria-hidden="true">↗</span></a></article>
+                {% else %}
+                <article class="insight-row reveal"><div><span class="insight-row__meta">{{ post.category|default('Article', true) }}</span><h3>{{ post.title }}</h3><p>{{ post.excerpt|default('', true)|truncate(180) }}</p></div><a class="text-link" href="{{ url_for('main.post_detail', slug=post.slug) }}">Read article <span aria-hidden="true">→</span></a></article>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
-
-    <!-- COMPLETE GEO PHASE 1: COMPREHENSIVE SCHEMA MARKUP -->
-    
-    <!-- Person Schema - Mayur Prabhune Identity -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Mayur Prabhune",
-      "url": "https://mayurprabhune.in",
-      "image": "https://mayurprabhune.in/static/images/Profile1.jpg",
-      "jobTitle": "AI Mentor and Strategy Consultant",
-      "description": "Leading AI mentor specializing in ethical AI implementation and leadership development. Expert in AI frameworks including ETHICS and LEAD methodologies.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Pune",
-        "addressRegion": "Maharashtra",
-        "addressCountry": "IN"
-      },
-      "email": "info@mayurprabhune.in",
-      "telephone": "+91-XXXXXXXXXX",
-      "sameAs": [
-        "https://www.linkedin.com/in/mayur-prabhune"
-      ],
-      "knowsAbout": [
-        "Artificial Intelligence",
-        "AI Leadership",
-        "Ethical AI Implementation",
-        "AI Strategy Consulting",
-        "Machine Learning",
-        "AI Training Programs",
-        "Cultural Sensitivity in AI",
-        "ETHICS Framework",
-        "LEAD Framework"
-      ],
-      "hasOccupation": {
-        "@type": "Occupation",
-        "name": "AI Mentor and Consultant",
-        "occupationLocation": {
-          "@type": "City",
-          "name": "Pune, Maharashtra, India"
-        },
-        "skills": [
-          "AI Strategy Development",
-          "Ethical AI Implementation",
-          "AI Leadership Training",
-          "Cultural AI Considerations",
-          "Executive Coaching"
-        ]
-      }
-    }
-    </script>
-
-    <!-- LocalBusiness Schema - AI Mentorship Services -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Mayur Prabhune AI Mentorship",
-      "image": "https://mayurprabhune.in/static/images/Profile1.jpg",
-      "url": "https://mayurprabhune.in",
-      "telephone": "+91-XXXXXXXXXX",
-      "email": "info@mayurprabhune.in",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Pune",
-        "addressLocality": "Pune",
-        "addressRegion": "Maharashtra",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "18.5204",
-        "longitude": "73.8567"
-      },
-      "description": "Expert AI mentorship and consulting services specializing in ethical AI implementation, leadership development, and cultural sensitivity in AI adoption for Indian businesses.",
-      "priceRange": "$$",
-      "servedAreas": [
-        {
-          "@type": "State",
-          "name": "Maharashtra"
-        },
-        {
-          "@type": "Country",
-          "name": "India"
-        }
-      ],
-      "serviceArea": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": "18.5204",
-          "longitude": "73.8567"
-        },
-        "geoRadius": "50000"
-      }
-    }
-    </script>
-
-    <!-- Service Schema - AI Training Programs -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "AI Mentorship and Training Programs",
-      "description": "Comprehensive AI mentorship services including executive coaching, team workshops, and strategy consulting with focus on ethical implementation and cultural sensitivity.",
-      "provider": {
-        "@type": "Person",
-        "name": "Mayur Prabhune",
-        "url": "https://mayurprabhune.in"
-      },
-      "serviceType": "AI Training and Consulting",
-      "offers": [
-        {
-          "@type": "Offer",
-          "name": "Executive AI Coaching",
-          "description": "One-on-one mentorship for leaders to develop AI strategies aligned with business goals",
-          "category": "Executive Training"
-        },
-        {
-          "@type": "Offer",
-          "name": "Team AI Workshops",
-          "description": "Customized workshops for teams to build foundational AI knowledge and practical skills",
-          "category": "Group Training"
-        },
-        {
-          "@type": "Offer",
-          "name": "AI Strategy Consulting",
-          "description": "Expert guidance on integrating AI ethically and effectively into organizational roadmaps",
-          "category": "Strategic Consulting"
-        }
-      ],
-      "areaServed": [
-        {
-          "@type": "Country",
-          "name": "India"
-        },
-        {
-          "@type": "State",
-          "name": "Maharashtra"
-        },
-        {
-          "@type": "City",
-          "name": "Pune"
-        }
-      ],
-      "availableChannel": [
-        {
-          "@type": "ServiceChannel",
-          "serviceType": "In-Person Training",
-          "availableLanguage": "English"
-        },
-        {
-          "@type": "ServiceChannel",
-          "serviceType": "Virtual Training",
-          "availableLanguage": "English"
-        }
-      ]
-    }
-    </script>
-
-    <!-- FAQ Schema for GEO Optimization -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Who is Mayur Prabhune?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Mayur Prabhune is a leading AI mentor and strategy consultant based in Pune, Maharashtra, India, specializing in helping C-suite executives and tech leaders implement ethical AI solutions that drive business growth and innovation. He has developed proprietary frameworks including ETHICS and LEAD methodologies for responsible AI implementation."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What AI mentorship services does Mayur offer?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Mayur offers three core services: Executive AI Coaching (1-on-1 strategic guidance for leaders), Team AI Workshops (group training for practical AI skills), and AI Strategy Consulting (organizational AI roadmap development with focus on ethical implementation and cultural considerations)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Where is Mayur Prabhune located and what areas does he serve?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Mayur is based in Pune, Maharashtra, India, and serves clients globally through both in-person and virtual sessions. He specializes in helping Indian businesses implement AI with cultural sensitivity while also working with international organizations."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How can I book an AI workshop or consultation with Mayur?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "You can book a workshop or consultation by contacting Mayur at info@mayurprabhune.in or through the contact form on mayurprabhune.in. Initial consultations are available to discuss your specific AI implementation needs and cultural considerations."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What makes Mayur's AI approach different and culturally sensitive?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Mayur focuses on ethical AI implementation with practical business applications, combining technical expertise with strategic business acumen and deep understanding of Indian business culture. His ETHICS framework ensures culturally appropriate AI adoption while his LEAD methodology develops AI leadership capabilities."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the ETHICS framework for AI implementation?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The ETHICS framework is Mayur Prabhune's proprietary methodology for implementing AI systems with ethical considerations and cultural sensitivity. It provides structured approaches to ensure responsible AI adoption that respects local business practices and cultural values, particularly important for Indian organizations."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the LEAD framework for AI leadership?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The LEAD framework is Mayur Prabhune's comprehensive methodology for developing AI leadership capabilities. It helps executives and managers build the strategic thinking, cultural awareness, and practical skills needed to successfully lead AI initiatives while maintaining ethical standards and cultural sensitivity."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What industries and companies does Mayur work with?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Mayur works across various industries including technology, healthcare, finance, manufacturing, and education, helping organizations of all sizes implement AI solutions responsibly and effectively. He has particular expertise in helping Indian companies navigate AI adoption with appropriate cultural considerations."
-          }
-        }
-      ]
-    }
-    </script>
-
-    <!-- Organization Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Mayur Prabhune AI Mentorship",
-      "url": "https://mayurprabhune.in",
-      "logo": "https://mayurprabhune.in/static/images/Profile1.jpg",
-      "description": "Leading AI mentorship and consulting organization specializing in ethical AI implementation, cultural sensitivity, and leadership development for Indian and global businesses.",
-      "founder": {
-        "@type": "Person",
-        "name": "Mayur Prabhune"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Pune",
-        "addressRegion": "Maharashtra",
-        "addressCountry": "IN"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+91-XXXXXXXXXX",
-        "contactType": "Customer Service",
-        "email": "info@mayurprabhune.in",
-        "availableLanguage": "English"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/in/mayur-prabhune"
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "AI Mentorship Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Executive AI Coaching"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Team AI Workshops"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "AI Strategy Consulting"
-            }
-          }
-        ]
-      }
-    }
-    </script>
 </section>
-{% endblock %}
+{% endif %}
 
-{% block scripts %}
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script>
-    const swiper = new Swiper('.testimonial-carousel', {
-        loop: true,
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
-</script>
+<section class="section section--line social-highlights" id="social-highlights" aria-labelledby="social-highlights-title">
+    <div class="container">
+        <div class="section-intro reveal">
+            <div><span class="eyebrow">Ideas beyond the website</span><h2 class="section-heading" id="social-highlights-title">Practical ideas, shared in public.</h2></div>
+            <div class="section-intro__copy"><p>Explore professional updates on LinkedIn and short-form AI learning from @aiwali_duniya.</p></div>
+        </div>
+        <div class="social-highlights__grid">
+            <section class="social-channel social-channel--linkedin" aria-labelledby="linkedin-feed-title">
+                <div class="social-channel__heading"><span class="social-post__network"><span class="social-post__linkedin" aria-hidden="true">in</span> LinkedIn</span><h3 id="linkedin-feed-title">Latest posts</h3></div>
+                {% if linkedin_posts %}
+                <div class="social-posts" aria-label="Latest LinkedIn posts">
+                    {% for post in linkedin_posts %}
+                    <a class="social-post reveal" href="{{ post.permalink }}" target="_blank" rel="noopener noreferrer">
+                        <div class="social-post__top"><span class="social-post__date">{{ post.published_at|datetime }}</span><span class="social-post__arrow" aria-hidden="true">↗</span></div>
+                        <h4>{{ post.title|truncate(100, true, '…') }}</h4>
+                        <p>{{ post.excerpt|truncate(200, true, '…') }}</p>
+                        <span class="social-post__link">Read on LinkedIn <span aria-hidden="true">→</span></span>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <a class="social-feed-empty" href="https://www.linkedin.com/in/mayur-prabhune" target="_blank" rel="noopener noreferrer"><span class="social-feed-empty__icon" aria-hidden="true">in</span><strong>Follow Mayur on LinkedIn</strong><span>Explore the latest public posts and professional updates.</span><b>Open LinkedIn <span aria-hidden="true">↗</span></b></a>
+                {% endif %}
+            </section>
+            <section class="social-channel social-channel--instagram" aria-labelledby="instagram-feed-title">
+                <div class="social-channel__heading"><span class="instagram-feature__label"><span class="instagram-feature__icon" aria-hidden="true">◎</span> @aiwali_duniya</span><h3 id="instagram-feed-title">Recent posts &amp; Reels</h3></div>
+                {% if instagram_posts %}
+                <div class="instagram-items" aria-label="Recent Instagram posts and Reels">
+                    {% for post in instagram_posts %}
+                    <a class="instagram-item reveal" href="{{ post.permalink }}" target="_blank" rel="noopener noreferrer" aria-label="Open Instagram {{ 'Reel' if post.media_product_type == 'REELS' else 'post' }}">
+                        <div class="instagram-item__media">
+                            {% if post.thumbnail_url or post.media_url %}<img src="{{ post.thumbnail_url or post.media_url }}" alt="{{ post.excerpt|default('Instagram post from aiwali_duniya', true)|truncate(110, true, '…') }}" loading="lazy">{% else %}<span class="instagram-item__placeholder" aria-hidden="true">AI<span>IN MOTION</span></span>{% endif %}
+                            {% if post.media_product_type == 'REELS' or post.media_type == 'VIDEO' %}<span class="instagram-item__play" aria-hidden="true">▶</span>{% endif %}
+                            <span class="instagram-item__type">{{ 'Reel' if post.media_product_type == 'REELS' else 'Post' }}</span>
+                        </div>
+                        <p>{{ post.excerpt|default('View this Instagram post', true)|truncate(82, true, '…') }}</p>
+                        <span class="instagram-item__date">{{ post.published_at|datetime }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <a class="instagram-feature instagram-feature--empty reveal" href="https://www.instagram.com/aiwali_duniya/" target="_blank" rel="noopener noreferrer" aria-label="Explore AIwali_duniya posts and Reels on Instagram">
+                    <div class="instagram-feature__art" aria-hidden="true"><span class="instagram-feature__orbit instagram-feature__orbit--one"></span><span class="instagram-feature__orbit instagram-feature__orbit--two"></span><span class="instagram-feature__spark instagram-feature__spark--one">✳</span><span class="instagram-feature__spark instagram-feature__spark--two">✦</span><span class="instagram-feature__core">AI<span>IN MOTION</span></span><span class="instagram-feature__play"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 10 6-10 6V6Z" fill="currentColor"/></svg></span></div>
+                    <div class="instagram-feature__body"><span class="instagram-feature__label"><span class="instagram-feature__icon" aria-hidden="true">◎</span> Instagram · @aiwali_duniya</span><h4>See the latest posts and Reels.</h4><p>Open the Instagram profile to explore short-form AI learning.</p><span class="instagram-feature__cta">Explore Instagram <span aria-hidden="true">↗</span></span></div>
+                </a>
+                {% endif %}
+            </section>
+        </div>
+    </div>
+</section>
+
+<section class="section section--compact" id="contact">
+    <div class="container"><div class="cta-panel reveal"><span class="eyebrow">Start a conversation</span><h2>What would you like your team to do better?</h2><p>Tell me about your audience, learning goals, and the work you want to improve. We can discuss a relevant next step.</p><a class="button" data-magnetic href="{{ url_for('main.contact') }}">Let’s talk <span aria-hidden="true">↗</span></a></div></div>
+</section>
 {% endblock %}

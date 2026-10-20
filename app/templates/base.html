@@ -1,195 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>{% block title %}{% endblock %} - Mayur Prabhune</title>
-    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" onload="this.rel='stylesheet'" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-    <link href="{{ url_for('static', filename='favicon.ico') }}" rel="icon" type="image/x-icon"/>
-    
-    <!-- Person Schema for Mayur Prabhune - GEO Optimization -->
-    <script type="application/ld+json">
-    {
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#080b12">
+    {% set seo_title = self.title()|striptags|trim %}
+    {% set seo_description = self.meta_description()|striptags|trim %}
+    <title>{% block title %}{{ site_settings.seo_title }}{% endblock %} | {{ site_settings.site_name }}</title>
+    <meta name="description" content="{% block meta_description %}{{ site_settings.seo_description }}{% endblock %}">
+    <link rel="canonical" href="{{ canonical_url|default('https://mayurprabhune.in' ~ request.path, true) }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ site_settings.site_name }}">
+    <meta property="og:title" content="{{ seo_title }} | {{ site_settings.site_name }}">
+    <meta property="og:description" content="{{ seo_description }}">
+    <meta property="og:url" content="{{ canonical_url|default('https://mayurprabhune.in' ~ request.path, true) }}">
+    <meta property="og:image" content="{{ url_for('static', filename='images/social-preview.svg', _external=True) }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ seo_title }} | {{ site_settings.site_name }}">
+    <meta name="twitter:description" content="{{ seo_description }}">
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/social-preview.svg', _external=True) }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+    <link rel="preload" href="{{ url_for('static', filename='css/experience.css') }}" as="style">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/experience.css') }}">
+    {# Keep Tailwind available to legacy content pages until those pages complete their CSS migration. #}
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    {% block styles %}{% endblock %}
+    {% block structured_data %}<script type="application/ld+json">
+    {{ {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "Mayur Prabhune",
-      "jobTitle": "AI Mentor & Strategy Consultant",
-      "description": "Leading AI mentor specializing in ethical AI implementation for business leaders",
-      "url": "https://mayurprabhune.in",
+      "@id": "https://mayurprabhune.in/#person",
+      "name": site_settings.site_name,
+      "jobTitle": "AI, Learning and Sales Enablement Professional",
+      "description": site_settings.seo_description,
+      "url": "https://mayurprabhune.in/",
       "email": "info@mayurprabhune.in",
       "telephone": "+91-7620065818",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Pune",
-        "addressRegion": "Maharashtra",
-        "addressCountry": "IN"
-      },
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Mayur Prabhune AI Consulting"
-      },
-      "knowsAbout": [
-        "Artificial Intelligence",
-        "Machine Learning",
-        "AI Strategy",
-        "Executive Coaching",
-        "Business Innovation",
-        "Ethical AI"
-      ],
-      "sameAs": [
-        "https://www.linkedin.com/in/mayur-prabhune"
-      ]
-    }
-    </script>
-    
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    {% block styles %}
-    <style type="text/tailwindcss">
-        :root {
-            --primary-cyan: #00ffff;
-            --primary-fuchsia: #ff00ff;
-        }
-        .play-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            transition: all 0.3s ease;
-        }
-        .video-thumbnail:hover .play-button {
-            transform: scale(1.1);
-            background-color: var(--primary-cyan);
-        }
-        .video-thumbnail:hover .play-icon {
-            color: #111818;
-        }
-    </style>
-    {% endblock %}
+      "address": {"@type": "PostalAddress", "addressLocality": "Pune", "addressRegion": "Maharashtra", "addressCountry": "IN"},
+      "knowsAbout": ["Artificial intelligence", "Generative AI", "Workforce learning", "Sales enablement", "Retail learning"],
+      "sameAs": ["https://www.linkedin.com/in/mayur-prabhune", "https://www.instagram.com/aiwali_duniya/"]
+    }|tojson }}
+    </script>{% endblock %}
 </head>
-<body class="bg-gray-900 text-white" style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
-<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
-    <div class="layout-container flex h-full grow flex-col">
-        <!-- Header -->
-        <header class="flex items-center justify-between whitespace-nowrap px-4 sm:px-10 py-5 bg-gray-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50">
-            <div class="flex items-center gap-4 text-white">
-                <a href="{{ url_for('main.index') }}" class="flex items-center gap-4">
-                    <svg class="size-8 text-[var(--primary-cyan)]" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_6_543)">
-                            <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4844 40.8634 22.2221 37.8124 24.4208 34.2346C25.7672 32.0436 27.6615 29.6551 29.9688 27.3478C32.2761 25.0405 34.6646 23.1462 36.8556 21.7998C39.4334 19.6011 42.4844 18.8634 43.7949 20.1739L42.1739 20.1739Z" fill="currentColor"></path>
-                            <path clip-rule="evenodd" d="M7.24189 26.4066C7.31369 26.4411 7.64204 26.5692 8.22696 26.7909C8.81188 27.0126 9.65338 27.328 10.7515 27.737C11.8496 28.146 13.2043 28.6486 14.8156 29.2448C16.4269 29.841 18.2948 30.5308 20.4193 31.3142C22.5438 32.0976 24.9249 32.9746 27.5626 33.9452C30.2003 34.9158 33.0946 35.98 36.2456 37.1379C39.3966 38.2958 42.8043 39.5473 46.4687 40.8925C47.3009 41.2151 47.717 41.3764 47.717 41.3764C47.717 41.3764 47.3009 41.2151 46.4687 40.8925C42.8043 39.5473 39.3966 38.2958 36.2456 37.1379C33.0946 35.98 30.2003 34.9158 27.5626 33.9452C24.9249 32.9746 22.5438 32.0976 20.4193 31.3142C18.2948 30.5308 16.4269 29.841 14.8156 29.2448C13.2043 28.6486 11.8496 28.146 10.7515 27.737C9.65338 27.328 8.81188 27.0126 8.22696 26.7909C7.64204 26.5692 7.31369 26.4411 7.24189 26.4066Z" fill="var(--primary-fuchsia)" fill-rule="evenodd"></path>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_6_543"><rect fill="white" height="48" width="48"></rect></clipPath>
-                        </defs>
-                    </svg>
-                    <h2 class="text-white text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em]">Mayur Prabhune</h2>
-                </a>
-            </div>
-            <div class="md:hidden">
-                <button class="text-white focus:outline-none" id="menu-btn">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                    </svg>
-                </button>
-            </div>
-            <div class="hidden md:flex flex-1 justify-end gap-8 items-center">
-                <nav class="flex items-center gap-9">
-                    <a class="text-gray-300 hover:text-white text-base font-medium leading-normal" href="{{ url_for('main.about') }}">About</a>
-                    <a class="text-gray-300 hover:text-white text-base font-medium leading-normal" href="{{ url_for('main.services') }}">Services</a>
-                    <a class="text-gray-300 hover:text-white text-base font-medium leading-normal" href="{{ url_for('main.blog') }}">Blog</a>
-                    <a class="text-gray-300 hover:text-white text-base font-medium leading-normal" href="{{ url_for('main.contact') }}">Contact</a>
-                </nav>
-                <div class="flex gap-4">
-                    <a href="{{ url_for('main.contact') }}" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[var(--primary-cyan)] text-gray-900 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors">
-                        <span class="truncate">Book a Workshop</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/mayur-prabhune" target="_blank" rel="noopener noreferrer" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-700 text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-gray-600 transition-colors">
-                        <span class="truncate">Connect on LinkedIn</span>
-                    </a>
-                </div>
-            </div>
-        </header>
-
-        <!-- Mobile Menu -->
-        <div class="hidden md:hidden bg-gray-900/90 backdrop-blur-sm fixed top-[76px] left-0 right-0 z-40 p-5" id="mobile-menu">
-            <nav class="flex flex-col items-center gap-6">
-                <a class="text-gray-300 hover:text-white text-lg font-medium" href="{{ url_for('main.about') }}">About</a>
-                <a class="text-gray-300 hover:text-white text-lg font-medium" href="{{ url_for('main.services') }}">Services</a>
-                <a class="text-gray-300 hover:text-white text-lg font-medium" href="{{ url_for('main.blog') }}">Blog</a>
-                <a class="text-gray-300 hover:text-white text-lg font-medium" href="{{ url_for('main.contact') }}">Contact</a>
+<body class="site-body" data-page="{{ request.endpoint or '' }}">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a class="wordmark" href="{{ url_for('main.index') }}" aria-label="Mayur Prabhune home">
+                <span class="wordmark__name">{{ site_settings.site_name }}<small>{{ site_settings.brand_tagline }}</small></span>
+            </a>
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-navigation" aria-label="Open navigation">
+                <span></span><span></span>
+            </button>
+            <nav class="site-nav" id="site-navigation" aria-label="Main navigation">
+                <a href="{{ url_for('main.index') }}" {% if request.endpoint == 'main.index' %}aria-current="page"{% endif %}>Home</a>
+                <a href="{{ url_for('main.about') }}" {% if request.endpoint == 'main.about' %}aria-current="page"{% endif %}>About</a>
+                <a href="{{ url_for('main.services') }}" {% if request.endpoint in ['main.services', 'main.premium_product_sales_training'] %}aria-current="page"{% endif %}>Expertise</a>
+                <a href="{{ url_for('main.about') }}#experience" {% if request.endpoint == 'main.about' %}data-section-link{% endif %}>Experience</a>
+                <a href="{{ url_for('main.success_stories') }}" {% if request.endpoint in ['main.success_stories', 'main.case_study_detail'] %}aria-current="page"{% endif %}>Projects</a>
+                <a href="{{ url_for('main.blog') }}" {% if request.endpoint in ['main.blog', 'main.post_detail'] %}aria-current="page"{% endif %}>Insights</a>
+                <a class="site-nav__cta" href="{{ url_for('main.contact') }}">Let’s connect <span aria-hidden="true">↗</span></a>
             </nav>
-            <div class="flex flex-col gap-4 mt-6">
-                <a href="{{ url_for('main.contact') }}" class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 bg-[var(--primary-cyan)] text-gray-900 text-base font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors">
-                    <span class="truncate">Book a Workshop</span>
-                </a>
-                <a href="https://www.linkedin.com/in/mayur-prabhune" target="_blank" rel="noopener noreferrer" class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 bg-gray-700 text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-gray-600 transition-colors">
-                    <span class="truncate">Connect on LinkedIn</span>
-                </a>
-            </div>
+            <nav class="mobile-nav" id="mobile-navigation" aria-label="Mobile navigation">
+                <a href="{{ url_for('main.index') }}" {% if request.endpoint == 'main.index' %}aria-current="page"{% endif %}>Home</a>
+                <a href="{{ url_for('main.about') }}" {% if request.endpoint == 'main.about' %}aria-current="page"{% endif %}>About</a>
+                <a href="{{ url_for('main.services') }}" {% if request.endpoint in ['main.services', 'main.premium_product_sales_training'] %}aria-current="page"{% endif %}>Expertise</a>
+                <a href="{{ url_for('main.about') }}#experience" data-section-link {% if request.endpoint == 'main.about' %}aria-current="location"{% endif %}>Experience</a>
+                <a href="{{ url_for('main.success_stories') }}" {% if request.endpoint in ['main.success_stories', 'main.case_study_detail'] %}aria-current="page"{% endif %}>Projects</a>
+                <a href="{{ url_for('main.blog') }}" {% if request.endpoint in ['main.blog', 'main.post_detail'] %}aria-current="page"{% endif %}>Insights</a>
+                <a href="{{ url_for('main.contact') }}">Let’s connect ↗</a>
+            </nav>
         </div>
+    </header>
 
-        <!-- Flash Messages -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="messages px-10 py-4 mt-20">
-                    {% for category, message in messages %}
-                        <div class="rounded-lg p-4 mb-4 {% if category == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-
-        <!-- Main Content -->
-        <main class="flex-1 pt-20 md:pt-24">
-            {% block content %}{% endblock %}
-        </main>
-
-        <!-- Footer -->
-        <footer class="border-t border-solid border-t-[#273a3a] px-10 md:px-20 lg:px-40 py-10">
-            <div class="flex max-w-7xl mx-auto flex-col items-center">
-                <div class="flex w-full flex-wrap items-center justify-between gap-6">
-                    <div class="flex flex-wrap items-center justify-center gap-6 text-sm">
-                        <a class="text-[#9bbbbb] hover:text-white transition-colors" href="#">Privacy Policy</a>
-                        <a class="text-[#9bbbbb] hover:text-white transition-colors" href="#">Terms of Service</a>
-                    </div>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <a class="text-[#9bbbbb] hover:text-white transition-colors" href="#" aria-label="Twitter">
-                            <svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,80,88v6.09C79.74,88.47,77.91,88,76,88a56,56,0,0,0-56,56,56.34,56.34,极"</path>
-                            </svg>
-                        </a>
-                        <a class="text-[#9bbbbb] hover:text-white transition-colors" href="https://www.linkedin.com/in/mayur-prabhune" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                            <svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,极"</path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <p class="text-[#9bbbbb] text-sm font-normal leading-normal mt-8">© {{ now.year }} Mayur Prabhune. All rights reserved.</p>
-            </div>
-        </footer>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-stack" role="status" aria-live="polite">
+        {% for category, message in messages %}
+        <div class="flash flash--{{ category }}">{{ message }}</div>
+        {% endfor %}
     </div>
-</div>
+    {% endif %}
+    {% endwith %}
 
-{% block scripts %}
-<script>
-    // Mobile menu toggle
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    }
-</script>
-{% endblock %}
+    <main id="main-content" class="site-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <a class="wordmark wordmark--footer" href="{{ url_for('main.index') }}">
+                <span class="wordmark__name">{{ site_settings.site_name }}<small>{{ site_settings.brand_tagline }}</small></span>
+            </a>
+            <div class="site-footer__links">
+                <a href="mailto:info@mayurprabhune.in">Email</a>
+                <a href="https://www.linkedin.com/in/mayur-prabhune" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+                <a href="https://www.instagram.com/aiwali_duniya/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+                <a href="{{ url_for('main.contact') }}">Contact</a>
+            </div>
+            <p>© {{ now.year }} {{ site_settings.site_name }}. All rights reserved.</p>
+        </div>
+    </footer>
+    <script defer src="{{ url_for('static', filename='js/experience.js') }}"></script>
+    {% block scripts %}{% endblock %}
+    <noscript><style>@media(max-width:767px){.menu-toggle{display:none!important}.mobile-nav{display:grid!important;position:static;opacity:1;pointer-events:auto;transform:none;border-top:1px solid var(--line);}}</style></noscript>
 </body>
 </html>

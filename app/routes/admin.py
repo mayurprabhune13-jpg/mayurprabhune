@@ -1,10 +1,10 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 from datetime import datetime
 import os
 from app import db
-from app.models import Video, Testimonial, Post, Contact, CaseStudy, ClientLogo
+from app.models import Video, Testimonial, Post, Contact, CaseStudy, ClientLogo, SiteSettings
 from config import Config
 from app.utils import generate_slug
 
@@ -57,6 +57,54 @@ def dashboard():
                          recent_messages=recent_messages,
                          recent_posts=recent_posts,
                          chart_data=chart_data)
+
+@bp.route('/site-settings', methods=['GET', 'POST'])
+def site_settings():
+    """Edit the public site identity, default SEO, and homepage content."""
+    settings = SiteSettings.query.first()
+    if settings is None:
+        settings = SiteSettings()
+        db.session.add(settings)
+        db.session.commit()
+
+    if request.method == 'POST':
+        fields = (
+            ('site_name', 120), ('brand_tagline', 180), ('seo_title', 180),
+            ('seo_description', 320), ('homepage_eyebrow', 180),
+            ('homepage_headline', 220), ('homepage_support', 240),
+            ('homepage_intro', 2000), ('homepage_photo_url', 500),
+            ('featured_video_title', 200), ('featured_video_description', 500),
+            ('featured_video_url', 500),
+        )
+        values = {key: request.form.get(key, '').strip() for key, _ in fields}
+        if any(not values[key] for key, _ in fields if key != 'homepage_photo_url'):
+            flash('Complete each required field before saving.', 'error')
+            return render_template('admin/site_settings.html', settings=settings), 400
+        if any(len(values[key]) > limit for key, limit in fields):
+            flash('One or more fields exceed the allowed length.', 'error')
+            return render_template('admin/site_settings.html', settings=settings), 400
+
+        photo_url = values['homepage_photo_url']
+        if photo_url and not (photo_url.startswith('/static/') or photo_url.startswith('https://')):
+            flash('Use a site /static/ image path or an HTTPS image URL for the portrait.', 'error')
+            return render_template('admin/site_settings.html', settings=settings), 400
+        parsed_video_url = urlsplit(values['featured_video_url'])
+        video_host = parsed_video_url.netloc.lower()
+        if parsed_video_url.scheme.lower() != 'https' or video_host not in ('youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be', 'www.youtu.be'):
+            flash('The featured video link must be a YouTube URL.', 'error')
+            return render_template('admin/site_settings.html', settings=settings), 400
+
+        for key, _ in fields:
+            setattr(settings, key, values[key])
+        try:
+            db.session.commit()
+            flash('Site settings saved. The public site now uses these values.', 'success')
+            return redirect(url_for('admin.site_settings'))
+        except Exception:
+            db.session.rollback()
+            flash('Could not save site settings. Please try again.', 'error')
+
+    return render_template('admin/site_settings.html', settings=settings)
 
 @bp.route('/videos', methods=['GET', 'POST'])
 def videos():
@@ -244,51 +292,51 @@ def case_studies():
     case_studies = CaseStudy.query.order_by(CaseStudy.created_at.desc()).all()
     return render_template('admin/case_studies.html', case_studies=case_studies)
     
-    @bp.route('/client-logos', methods=['GET', 'POST'])
-    def client_logos():
-        """Manage client logos"""
-        if request.method == 'POST':
-            client_name = request.form.get('client_name')
-            website_url = request.form.get('website_url')
-            description = request.form.get('description')
-            display_order = request.form.get('display_order', 0)
-            status = request.form.get('status', 'active')
-            logo = request.files.get('logo')
-            
-            if not client_name:
-                flash('Client name is required', 'error')
-                return redirect(url_for('admin.client_logos'))
-                
-            logo_url = None
-            if logo and allowed_file(logo.filename):
-                filename = secure_filename(logo.filename)
-                logo.save(os.path.join(Config.UPLOAD_FOLDER, filename))
-                logo_url = f'/static/uploads/{filename}'
-            else:
-                flash('Valid logo image is required', 'error')
-                return redirect(url_for('admin.client_logos'))
-                
-            client_logo = ClientLogo(
-                client_name=client_name,
-                logo_url=logo_url,
-                website_url=website_url,
-                description=description,
-                display_order=int(display_order) if display_order else 0,
-                status=status
-            )
-            
-            try:
-                db.session.add(client_logo)
-                db.session.commit()
-                flash('Client logo added successfully', 'success')
-            except:
-                db.session.rollback()
-                flash('Error adding client logo', 'error')
-                
+@bp.route('/client-logos', methods=['GET', 'POST'])
+def client_logos():
+    """Manage client logos shown in the public proof section."""
+    if request.method == 'POST':
+        client_name = request.form.get('client_name', '').strip()
+        website_url = request.form.get('website_url', '').strip()
+        description = request.form.get('description', '').strip()
+        status = request.form.get('status', 'active')
+        logo = request.files.get('logo')
+        try:
+            display_order = int(request.form.get('display_order') or 0)
+        except ValueError:
+            display_order = 0
+
+        if not client_name:
+            flash('Client name is required.', 'error')
             return redirect(url_for('admin.client_logos'))
-            
-        client_logos = ClientLogo.query.order_by(ClientLogo.display_order.asc(), ClientLogo.created_at.desc()).all()
-        return render_template('admin/client_logos.html', client_logos=client_logos)
+        logo_extension = logo.filename.rsplit('.', 1)[-1].lower() if logo and logo.filename and '.' in logo.filename else ''
+        if not logo or not logo.filename or logo_extension not in {'png', 'jpg', 'jpeg', 'gif'}:
+            flash('Choose a valid PNG, JPG, or GIF logo image.', 'error')
+            return redirect(url_for('admin.client_logos'))
+
+        filename = secure_filename(logo.filename)
+        upload_folder = current_app.config.get('UPLOAD_FOLDER', Config.UPLOAD_FOLDER)
+        os.makedirs(upload_folder, exist_ok=True)
+        logo.save(os.path.join(upload_folder, filename))
+        client_logo = ClientLogo(
+            client_name=client_name[:100],
+            logo_url=f'/static/uploads/{filename}',
+            website_url=website_url[:500] or None,
+            description=description or None,
+            display_order=display_order,
+            status=status if status in ('active', 'inactive') else 'active',
+        )
+        try:
+            db.session.add(client_logo)
+            db.session.commit()
+            flash('Client logo added successfully.', 'success')
+        except Exception:
+            db.session.rollback()
+            flash('Could not save this logo. Please try again.', 'error')
+        return redirect(url_for('admin.client_logos'))
+
+    client_logos = ClientLogo.query.order_by(ClientLogo.display_order.asc(), ClientLogo.created_at.desc()).all()
+    return render_template('admin/client_logos.html', client_logos=client_logos)
 
 @bp.route('/messages')
 def messages():

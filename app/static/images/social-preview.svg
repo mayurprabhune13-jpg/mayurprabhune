@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Mayur Prabhune — AI, Learning, Enablement</title>
+  <desc id="desc">An abstract neural constellation in midnight blue with cyan and violet light.</desc>
+  <defs>
+    <radialGradient id="bg" cx="74%" cy="42%" r="78%"><stop stop-color="#17283c"/><stop offset=".68" stop-color="#0d1320"/><stop offset="1" stop-color="#080b12"/></radialGradient>
+    <radialGradient id="core" cx="34%" cy="27%"><stop stop-color="#9aefff" stop-opacity=".65"/><stop offset=".46" stop-color="#24526b" stop-opacity=".8"/><stop offset="1" stop-color="#101722"/></radialGradient>
+    <linearGradient id="line" x1="0" x2="1"><stop stop-color="#55e6ff" stop-opacity=".08"/><stop offset=".5" stop-color="#55e6ff" stop-opacity=".75"/><stop offset="1" stop-color="#9b8cff" stop-opacity=".12"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g opacity=".12" stroke="#8aa5c1"><path d="M0 110h1200M0 190h1200M0 270h1200M0 350h1200M0 430h1200M0 510h1200"/><path d="M120 0v630M200 0v630M280 0v630M360 0v630M440 0v630M520 0v630M600 0v630M680 0v630M760 0v630M840 0v630M920 0v630M1000 0v630M1080 0v630"/></g>
+  <g fill="none" stroke="url(#line)" stroke-width="2"><path d="m710 105 130 91 119-36 95 103-50 132-145 68-120-86-126 25-73-114 63-112z"/><path d="m710 105 103 272 146-217M840 196l-97 181 216-17M710 105l26 286M959 160l45 235M1064 263l-205 200M630 276l280-80"/></g>
+  <g fill="#55e6ff" filter="url(#glow)"><circle cx="710" cy="105" r="6"/><circle cx="840" cy="196" r="7"/><circle cx="959" cy="160" r="5"/><circle cx="1054" cy="263" r="6"/><circle cx="1004" cy="395" r="5"/><circle cx="859" cy="463" r="7"/><circle cx="739" cy="377" r="5"/><circle cx="613" cy="402" r="6"/><circle cx="666" cy="290" r="5"/></g>
+  <circle cx="855" cy="298" r="100" fill="url(#core)" stroke="#83edff" stroke-opacity=".65"/>
+  <ellipse cx="855" cy="298" rx="165" ry="56" fill="none" stroke="#55e6ff" stroke-opacity=".6" transform="rotate(-27 855 298)"/>
+  <ellipse cx="855" cy="298" rx="128" ry="186" fill="none" stroke="#9b8cff" stroke-opacity=".46" transform="rotate(34 855 298)"/>
+  <text x="855" y="306" fill="#c5f9ff" font-family="Arial,sans-serif" font-size="18" letter-spacing="5" text-anchor="middle">AI · LEARNING</text>
+  <text x="84" y="106" fill="#55e6ff" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="4">MAYUR PRABHUNE</text>
+  <text x="80" y="253" fill="#f5f7fa" font-family="Arial,sans-serif" font-size="62" font-weight="500" letter-spacing="-3">Building Human Potential</text>
+  <text x="80" y="329" fill="#f5f7fa" font-family="Arial,sans-serif" font-size="62" font-weight="500" letter-spacing="-3">in the Age of <tspan fill="#55e6ff">AI.</tspan></text>
+  <text x="84" y="386" fill="#9aa9bc" font-family="Arial,sans-serif" font-size="18" letter-spacing="1.5">GENAI  ·  LEARNING INNOVATION  ·  SALES ENABLEMENT</text>
+  <path d="M84 440h340" stroke="#55e6ff" stroke-width="2"/>
+</svg>

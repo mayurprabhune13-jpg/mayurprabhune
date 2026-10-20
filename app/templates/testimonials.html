@@ -1,21 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Testimonials - Mayur Prabhune{% endblock %}
+
+{% block title %}Testimonials{% endblock %}
+{% block meta_description %}Approved feedback from people who have worked with Mayur Prabhune on learning, AI, and team enablement.{% endblock %}
+
 {% block content %}
-<div class="layout-content-container flex flex-col max-w-6xl flex-1 mx-auto">
-  <h1 class="text-white text-3xl font-bold mb-8">Testimonials</h1>
-  <div class="grid md:grid-cols-3 gap-6">
-    {% for t in testimonials %}
-    <figure class="rounded-xl border border-white/10 bg-white/5 p-6">
-      <blockquote class="text-white/80">"{{ t.content }}"</blockquote>
-      <figcaption class="mt-4">
-        <div class="text-white font-semibold">{{ t.author }}</div>
-        {% if t.role %}<div class="text-white/60 text-sm">{{ t.role }}</div>{% endif %}
-      </figcaption>
-    </figure>
-    {% endfor %}
-  </div>
-  {% if not testimonials %}
-    <p class="text-white/60">No testimonials yet.</p>
-  {% endif %}
+<div class="experience-page">
+    <header class="case-study-hero"><span class="eyebrow">Collaborator perspectives</span><h1>Words from people I’ve worked with.</h1><p>Testimonials shown here are published from the site’s approved testimonial library.</p></header>
+    {% if testimonials %}<div class="quote-grid page-list page-list--testimonials">{% for testimonial in testimonials %}<figure class="quote-card"><span class="quote-card__mark" aria-hidden="true">“</span><blockquote>{{ testimonial.content }}</blockquote><figcaption>{{ testimonial.author }}{% if testimonial.role %}<span>{{ testimonial.role }}</span>{% endif %}</figcaption></figure>{% endfor %}</div>{% else %}<div class="empty-state page-empty-state"><span class="eyebrow">Collaborator perspectives</span><h2>Testimonials will be added here when approved.</h2><p>For now, explore the work and approach behind the programs.</p><a class="text-link" href="{{ url_for('main.about') }}">About Mayur <span aria-hidden="true">→</span></a></div>{% endif %}
+    <section class="page-end-cta" aria-labelledby="testimonial-cta-title"><div><span class="eyebrow">Work together</span><h2 id="testimonial-cta-title">Let’s build a useful learning experience.</h2><p>Share the challenge your team is working on.</p></div><a class="button" href="{{ url_for('main.contact') }}">Contact Mayur <span aria-hidden="true">↗</span></a></section>
 </div>
 {% endblock %}

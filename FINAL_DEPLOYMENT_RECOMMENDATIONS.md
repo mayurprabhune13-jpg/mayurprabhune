@@ -78,7 +78,7 @@ MAIL_USERNAME=info@mayurprabhune.in
 MAIL_PASSWORD=Mayur@&12345
 MAIL_USE_TLS=True
 MAIL_DEFAULT_SENDER=info@mayurprabhune.in
-ADMIN_USERNAME=admin
+ADMIN_USERNAME=your-admin-username
 ADMIN_PASSWORD=[your-admin-password]
 SECRET_KEY=[your-secret-key]
 ```

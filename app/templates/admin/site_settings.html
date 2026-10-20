@@ -1,0 +1,75 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Site Settings{% endblock %}
+{% block header %}Site Settings{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl space-y-6">
+    <section class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+        <p class="mb-2 text-sm text-gray-300">Changes save directly to the site database and appear on the public pages immediately.</p>
+        <form method="POST" action="{{ url_for('admin.site_settings') }}" class="space-y-7">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <fieldset class="space-y-4">
+                <legend class="mb-1 text-lg font-semibold text-white">Branding</legend>
+                <div class="grid gap-4 md:grid-cols-2">
+                    <label class="block text-sm text-gray-200">Display name
+                        <input name="site_name" maxlength="120" required value="{{ settings.site_name }}" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30">
+                    </label>
+                    <label class="block text-sm text-gray-200">Wordmark tagline
+                        <input name="brand_tagline" maxlength="180" required value="{{ settings.brand_tagline }}" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30">
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset class="space-y-4 border-t border-gray-700 pt-6">
+                <legend class="mb-1 text-lg font-semibold text-white">Search and sharing defaults</legend>
+                <label class="block text-sm text-gray-200">Default page title
+                    <input name="seo_title" maxlength="180" required value="{{ settings.seo_title }}" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30">
+                </label>
+                <label class="block text-sm text-gray-200">Default search description
+                    <textarea name="seo_description" maxlength="320" rows="3" required class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30">{{ settings.seo_description }}</textarea>
+                </label>
+                <p class="text-xs text-gray-400">Individual page descriptions can still override this default when that page defines its own metadata.</p>
+            </fieldset>
+
+            <fieldset class="space-y-4 border-t border-gray-700 pt-6">
+                <legend class="mb-1 text-lg font-semibold text-white">Homepage introduction</legend>
+                <label class="block text-sm text-gray-200">Eyebrow
+                    <input name="homepage_eyebrow" maxlength="180" required value="{{ settings.homepage_eyebrow }}" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30">
+                </label>
+                <label class="block text-sm text-gray-200">Main headline
+                    <input name="homepage_headline" maxlength="220" required value="{{ settings.homepage_headline }}" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30">
+                </label>
+                <label class="block text-sm text-gray-200">Supporting line
+                    <input name="homepage_support" maxlength="240" required value="{{ settings.homepage_support }}" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30">
+                </label>
+                <label class="block text-sm text-gray-200">Introduction paragraph
+                    <textarea name="homepage_intro" maxlength="2000" rows="4" required class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30">{{ settings.homepage_intro }}</textarea>
+                </label>
+                <label class="block text-sm text-gray-200">Portrait image URL or site path
+                    <input name="homepage_photo_url" maxlength="500" value="{{ settings.homepage_photo_url or '' }}" placeholder="/static/images/Profile1.jpg" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30">
+                    <span class="mt-1 block text-xs text-gray-400">Use a path under /static/ or a secure https image URL. Leave blank for the current default portrait.</span>
+                </label>
+            </fieldset>
+
+            <fieldset class="space-y-4 border-t border-gray-700 pt-6">
+                <legend class="mb-1 text-lg font-semibold text-white">Featured YouTube video</legend>
+                <label class="block text-sm text-gray-200">Video title
+                    <input name="featured_video_title" maxlength="200" required value="{{ settings.featured_video_title }}" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30">
+                </label>
+                <label class="block text-sm text-gray-200">Video description
+                    <textarea name="featured_video_description" maxlength="500" rows="2" required class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30">{{ settings.featured_video_description }}</textarea>
+                </label>
+                <label class="block text-sm text-gray-200">YouTube watch URL
+                    <input type="url" name="featured_video_url" maxlength="500" required value="{{ settings.featured_video_url }}" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30">
+                </label>
+            </fieldset>
+
+            <div class="flex flex-wrap items-center gap-3 border-t border-gray-700 pt-6">
+                <button type="submit" class="rounded-lg bg-cyan-300 px-5 py-3 font-semibold text-gray-950 transition hover:bg-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-100 focus:ring-offset-2 focus:ring-offset-gray-800">Save site settings</button>
+                <a href="{{ url_for('main.index') }}" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-gray-600 px-5 py-3 text-sm text-gray-200 hover:border-cyan-300 hover:text-cyan-200">View public site <span aria-hidden="true">↗</span></a>
+            </div>
+        </form>
+    </section>
+</div>
+{% endblock %}

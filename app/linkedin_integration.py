@@ -1,101 +1,26 @@
-from datetime import datetime, timedelta
 import logging
-import requests
 
 logger = logging.getLogger(__name__)
 
 class LinkedInBlogFetcher:
     """
-    Fetches blog posts from LinkedIn using various methods
+    Safe placeholder for the optional LinkedIn feed.
+
+    The previous implementation returned invented sample posts and engagement
+    figures. Reading a member's posts requires an authorized LinkedIn API
+    integration; do not substitute mock content for a real feed.
     """
     
     def __init__(self, linkedin_profile_url=None):
         self.profile_url = linkedin_profile_url or "https://www.linkedin.com/in/mayur-prabhune"
-        self.session = requests.Session()
-        self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        })
     
     def fetch_recent_posts(self, limit=3):
-        """
-        Fetch recent LinkedIn posts/articles
-        Since LinkedIn's API is restricted, this returns mock data for now
-        In production, you would integrate with LinkedIn's API or use authorized RSS feeds
-        """
-        try:
-            logger.info("Fetching sample LinkedIn posts")
-            # For now, return sample blog posts that would be typical for an AI mentor
-            sample_posts = [
-                {
-                    'title': 'The Future of AI Leadership: 5 Key Trends Every Executive Should Know',
-                    'excerpt': 'As AI continues to reshape industries, leaders must adapt their strategies. Here are the critical trends that will define AI leadership in 2024 and beyond.',
-                    'url': f"{self.profile_url}/recent-activity/",
-                    'published_date': datetime.now() - timedelta(days=2),
-                    'author': 'Mayur Prabhune',
-                    'engagement': {'likes': 156, 'comments': 23, 'shares': 12},
-                    'tags': ['AI Leadership', 'Executive Strategy', 'Digital Transformation']
-                },
-                {
-                    'title': 'Ethical AI Implementation: A Practical Framework for Indian Businesses',
-                    'excerpt': 'Implementing AI ethically requires more than good intentions. This framework helps Indian businesses navigate cultural considerations while adopting AI responsibly.',
-                    'url': f"{self.profile_url}/recent-activity/",
-                    'published_date': datetime.now() - timedelta(days=5),
-                    'author': 'Mayur Prabhune',
-                    'engagement': {'likes': 234, 'comments': 34, 'shares': 18},
-                    'tags': ['Ethical AI', 'Cultural Sensitivity', 'Business Strategy']
-                },
-                {
-                    'title': 'Breaking Down AI Silos: How Cross-Functional Teams Drive Innovation',
-                    'excerpt': 'AI success isn\'t just about technology—it\'s about people. Learn how building cross-functional AI teams can accelerate innovation and ensure sustainable adoption.',
-                    'url': f"{self.profile_url}/recent-activity/",
-                    'published_date': datetime.now() - timedelta(days=8),
-                    'author': 'Mayur Prabhune',
-                    'engagement': {'likes': 187, 'comments': 28, 'shares': 15},
-                    'tags': ['Team Building', 'AI Innovation', 'Organizational Change']
-                }
-            ]
-            
-            return sample_posts[:limit]
-            
-        except Exception as e:
-            logger.error(f"Error fetching LinkedIn posts: {str(e)}")
-            return []
+        logger.warning("LinkedIn feed is not configured with an approved member-posts API integration")
+        return []
     
     def fetch_linkedin_articles(self, limit=3):
-        """
-        Fetch published LinkedIn articles
-        This would integrate with LinkedIn's Publishing API in production
-        """
-        try:
-            # Sample LinkedIn articles for AI mentor
-            sample_articles = [
-                {
-                    'title': 'The ETHICS Framework: A Comprehensive Guide to Responsible AI Implementation',
-                    'excerpt': 'Introducing the ETHICS framework - a systematic approach to implementing AI that prioritizes cultural sensitivity, transparency, and sustainable business outcomes.',
-                    'url': f"{self.profile_url}/pulse/",
-                    'published_date': datetime.now() - timedelta(days=12),
-                    'author': 'Mayur Prabhune',
-                    'read_time': '8 min read',
-                    'engagement': {'likes': 312, 'comments': 45, 'shares': 28},
-                    'tags': ['ETHICS Framework', 'AI Implementation', 'Responsible AI']
-                },
-                {
-                    'title': 'Leading AI Transformation: Lessons from 50+ Indian Organizations',
-                    'excerpt': 'After working with over 50 Indian organizations on AI transformation, here are the key patterns that separate successful AI leaders from the rest.',
-                    'url': f"{self.profile_url}/pulse/",
-                    'published_date': datetime.now() - timedelta(days=20),
-                    'author': 'Mayur Prabhune',
-                    'read_time': '12 min read',
-                    'engagement': {'likes': 489, 'comments': 67, 'shares': 41},
-                    'tags': ['AI Transformation', 'Leadership', 'Case Studies']
-                }
-            ]
-            
-            return sample_articles[:limit]
-            
-        except Exception as e:
-            logger.error(f"Error fetching LinkedIn articles: {str(e)}")
-            return []
+        logger.warning("LinkedIn article feed is not configured with an authorized API integration")
+        return []
     
     def get_combined_content(self, limit=3):
         """

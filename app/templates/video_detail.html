@@ -1,15 +1,13 @@
 {% extends "base.html" %}
-{% block title %}{{ video.title }} - Video{% endblock %}
+
+{% block title %}{{ video.title }}{% endblock %}
+{% block meta_description %}{{ video.description|default(video.title, true)|striptags|truncate(155, true, '…') }}{% endblock %}
+
 {% block content %}
-<div class="layout-content-container flex flex-col max-w-4xl flex-1 mx-auto">
-  <h1 class="text-white text-3xl font-bold mb-6">{{ video.title }}</h1>
-  {% if video.video_url %}
-  <div class="aspect-video w-full rounded-xl overflow-hidden bg-black mb-6">
-    <iframe src="{{ video.video_url }}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
-  </div>
-  {% endif %}
-  {% if video.description %}
-  <p class="text-white/80">{{ video.description }}</p>
-  {% endif %}
-</div>
+<article class="experience-page">
+    <header class="case-study-hero"><a class="text-link" href="{{ url_for('main.videos') }}"><span aria-hidden="true">←</span> All videos</a><p class="eyebrow" style="margin-top:25px">{{ video.category or 'Video' }}</p><h1>{{ video.title }}</h1>{% if video.description %}<p>{{ video.description }}</p>{% endif %}</header>
+    {% if video.video_url %}<div class="video-frame"><iframe src="{{ video.video_url }}" title="{{ video.title }}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>{% else %}<div class="empty-state page-empty-state"><span class="eyebrow">Video unavailable</span><h2>This video doesn’t have a playable link yet.</h2><a class="text-link" href="{{ url_for('main.videos') }}">Browse all videos <span aria-hidden="true">→</span></a></div>{% endif %}
+    {% if video.description %}<p class="section-copy" style="margin-top:25px">{{ video.description }}</p>{% endif %}
+    <section class="page-end-cta" aria-labelledby="video-cta-title"><div><span class="eyebrow">Explore the work</span><h2 id="video-cta-title">Interested in a session for your team?</h2><p>Discuss learning goals, audience, and possible formats.</p></div><a class="button" href="{{ url_for('main.contact') }}">Get in touch <span aria-hidden="true">↗</span></a></section>
+</article>
 {% endblock %}

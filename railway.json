@@ -4,6 +4,7 @@
     "builder": "DOCKERFILE"
   },
   "deploy": {
+    "preDeployCommand": ["flask --app wsgi:app db upgrade"],
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }

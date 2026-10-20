@@ -1,0 +1,12 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "version": 2,
+  "build": {
+    "builder": "DOCKERFILE"
+  },
+  "deploy": {
+    "startCommand": "python scripts/sync_social_posts.py",
+    "cronSchedule": "15 3 * * *",
+    "restartPolicyType": "NEVER"
+  }
+}

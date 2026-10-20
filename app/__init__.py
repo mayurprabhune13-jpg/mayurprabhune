@@ -58,34 +58,6 @@ def create_app(config_class=Config):
     def health_check():
         return jsonify({'status': 'healthy', 'message': 'Application is running'})
     
-    # Database setup route
-    @app.route('/setup-db')
-    def setup_database():
-        """Initialize database connection and setup"""
-        try:
-            # Create tables and admin user
-            with app.app_context():
-                db.create_all()
-                
-                # Import models and create admin user
-                from app.models import User
-                admin = User.query.filter_by(username=app.config['ADMIN_USERNAME']).first()
-                if not admin:
-                    admin = User(
-                        username=app.config['ADMIN_USERNAME'],
-                        email=app.config['ADMIN_EMAIL'],
-                        is_admin=True
-                    )
-                    db.session.add(admin)
-                admin.set_password(app.config['ADMIN_PASSWORD'])
-                db.session.commit()
-                
-            return jsonify({'status': 'success', 'message': 'Database setup completed'})
-            
-        except Exception as e:
-            logger.error(f"Database setup error: {str(e)}")
-            return jsonify({'status': 'error', 'message': str(e)}), 500
-    
     # Remove basic home route - let main blueprint handle it
     # @app.route('/')
     # def home():
@@ -93,7 +65,6 @@ def create_app(config_class=Config):
     #     <h1>Mayur Prabhune - Website</h1>
     #     <p>Application is running successfully!</p>
     #     <p><a href="/health">Health Check</a></p>
-    #     <p><a href="/setup-db">Setup Database</a></p>
     #     <p>Domain: mayurprabhune.in</p>
     #     '''
     
@@ -110,6 +81,11 @@ def create_app(config_class=Config):
     @app.context_processor
     def inject_now():
         return {'now': datetime.utcnow()}
+
+    @app.context_processor
+    def inject_site_settings():
+        from app.site_settings import get_site_settings
+        return {'site_settings': get_site_settings()}
     
     # Register blueprints - import them inside app context
     with app.app_context():

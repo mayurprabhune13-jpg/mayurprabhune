@@ -51,7 +51,7 @@ This guide covers deploying the Flask application to various platforms.
    ```bash
    heroku config:set SECRET_KEY=your-secret-key
    heroku config:set DATABASE_URL=your-database-url
-   heroku config:set ADMIN_USERNAME=admin
+   heroku config:set ADMIN_USERNAME=your-admin-username
    heroku config:set ADMIN_EMAIL=mayur.prabhune@gmail.com
    heroku config:set ADMIN_PASSWORD=securepassword
    ```

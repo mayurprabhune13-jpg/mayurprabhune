@@ -1,198 +1,73 @@
 {% extends "base.html" %}
 
-{% block title %}About Me{% endblock %}
+{% block title %}About Mayur Prabhune{% endblock %}
+{% block meta_description %}Mayur Prabhune builds AI-enabled learning, sales capability, and workforce transformation programs, with a focus on practical AI and premium retail conversations.{% endblock %}
 
 {% block content %}
-<!-- Review/Testimonial Schema for GEO Optimization -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Mayur Prabhune",
-  "review": [
-    {
-      "@type": "Review",
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": 5,
-        "bestRating": 5
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Sarah Chen"
-      },
-      "reviewBody": "Mayur's AI mentorship transformed our startup's approach to automation. His practical guidance helped us implement AI solutions that increased our efficiency by 40% within 6 months.",
-      "datePublished": "2024-08-15"
-    },
-    {
-      "@type": "Review",
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": 5,
-        "bestRating": 5
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Rajesh Kumar"
-      },
-      "reviewBody": "As a manager leading AI transformation, Mayur's leadership training was invaluable. He helped our team navigate change management and build an AI-first culture successfully.",
-      "datePublished": "2024-09-02"
-    },
-    {
-      "@type": "Review",
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": 5,
-        "bestRating": 5
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Priya Sharma"
-      },
-      "reviewBody": "Mayur's AI awareness program gave me the confidence to transition into an AI career. His mentorship style is patient, practical, and incredibly effective for beginners.",
-      "datePublished": "2024-07-20"
-    }
-  ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": 4.9,
-    "reviewCount": 47,
-    "bestRating": 5,
-    "worstRating": 4
-  }
-}
-</script>
-
-<div class="flex w-full max-w-5xl flex-col gap-12 mx-auto">
-    <section class="flex flex-col items-center text-center">
-        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">About Me</h1>
-        <p class="mt-6 max-w-2xl text-lg leading-8 text-[#9dabb9]">A glimpse into my journey, mission, and the philosophy that drives me.</p>
-    </section>
-
-    <section class="flex flex-col gap-8 md:flex-row md:items-center">
-        <div class="flex-shrink-0">
-            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-32 h-32 sm:w-40 sm:h-40 mx-auto" 
-                 style='background-image: url("{{ url_for('static', filename='images/profile.png') }}");'></div>
+<div class="experience-page">
+    <header class="experience-page__hero">
+        <div>
+            <span class="eyebrow">About Mayur Prabhune</span>
+            <h1>Technology matters when it helps people do meaningful work.</h1>
+            <p>I build AI-enabled learning, sales capability, and workforce transformation programs. My focus is connecting new technology and learning to practical work—from AI-supported sales practice to more relevant customer conversations in premium retail.</p>
+            <div class="hero__actions"><a class="button" data-magnetic href="{{ url_for('main.contact') }}">Let’s connect <span aria-hidden="true">↗</span></a><a class="button button--secondary" href="{{ url_for('main.services') }}">Explore areas of focus <span aria-hidden="true">→</span></a></div>
         </div>
-        <div class="flex flex-col gap-4 text-center md:text-left">
-            <h2 class="text-3xl font-bold tracking-tight text-white">Mayur Prabhune</h2>
-            <p class="text-lg font-medium text-[#1173d4]">AI Mentor &amp; Tech Leader</p>
-            <p class="text-[#9dabb9]">I am passionate about leveraging AI to solve complex problems and empowering the next generation of tech leaders. My journey is one of continuous learning, innovation, and a commitment to ethical technology.</p>
+        <div class="experience-page__visual experience-page__visual--portrait">
+            <img src="{{ url_for('static', filename='images/Profile1.jpg') }}" alt="Portrait of Mayur Prabhune" fetchpriority="high">
+            <span>AI · Learning · Sales Capability</span>
+        </div>
+    </header>
+
+    <section class="experience-page__section" id="experience" data-nav-section>
+        <span class="eyebrow">Professional focus</span>
+        <h2>Bringing learning closer to the work.</h2>
+        <p>My focus is on connecting new technology and useful learning with people’s day-to-day tasks. That includes exploring AI in practical contexts, designing learning for teams, and supporting the customer conversations that shape retail and sales experiences.</p>
+        <div class="method-grid">
+            <article class="method-card"><span class="method-card__index">01 / AI</span><h3>Practical exploration</h3><p>Generative and agentic AI learning grounded in team questions and work scenarios.</p></article>
+            <article class="method-card"><span class="method-card__index">02 / LEARNING</span><h3>Capability development</h3><p>Role-relevant training and learning experiences designed around the audience.</p></article>
+            <article class="method-card"><span class="method-card__index">03 / ENABLEMENT</span><h3>Customer-facing practice</h3><p>Sales and frontline learning shaped around customer needs, product conversations, and practice.</p></article>
         </div>
     </section>
 
-    <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
-        <section>
-            <h3 class="text-2xl font-bold text-white mb-6">Professional Experience</h3>
-            <div class="space-y-6 border-l-2 border-[#3b4754] pl-6">
-                <div class="relative">
-                    <div class="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full bg-[#1173d4]"></div>
-                    <h4 class="font-semibold text-white">AI Mentor</h4>
-                    <p class="text-sm text-[#9dabb9]">Mentoring individuals and teams in AI and machine learning</p>
-                </div>
-                <div class="relative">
-                    <div class="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full bg-[#1173d4]"></div>
-                    <h4 class="font-semibold text-white">Tech Lead</h4>
-                    <p class="text-sm text-[#9dabb9]">Leading technical teams in AI projects</p>
-                </div>
-                <div class="relative">
-                    <div class="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full bg-[#1173d4]"></div>
-                    <h4 class="font-semibold text-white">Software Engineer</h4>
-                    <p class="text-sm text-[#9dabb9]">Developing software solutions with a focus on AI</p>
-                </div>
-            </div>
-        </section>
+    <section class="experience-page__section">
+        <span class="eyebrow">How I work</span>
+        <h2>Useful, human-centred, and grounded in context.</h2>
+        <ul>
+            <li>Start with the audience and their goals.</li>
+            <li>Use examples that fit the work and the people doing it.</li>
+            <li>Make room for questions, experimentation, and practice.</li>
+            <li>Consider responsible use and human judgment.</li>
+        </ul>
+    </section>
 
-        <section>
-            <h3 class="text-2xl font-bold text-white mb-6">Qualifications</h3>
-            <div class="space-y-6 border-l-2 border-[#3b4754] pl-6">
-                <div class="relative">
-                    <div class="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full bg-[#1173d4]"></div>
-                    <h4 class="font-semibold text-white">Master of Science in Computer Science</h4>
-                    <p class="text-sm text-[#9dabb9]">University of California, Berkeley</p>
-                </div>
-                <div class="relative">
-                    <div class="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full bg-[#1173d4]"></div>
-                    <h4 class="font-semibold text-white">Certified AI Professional</h4>
-                    <p class="text-sm text-[#9dabb9]">AI Certification Board</p>
-                </div>
-                <div class="relative">
-                    <div class="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full bg-[#1173d4]"></div>
-                    <h4 class="font-semibold text-white">Leadership Training</h4>
-                    <p class="text-sm text-[#9dabb9]">Leadership Development Institute</p>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-        <section class="rounded-lg bg-[#1a1e24] p-6 sm:p-8">
-            <h3 class="text-2xl font-bold text-white mb-4">My Mission</h3>
-            <p class="text-[#9dabb9]">To empower individuals and organizations to leverage AI effectively and ethically, fostering innovation and growth through mentorship and guidance.</p>
-        </section>
-        <section class="rounded-lg bg-[#1a1e24] p-6 sm:p-8">
-            <h3 class="text-2xl font-bold text-white mb-4">My Philosophy</h3>
-            <p class="text-[#9dabb9]">I believe in a collaborative and personalized approach to mentorship, focusing on understanding each client's unique needs and goals to provide tailored guidance and support.</p>
-        </section>
-    </div>
-
-    <!-- Client Testimonials Section -->
-    <section class="mt-16">
-        <h3 class="text-3xl font-bold text-white text-center mb-12">What Clients Say</h3>
-        <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            <div class="bg-[#1a1e24] p-6 rounded-lg border border-gray-800">
-                <div class="flex items-center mb-4">
-                    <div class="flex text-yellow-400">
-                        ★★★★★
-                    </div>
-                </div>
-                <p class="text-[#9dabb9] mb-4 italic">"Mayur's AI mentorship transformed our startup's approach to automation. His practical guidance helped us implement AI solutions that increased our efficiency by 40% within 6 months."</p>
-                <div class="text-white font-semibold">— Sarah Chen</div>
-                <div class="text-sm text-gray-500">Startup Founder</div>
-            </div>
-
-            <div class="bg-[#1a1e24] p-6 rounded-lg border border-gray-800">
-                <div class="flex items-center mb-4">
-                    <div class="flex text-yellow-400">
-                        ★★★★★
-                    </div>
-                </div>
-                <p class="text-[#9dabb9] mb-4 italic">"As a manager leading AI transformation, Mayur's leadership training was invaluable. He helped our team navigate change management and build an AI-first culture successfully."</p>
-                <div class="text-white font-semibold">— Rajesh Kumar</div>
-                <div class="text-sm text-gray-500">Technology Manager</div>
-            </div>
-
-            <div class="bg-[#1a1e24] p-6 rounded-lg border border-gray-800">
-                <div class="flex items-center mb-4">
-                    <div class="flex text-yellow-400">
-                        ★★★★★
-                    </div>
-                </div>
-                <p class="text-[#9dabb9] mb-4 italic">"Mayur's AI awareness program gave me the confidence to transition into an AI career. His mentorship style is patient, practical, and incredibly effective for beginners."</p>
-                <div class="text-white font-semibold">— Priya Sharma</div>
-                <div class="text-sm text-gray-500">AI Professional</div>
-            </div>
+    <section class="experience-page__section" aria-labelledby="credentials-title">
+        <span class="eyebrow">Learning &amp; credentials</span>
+        <h2 id="credentials-title">Selected credentials listed on LinkedIn.</h2>
+        <p>These courses and certifications are listed on Mayur’s public LinkedIn profile.</p>
+        <div class="method-grid">
+            <article class="method-card"><span class="method-card__index">LINKEDIN · JUN 2025</span><h3>Agentic AI Fundamentals</h3><p>Architectures, frameworks, and applications.</p></article>
+            <article class="method-card"><span class="method-card__index">LINKEDIN · JUN 2025</span><h3>What Is Microsoft Copilot?</h3><p>An overview of Microsoft’s AI tools.</p></article>
+            <article class="method-card"><span class="method-card__index">COURSERA · JUL 2024</span><h3>Introduction to Generative AI</h3></article>
+            <article class="method-card"><span class="method-card__index">COURSERA · JUL 2022</span><h3>Foundation of Project Management</h3></article>
+            <article class="method-card"><span class="method-card__index">APPLE · APR 2014</span><h3>Apple Certified Technician for Pro Products</h3></article>
+            <article class="method-card"><span class="method-card__index">MICROSOFT · APR 2013</span><h3>Sales Certified – Software as a Service Solutions</h3></article>
         </div>
+        <p><a class="text-link" href="https://www.linkedin.com/in/mayur-prabhune" target="_blank" rel="noopener noreferrer">View the LinkedIn profile <span aria-hidden="true">↗</span></a></p>
+    </section>
 
-        <!-- Client Success Statistics -->
-        <div class="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-4 text-center">
-            <div class="bg-[#1a1e24] p-4 rounded-lg">
-                <div class="text-2xl font-bold text-[#1173d4]">50+</div>
-                <div class="text-sm text-[#9dabb9]">Projects Completed</div>
-            </div>
-            <div class="bg-[#1a1e24] p-4 rounded-lg">
-                <div class="text-2xl font-bold text-[#1173d4]">95%</div>
-                <div class="text-sm text-[#9dabb9]">Client Satisfaction</div>
-            </div>
-            <div class="bg-[#1a1e24] p-4 rounded-lg">
-                <div class="text-2xl font-bold text-[#1173d4]">100+</div>
-                <div class="text-sm text-[#9dabb9]">Professionals Trained</div>
-            </div>
-            <div class="bg-[#1a1e24] p-4 rounded-lg">
-                <div class="text-2xl font-bold text-[#1173d4]">5+</div>
-                <div class="text-sm text-[#9dabb9]">Years Experience</div>
-            </div>
+    <section class="experience-page__section" aria-labelledby="ideas-title">
+        <span class="eyebrow">Ideas &amp; field notes</span>
+        <h2 id="ideas-title">Themes from Mayur’s LinkedIn writing.</h2>
+        <div class="method-grid">
+            <article class="method-card"><span class="method-card__index">AI × SALES</span><h3>Practice before the customer conversation</h3><p>Use AI role-play to rehearse objections and reflect on the quality of sales conversations.</p></article>
+            <article class="method-card"><span class="method-card__index">PREMIUM RETAIL</span><h3>Make recommendations more relevant</h3><p>Combine customer context with thoughtful questions, listening, and human judgment.</p></article>
+            <article class="method-card"><span class="method-card__index">WORKFORCE LEARNING</span><h3>Build capability beyond course completion</h3><p>Connect learning activity to the skills people need to use in their day-to-day work.</p></article>
         </div>
+        <p><a class="text-link" href="https://www.linkedin.com/in/mayur-prabhune" target="_blank" rel="noopener noreferrer">Read Mayur’s posts on LinkedIn <span aria-hidden="true">↗</span></a></p>
+    </section>
+
+    <section class="experience-page__section">
+        <div class="cta-panel"><span class="eyebrow">Let’s work together</span><h2>Have a team challenge or learning goal in mind?</h2><p>Share the context and we can explore a suitable next step.</p><a class="button" href="{{ url_for('main.contact') }}">Contact Mayur <span aria-hidden="true">↗</span></a></div>
     </section>
 </div>
 {% endblock %}

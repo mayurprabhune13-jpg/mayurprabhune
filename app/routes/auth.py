@@ -1,13 +1,11 @@
-from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify
-from app import csrf
+from flask import Blueprint, render_template, flash, redirect, url_for, request
+from urllib.parse import urljoin, urlsplit
 from flask_login import login_user, logout_user, login_required, current_user
 from app.models import User
-from app import db
 
 bp = Blueprint('auth', __name__)
 
 @bp.route('/login', methods=['GET', 'POST'])
-@csrf.exempt
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('admin.dashboard'))
@@ -21,7 +19,11 @@ def login():
             login_user(user)
             flash('Logged in successfully!', 'success')
             next_page = request.args.get('next')
-            return redirect(next_page or url_for('admin.dashboard'))
+            if next_page:
+                target = urljoin(request.host_url, next_page)
+                if urlsplit(target).netloc == urlsplit(request.host_url).netloc:
+                    return redirect(target)
+            return redirect(url_for('admin.dashboard'))
         
         flash('Invalid email or password', 'error')
     
@@ -33,27 +35,3 @@ def logout():
     logout_user()
     flash('Logged out successfully!', 'success')
     return redirect(url_for('main.index'))
-
-@bp.route('/setup-db', methods=['GET'])
-@csrf.exempt
-def setup_db():
-    try:
-        db.create_all()
-        
-        # Create admin user if not exists
-        admin = User.query.filter_by(email='admin@example.com').first()
-        if not admin:
-            admin = User(
-                email='admin@example.com', 
-                is_admin=True
-            )
-            admin.set_password('AdminPass123!')
-            db.session.add(admin)
-            db.session.commit()
-            return jsonify({"status": "success", "message": "Database and admin user created successfully!"})
-        
-        return jsonify({"status": "success", "message": "Admin user already exists!"})
-        
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({"status": "error", "message": f"Error setting up database: {str(e)}"}), 500

@@ -1,87 +1,35 @@
 {% extends "base.html" %}
 
-{% block title %}Success Stories - Mayur Prabhune{% endblock %}
-
-{% block styles %}
-<style type="text/tailwindcss">
-  :root {
-    --primary-cyan: #06f9f9;
-    --primary-fuchsia: #f906f9;
-  }
-  .gradient-border-bottom {
-    border-image: linear-gradient(to right, var(--primary-cyan), var(--primary-fuchsia)) 1;
-  }
-  .gradient-text {
-    background: linear-gradient(to right, var(--primary-cyan), var(--primary-fuchsia));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .case-study-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .case-study-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(6, 249, 249, 0.1), 0 4px 6px -2px rgba(249, 6, 249, 0.05);
-  }
-</style>
-{% endblock %}
+{% block title %}Projects & Case Studies{% endblock %}
+{% block meta_description %}Explore published projects and case studies related to AI learning, workforce development, and sales enablement with Mayur Prabhune.{% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-    <div class="mx-auto max-w-4xl text-center">
-        <h1 class="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl">
-            Success <span class="gradient-text">Stories</span>
-        </h1>
-        <p class="mt-4 text-base text-[#9bbbbb] sm:text-lg">
-            Explore how Mayur Prabhune's AI mentorship has empowered clients to achieve remarkable results.
-        </p>
-    </div>
-
-    <div class="mt-12 grid gap-8 md:mt-16 lg:mt-20 lg:grid-cols-1 lg:gap-12">
-        {% for case_study in case_studies %}
-        <div class="case-study-card flex flex-col overflow-hidden rounded-lg bg-[#1a2222] @container {% if loop.index is even %}md:flex-row-reverse{% else %}md:flex-row{% endif %}">
-            <div class="h-64 w-full bg-cover bg-center md:h-auto md:w-1/3"
-                 {% if case_study.image_url %}style="background-image: url('{{ url_for('static', filename=case_study.image_url) }}');"{% endif %}>
-            </div>
-            <div class="flex flex-1 flex-col justify-between p-6 sm:p-8">
-                <div>
-                    <p class="text-sm font-semibold uppercase tracking-wider text-[var(--primary-fuchsia)]">
-                        {{ case_study.industry }}
-                    </p>
-                    <h3 class="mt-2 text-xl font-bold tracking-tight sm:text-2xl">
-                        {{ case_study.title }}
-                    </h3>
-                    <p class="mt-4 text-base text-[#9bbbbb]">
-                        {{ case_study.description }}
-                    </p>
-                    <p class="mt-3 text-sm font-medium text-gray-400">
-                        Client: {{ case_study.client }}
-                    </p>
-                </div>
-                <div class="mt-6">
-                    <a href="{{ url_for('main.case_study_detail', slug=case_study.slug) }}"
-                       class="group inline-flex items-center font-semibold text-[var(--primary-cyan)] transition-all hover:text-white">
-                        <span>Read Case Study</span>
-                        <svg class="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1" 
-                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M17 8l4 4m0 0l-4 4m4-4H3" 
-                                  stroke-linecap="round" 
-                                  stroke-linejoin="round" 
-                                  stroke-width="2">
-                            </path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
+<div class="experience-page">
+    <header class="case-study-hero">
+        <span class="eyebrow">Projects · Case studies</span>
+        <h1>Work shaped around real challenges.</h1>
+        <p>Published project stories and case studies. Each story is drawn from the site’s existing content library.</p>
+    </header>
+    {% if case_studies and case_studies.items %}
+    <div class="project-grid page-list page-list--projects">
+        {% for case_study in case_studies.items %}
+        <article class="project-card" data-tilt>
+            <div class="project-card__visual{% if not case_study.image_url %} project-card__visual--abstract{% endif %}">{% if case_study.image_url %}<img src="{{ case_study.image_url|media_url }}" alt="{{ case_study.title }} project visual" loading="lazy">{% else %}<span class="project-card__fallback"><span class="eyebrow">{{ case_study.industry }}</span><span aria-hidden="true">{{ '%02d'|format(loop.index) }}</span></span>{% endif %}</div>
+            <div class="project-card__body"><span class="project-card__label">{{ case_study.industry }}</span><h2>{{ case_study.title }}</h2><p>{{ case_study.description|truncate(220) }}</p><div class="project-card__footer"><small>{{ case_study.client or 'Project story' }}</small><a class="text-link" href="{{ url_for('main.case_study_detail', slug=case_study.slug) }}">Explore case study <span aria-hidden="true">↗</span></a></div></div>
+        </article>
         {% endfor %}
-
-        {% if not case_studies %}
-        <div class="text-center text-gray-400 py-12">
-            <p>No case studies available at the moment.</p>
-        </div>
-        {% endif %}
     </div>
+    {% else %}
+    <section class="empty-state page-empty-state" aria-label="No published case studies"><span class="eyebrow">Project library</span><h2>Case studies will appear here when they’re ready to share.</h2><p>Explore the services and learning approach while project stories are prepared.</p><a class="text-link" href="{{ url_for('main.services') }}">Explore areas of focus <span aria-hidden="true">→</span></a></section>
+    {% endif %}
+
+    {% if case_studies and case_studies.pages > 1 %}
+    <nav class="pagination" aria-label="Project pages">
+        {% if case_studies.has_prev %}<a class="button button--secondary" href="{{ url_for('main.success_stories', page=case_studies.prev_num, industry=current_industry) }}">← Previous</a>{% endif %}
+        <span class="section-copy">Page {{ case_studies.page }} of {{ case_studies.pages }}</span>
+        {% if case_studies.has_next %}<a class="button button--secondary" href="{{ url_for('main.success_stories', page=case_studies.next_num, industry=current_industry) }}">Next →</a>{% endif %}
+    </nav>
+    {% endif %}
+    <section class="page-end-cta" aria-labelledby="projects-cta-title"><div><span class="eyebrow">Your challenge could be next</span><h2 id="projects-cta-title">Have a team goal you’d like to move forward?</h2><p>Share the context and discuss a relevant next step.</p></div><a class="button" href="{{ url_for('main.contact') }}">Talk through your goals <span aria-hidden="true">↗</span></a></section>
 </div>
 {% endblock %}

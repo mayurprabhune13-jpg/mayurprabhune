@@ -1,0 +1,36 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Case Studies{% endblock %}
+{% block header %}Case Studies & Projects{% endblock %}
+
+{% block content %}
+<div class="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(320px,0.85fr)]">
+    <section class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+        <h3 class="mb-1 text-lg font-semibold">Add a project story</h3>
+        <p class="mb-5 text-sm text-gray-400">Use approved client details and outcomes. Drafts stay private until published.</p>
+        <form method="POST" enctype="multipart/form-data" class="space-y-4">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="grid gap-4 sm:grid-cols-2">
+                <label class="block text-sm text-gray-200">Project title <input name="title" maxlength="200" required class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white"></label>
+                <label class="block text-sm text-gray-200">Client <input name="client" maxlength="100" required class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white"></label>
+                <label class="block text-sm text-gray-200">Industry <input name="industry" maxlength="100" required class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white"></label>
+                <label class="block text-sm text-gray-200">Cover image <input type="file" name="image" accept="image/png,image/jpeg,image/gif" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-sm text-gray-200"></label>
+            </div>
+            <label class="block text-sm text-gray-200">Overview <textarea name="description" required rows="3" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white"></textarea></label>
+            <label class="block text-sm text-gray-200">Challenge <textarea name="challenge" rows="3" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white"></textarea></label>
+            <label class="block text-sm text-gray-200">Approach and solution <textarea name="solution" rows="3" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white"></textarea></label>
+            <label class="block text-sm text-gray-200">Outcomes <textarea name="results" rows="3" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white"></textarea></label>
+            <label class="block text-sm text-gray-200">Visibility <select name="status" class="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-white"><option value="draft">Save draft</option><option value="published">Publish now</option></select></label>
+            <button type="submit" class="rounded-lg bg-cyan-300 px-5 py-3 font-semibold text-gray-950 hover:bg-cyan-200">Save project</button>
+        </form>
+    </section>
+    <section class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+        <h3 class="mb-4 text-lg font-semibold">Existing projects</h3>
+        <div class="space-y-3">
+            {% for item in case_studies %}
+            <article class="flex items-start justify-between gap-3 rounded-lg border border-gray-700 bg-gray-900/60 p-4"><div class="min-w-0"><h4 class="font-medium text-white">{{ item.title }}</h4><p class="mt-1 text-xs text-gray-400">{{ item.client }} · {{ item.industry }} · {{ item.status|title }}</p></div><a href="{{ url_for('admin.delete_case_study', id=item.id) }}" class="shrink-0 text-sm text-rose-300 hover:text-rose-200" onclick="return confirm('Delete this project?')">Delete</a></article>
+            {% else %}<p class="rounded-lg border border-dashed border-gray-600 p-5 text-sm text-gray-400">No project stories yet.</p>{% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}

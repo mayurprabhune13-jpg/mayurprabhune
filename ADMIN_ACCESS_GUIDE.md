@@ -1,13 +1,9 @@
 # Quick Admin Access Guide - mayurprabhune.in
 *Ready to Use Now!*
 
-## 🚀 **Immediate Access**
+## Admin access
 
-### **Your Admin Credentials**
-- **Login URL**: `https://mayurprabhune.in/login`
-- **Username**: `admin`
-- **Email**: `info@mayurprabhune.in`
-- **Password**: *[Use the password you set during initial setup]*
+Sign in at `/auth/login` with an administrator account that has already been created. Admin access is restricted to accounts with the admin role. If no admin account has been provisioned in the production database, one must be created through the deployment's secure setup process before sign-in will work.
 
 ### **Admin Dashboard**
 Once logged in, access your dashboard at:
@@ -47,6 +43,14 @@ Once logged in, access your dashboard at:
 - Track client inquiries
 - Archive old messages
 
+### **6. Update site appearance and SEO defaults** (`/admin/site-settings`)
+- Change the site name and wordmark tagline
+- Update the default page title and search description
+- Edit the homepage eyebrow, headline, supporting line, introduction and portrait image
+- Change the featured YouTube video title, description and URL
+
+Instagram and LinkedIn access tokens remain in Railway Variables; they are not displayed or stored in the admin database.
+
 ---
 
 ## 🎯 **Quick Start Checklist**
@@ -71,13 +75,15 @@ Once logged in, access your dashboard at:
 
 | Function | URL | Purpose |
 |----------|-----|---------|
-| **Login** | `/login` | Access admin panel |
+| **Login** | `/auth/login` | Access admin panel |
 | **Dashboard** | `/admin/dashboard` | Overview & analytics |
 | **Videos** | `/admin/videos` | Video portfolio |
 | **Testimonials** | `/admin/testimonials` | Client feedback |
 | **Blog** | `/admin/posts` | Content creation |
 | **Case Studies** | `/admin/case-studies` | Success stories |
 | **Messages** | `/admin/messages` | Contact inquiries |
+| **Site Settings** | `/admin/site-settings` | Brand, homepage, SEO defaults and featured video |
+| **Client Logos** | `/admin/client-logos` | Manage the homepage organization logo strip |
 
 ---
 

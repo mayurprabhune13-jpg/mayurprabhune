@@ -1,15 +1,8 @@
 # Mayur Prabhune - Portfolio Website
 
-## 🚀 Current Status: Ready for Deployment
+## Current Status
 
-**⚠️ Deployment Status**: Application fully developed, awaiting Railway plan upgrade
-- ✅ Complete Flask portfolio website with admin panel
-- ✅ Domain configured: mayurprabhune.in
-- ✅ Email service active: info@mayurprabhune.in (Titan Email)
-- ✅ Database configured: PostgreSQL on Railway
-- ❌ Deployment blocked: Railway account plan limitations
-
-**Quick Solutions**: [See Deployment Options →](FINAL_DEPLOYMENT_RECOMMENDATIONS.md)
+The website is hosted on Railway at [mayurprabhune.in](https://mayurprabhune.in). Railway is connected to this GitHub repository and automatically deploys changes pushed to the `main` branch. Review changes on a separate branch before merging to `main`.
 
 ---
 
@@ -28,11 +21,17 @@
 
 ## Quick Deployment Options
 
-### Option 1: Railway (Recommended - 5 minutes)
+### Current deployment: Railway
+
+Pushes to the connected `main` branch trigger a Railway deployment. Work on a feature branch and review the change before merging to `main`.
+
+To work locally:
 ```bash
-# Upgrade Railway plan ($5/month) then:
-railway up
-# Result: Live at mayurprabhune.in with SSL
+git clone https://github.com/mayurprabhune13-jpg/mayurprabhune.git
+cd mayurprabhune
+python -m venv .venv
+pip install -r requirements.txt
+python run.py
 ```
 
 ### Option 2: Local Development
@@ -74,9 +73,9 @@ python run.py
 ```env
 ✅ DATABASE_URL=postgresql://[configured on Railway]
 ✅ MAIL_SERVER=smtp.titan.email
-✅ MAIL_USERNAME=info@mayurprabhune.in  
+✅ MAIL_USERNAME=info@mayurprabhune.in
 ✅ MAIL_PASSWORD=[configured]
-✅ ADMIN_USERNAME=admin
+✅ ADMIN_USERNAME=your-admin-username
 ✅ ADMIN_PASSWORD=[configured]
 ✅ SECRET_KEY=[configured]
 ✅ Domain: mayurprabhune.in (DNS configured)
@@ -125,9 +124,9 @@ python run.py
    ```env
    SECRET_KEY=your-secret-key-here
    DATABASE_URL=sqlite:///app.db
-   ADMIN_USERNAME=admin
+   ADMIN_USERNAME=your-admin-username
    ADMIN_EMAIL=mayur.prabhune@gmail.com
-   ADMIN_PASSWORD=admin
+   ADMIN_PASSWORD=replace-with-a-unique-password
    ```
 
 6. **Initialize database**
@@ -146,11 +145,7 @@ python run.py
 
 ## Admin Access
 
-Access the admin dashboard at `/admin/login` with the following credentials:
-- **Username**: admin
-- **Password**: admin
-
-**Important**: Change the default admin password in production!
+Access the admin dashboard at `/admin/login`. Admin credentials are configured privately in the deployment environment; this repository does not provide or document default production credentials.
 
 ### Admin Features
 - Manage blog posts with rich text editor
@@ -183,14 +178,8 @@ The application provides RESTful API endpoints at `/api/`:
 
 ## Production Deployment
 
-### Current Status: Railway (Configured, Needs Plan Upgrade)
-All configuration is complete on Railway:
-- Environment variables set
-- Database connected
-- Domain configured
-- **Issue**: Plan limitation preventing deployment
-
-**Solution**: Upgrade to Railway Developer plan ($5/month) → Instant deployment
+### Railway
+The live site is deployed on Railway with its custom domain and PostgreSQL service. GitHub pushes to `main` trigger automatic deployments.
 
 ### Alternative Platforms
 
@@ -255,18 +244,14 @@ mayur-prabhune/
 └── README.md            # This file
 ```
 
-## Next Steps
+## Deployment workflow
 
-1. **Immediate**: Choose deployment platform
-   - Railway upgrade ($5/month) - recommended for speed
-   - Render free tier - budget option
-   - DigitalOcean ($5/month) - full control
+1. Create a feature branch for changes.
+2. Review the change and open a pull request.
+3. Merge approved changes into `main` to trigger Railway deployment.
+4. Check the Railway deployment status and confirm the site is responding.
 
-2. **Deploy**: Follow platform-specific instructions in [Final Recommendations](FINAL_DEPLOYMENT_RECOMMENDATIONS.md)
-
-3. **Test**: Use post-deployment checklist to verify functionality
-
-4. **Monitor**: Application includes health checks and error handling
+Keep production secrets in Railway's environment settings. Do not commit secret values to GitHub.
 
 ## Important Environment Variables
 
@@ -276,7 +261,7 @@ Set in `.env` (examples):
 FLASK_ENV=development
 SECRET_KEY=change-me-in-production
 DATABASE_URL=sqlite:///app.db
-ADMIN_USERNAME=admin
+ADMIN_USERNAME=your-admin-username
 ADMIN_EMAIL=mayur.prabhune@gmail.com
 ADMIN_PASSWORD=secure-password
 
@@ -294,17 +279,6 @@ CONTACT_PHONE=+91 7620065818
 CONTACT_LINKEDIN=https://www.linkedin.com/in/mayur-prabhune
 ```
 
-## Support & Cost Analysis
-
-### Monthly Hosting Costs
-| Platform | Cost | Custom Domain | SSL | Database | Email |
-|----------|------|---------------|-----|----------|-------|
-| Railway Developer | $5 | ✅ Free | ✅ Auto | ✅ Included | ✅ Configured |
-| Render Starter | $7 | ✅ Included | ✅ Auto | $7 extra | External |
-| DigitalOcean | $5 | ✅ Included | ✅ Auto | $15 extra | External |
-
-**Recommendation**: Railway upgrade for immediate deployment with all features.
-
 ## Contributing
 
 1. Fork the repository
@@ -321,11 +295,11 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 For support and questions:
 - **Email**: info@mayurprabhune.in (active)
-- **Website**: mayurprabhune.in (pending deployment)
+- **Website**: [mayurprabhune.in](https://mayurprabhune.in)
 - **LinkedIn**: https://www.linkedin.com/in/mayur-prabhune
 
 ---
 
-**Last Updated**: January 13, 2025  
-**Status**: Production-ready, awaiting deployment platform decision  
+**Last Updated**: October 20, 2026
+**Status**: Live on Railway; production deploys follow pushes to `main`
 **Quick Start**: See [FINAL_DEPLOYMENT_RECOMMENDATIONS.md](FINAL_DEPLOYMENT_RECOMMENDATIONS.md)

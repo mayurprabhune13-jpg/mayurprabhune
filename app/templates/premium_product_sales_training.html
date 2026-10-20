@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Premium Product Sales Trainer in Pune{% endblock %}
+{% block meta_description %}Sales training for teams selling premium products. Practice customer discovery, product conversations, recommendations, and objection handling with Mayur Prabhune in Pune, India.{% endblock %}
+
+{% block content %}
+<div class="experience-page">
+    <header class="experience-page__hero">
+        <div>
+            <span class="eyebrow">Sales learning · Pune, India</span>
+            <h1>Help customers see the value that fits them.</h1>
+            <p>Practical learning for teams selling premium products—built around customer needs, product conversations, and confident recommendations.</p>
+            <div class="hero__actions"><a class="button" data-magnetic href="{{ url_for('main.contact', topic='premium-product-sales-training') }}">Discuss sales training <span aria-hidden="true">↗</span></a><a class="button button--secondary" href="{{ url_for('main.services') }}">Explore AI training <span aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="experience-page__visual" role="img" aria-label="Abstract product form surrounded by customer conversation paths">
+            <svg viewBox="0 0 520 330" aria-hidden="true" width="100%" height="100%">
+                <defs><linearGradient id="product-front" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dec2a3"/><stop offset=".58" stop-color="#ac8060"/><stop offset="1" stop-color="#76543f"/></linearGradient><linearGradient id="product-side" x1="0" x2="1"><stop stop-color="#77573e"/><stop offset="1" stop-color="#392a24"/></linearGradient><radialGradient id="sales-glow"><stop stop-color="#d8a375" stop-opacity=".24"/><stop offset="1" stop-color="#d8a375" stop-opacity="0"/></radialGradient></defs>
+                <ellipse cx="260" cy="224" rx="186" ry="70" fill="url(#sales-glow)"/><ellipse cx="260" cy="214" rx="190" ry="55" fill="none" stroke="#e7bd9957" transform="rotate(-18 260 214)"/><ellipse cx="260" cy="205" rx="146" ry="91" fill="none" stroke="#55e6ff4a" transform="rotate(32 260 205)"/>
+                <path d="m193 88 103-29 72 40-102 37z" fill="#f1d4b4" stroke="#f1d4b4" stroke-opacity=".5"/><path d="m193 88 0 127 73 43V136z" fill="url(#product-front)" stroke="#f4d7ba" stroke-opacity=".7"/><path d="m266 136 102-37v125l-102 34z" fill="url(#product-side)" stroke="#e6ba91" stroke-opacity=".6"/><path d="M210 117v83M229 124v87" stroke="#f8ead8" stroke-opacity=".42"/><circle cx="105" cy="173" r="6" fill="#55e6ff"/><circle cx="417" cy="120" r="6" fill="#9b8cff"/><circle cx="395" cy="265" r="5" fill="#7ee7b5"/><path d="m105 173 87-36m176-37 49 20m-50 145 28 35" fill="none" stroke="#c4d5e4" stroke-opacity=".5" stroke-dasharray="3 6"/>
+                <text x="297" y="178" fill="#1b242a" font-family="Arial,sans-serif" font-size="10" letter-spacing="2" text-anchor="middle">PRODUCT VALUE</text>
+            </svg>
+        </div>
+    </header>
+
+    <section class="experience-page__section">
+        <span class="eyebrow">The conversation</span>
+        <h2>Make the experience feel personal, not scripted.</h2>
+        <div class="method-grid">
+            <article class="method-card"><span class="method-card__index">01 / DISCOVER</span><h3>Listen for what matters</h3><p>Practice questions that help teams understand a customer’s priorities and clarify their needs.</p></article>
+            <article class="method-card"><span class="method-card__index">02 / EXPLAIN</span><h3>Connect features with value</h3><p>Help customers see how product details relate to the needs they have shared.</p></article>
+            <article class="method-card"><span class="method-card__index">03 / RECOMMEND</span><h3>Guide with confidence</h3><p>Practice clear recommendations and thoughtful responses to customer questions or objections.</p></article>
+        </div>
+    </section>
+
+    <section class="experience-page__section">
+        <div class="section-intro"><div><span class="eyebrow">Made for your context</span><h2 class="section-heading">Use your products and customer moments.</h2></div><div class="section-intro__copy"><p>Product category, customer journey, team experience, and business goals can shape the examples and practice activities.</p></div></div>
+        <div class="method-grid">
+            <article class="method-card"><span class="method-card__index">BEFORE THE SESSION</span><h3>Share context</h3><p>Audience, products, common customer needs, and what the team wants to improve.</p></article>
+            <article class="method-card"><span class="method-card__index">DURING THE SESSION</span><h3>Learn by doing</h3><p>Relevant examples, guided conversation practice, and time to reflect.</p></article>
+            <article class="method-card"><span class="method-card__index">AFTER THE SESSION</span><h3>Agree next steps</h3><p>Discuss how the team can continue applying the learning in its day-to-day work.</p></article>
+        </div>
+        <p class="section-copy" style="margin-top:22px">The session format and scope are agreed after an initial discussion. No client outcomes or product-category credentials are implied by this page.</p>
+    </section>
+
+    <section class="experience-page__section"><div class="cta-panel"><span class="eyebrow">Retail leaders · Sales managers · L&amp;D teams</span><h2>What customer conversation would you like to strengthen?</h2><p>Tell me about your products, team, and learning goals. We can discuss a useful training format.</p><a class="button" href="{{ url_for('main.contact', topic='premium-product-sales-training') }}">Start a conversation <span aria-hidden="true">↗</span></a></div></section>
+</div>
+{% endblock %}

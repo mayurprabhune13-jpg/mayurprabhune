@@ -1,14 +1,21 @@
 {% extends "base.html" %}
-{% block title %}{{ post.title }} - Blog{% endblock %}
+
+{% block title %}{{ post.title }}{% endblock %}
+{% block meta_description %}{{ post.excerpt|default(post.content|striptags, true)|truncate(155, true, '…') }}{% endblock %}
+
 {% block content %}
-<div class="layout-content-container flex flex-col max-w-3xl flex-1 mx-auto">
-  <h1 class="text-white text-4xl font-bold leading-tight mb-3">{{ post.title }}</h1>
-  <div class="text-white/60 text-sm mb-8">{{ post.category }} • {{ post.published_at|datetime or post.created_at|datetime }} • {{ post.reading_time }} min read</div>
-  {% if post.image_url %}
-  <img src="{{ post.image_url }}" alt="{{ post.title }}" class="w-full rounded-xl mb-6" />
-  {% endif %}
-  <article class="prose prose-invert max-w-none">
-    {{ post.content | safe }}
-  </article>
-</div>
+<article class="experience-page">
+    <header class="case-study-hero">
+        <a class="text-link" href="{{ url_for('main.blog') }}"><span aria-hidden="true">←</span> All insights</a>
+        <p class="eyebrow" style="margin-top:25px">{{ post.category or 'Insight' }}{% if post.published_at %}<span aria-hidden="true"> · </span>{{ post.published_at|datetime }}{% endif %}</p>
+        <h1>{{ post.title }}</h1>
+        {% if post.excerpt %}<p>{{ post.excerpt }}</p>{% endif %}
+        {% if post.image_url %}<img class="case-study-image" src="{{ post.image_url|media_url }}" alt="{{ post.title }}" fetchpriority="high">{% endif %}
+    </header>
+    <div class="article-content">
+        <p class="insight-row__meta">{{ post.reading_time }} min read</p>
+        <div class="prose prose-invert max-w-none">{{ post.content|safe }}</div>
+    </div>
+    <section class="experience-page__section"><div class="cta-panel"><span class="eyebrow">Continue the conversation</span><h2>Want to explore this with your team?</h2><p>Share your context and learning goals, and we can discuss what may fit.</p><a class="button" href="{{ url_for('main.contact') }}">Contact Mayur <span aria-hidden="true">↗</span></a></div></section>
+</article>
 {% endblock %}
