@@ -425,3 +425,104 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .motion-ready .reveal { opacity: 1; transform: none; }
 }
+
+/* Refined responsive pass: the public templates use their own layout system.
+   Keep the visual language luminous while protecting alignment from utility CSS. */
+:root {
+  color-scheme: dark;
+  --ink: #101426;
+  --surface: #171d34;
+  --surface-raised: #202944;
+  --surface-soft: #252d49;
+  --text: #f7f7ff;
+  --muted: #b2bad2;
+  --line: rgba(177, 190, 255, .2);
+  --cyan: #73e7ff;
+  --violet: #b8a2ff;
+  --green: #8af0c0;
+  --gutter: clamp(20px, 5.2vw, 76px);
+}
+
+html { background: #101426; }
+body.site-body {
+  background:
+    radial-gradient(ellipse at 76% 8%, rgba(103, 79, 214, .22), transparent 29%),
+    radial-gradient(ellipse at 17% 32%, rgba(45, 161, 210, .12), transparent 34%),
+    radial-gradient(ellipse at 88% 68%, rgba(87, 73, 173, .1), transparent 31%),
+    linear-gradient(155deg, #12182d 0%, #101629 48%, #15162f 100%);
+  background-attachment: fixed;
+}
+.site-header { background: rgba(16, 20, 38, .84); }
+.section { padding-top: clamp(58px, 7vw, 96px); padding-bottom: clamp(58px, 7vw, 96px); }
+.section--compact { padding-top: clamp(42px, 5vw, 70px); padding-bottom: clamp(42px, 5vw, 70px); }
+
+/* Tailwind's former CDN utility defined `.container` globally. These public
+   page containers deliberately outrank that generic selector in any cached page. */
+main.site-main .container,
+.site-header__inner,
+.site-footer__inner,
+.flash-stack {
+  width: min(var(--container), calc(100% - 2 * var(--gutter)));
+  max-width: var(--container);
+  margin-right: auto;
+  margin-left: auto;
+}
+.hero { min-height: min(690px, calc(100svh - 76px)); }
+.hero::before { background: radial-gradient(ellipse, rgba(105, 120, 230, .2), rgba(53, 178, 224, .06) 36%, transparent 68%); }
+.hero-art__glow { background: radial-gradient(circle, rgba(101, 224, 255, .26), rgba(149, 119, 255, .16) 42%, transparent 72%); animation: cosmic-pulse 10s ease-in-out infinite; }
+.hero-art__grid { opacity: .12; transform: perspective(1200px) rotateX(58deg) scale(1.18) translateY(80px); }
+.neural-orb__core { box-shadow: inset -26px -30px 65px rgba(1, 6, 14, .5), inset 9px 7px 30px rgba(212, 251, 255, .2), 0 0 100px rgba(85, 230, 255, .2), 0 0 150px rgba(155, 140, 255, .1); }
+.orbit-label { border-color: rgba(172, 185, 255, .28); background: rgba(27, 34, 60, .9); }
+.method-card, .social-channel, .social-post, .quote-card { border-color: rgba(177, 190, 255, .18); }
+.method-card { background: linear-gradient(145deg, rgba(31, 39, 67, .9), rgba(22, 30, 54, .86)); }
+.social-channel { background: linear-gradient(145deg, rgba(32, 39, 69, .92), rgba(20, 27, 50, .94)); }
+.social-post { background: linear-gradient(145deg, rgba(39, 48, 80, .96), rgba(25, 33, 59, .98)); }
+.featured-video { background: radial-gradient(ellipse at 90% 0%, rgba(155, 140, 255, .18), transparent 48%), linear-gradient(145deg, #222b4a, #161e38 65%, #252044); }
+.cta-panel { border-color: rgba(123, 205, 255, .32); background: radial-gradient(ellipse at 90% 0%, rgba(85, 230, 255, .2), transparent 55%), radial-gradient(ellipse at 0% 100%, rgba(155, 140, 255, .15), transparent 45%), linear-gradient(125deg, #202b49, #171f39 60%, #242043); }
+.article-content { color: #dbe2f6; }
+.article-content .prose { max-width: 760px; margin: 30px auto; color: #dbe2f6; font-size: 16px; line-height: 1.85; }
+.article-content .prose :is(h2, h3, h4) { margin: 1.7em 0 .6em; color: var(--text); letter-spacing: -.04em; line-height: 1.15; }
+.article-content .prose a { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+.article-content .prose img { border: 1px solid var(--line); border-radius: 14px; }
+
+@media (max-width: 1024px) {
+  :root { --gutter: clamp(24px, 4.5vw, 48px); }
+  .hero { min-height: unset; padding-top: 58px; padding-bottom: 70px; }
+  .hero-art { min-width: 0; }
+}
+@media (max-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .hero__copy { max-width: 680px; }
+  .hero__title { max-width: 760px; font-size: clamp(58px, 9.5vw, 82px); }
+  .hero-art { width: min(100%, 620px); min-height: 400px; margin: 0 auto; }
+  .hero-portrait { width: clamp(220px, 34vw, 286px); }
+  .scroll-cue { bottom: 20px; }
+  .expertise-shell { grid-template-columns: 1fr; gap: 24px; }
+  .expertise-rail { position: static; }
+}
+@keyframes cosmic-pulse { 0%, 100% { opacity: .72; scale: .96; } 50% { opacity: 1; scale: 1.04; } }
+@media (max-width: 767px) {
+  :root { --gutter: 22px; }
+  .hero { padding-top: 50px; padding-bottom: 58px; }
+  .hero__title { font-size: clamp(50px, 12vw, 72px); }
+  .hero__intro { max-width: 56ch; }
+  .hero-art { width: 100%; min-height: 365px; margin: 0; overflow: clip; }
+  .hero-portrait { width: clamp(205px, 56vw, 258px); }
+  .orbit-label--one { left: 2%; }
+  .orbit-label--two { right: 2%; }
+  .orbit-label--three { left: 3%; }
+  .hero-art__caption { right: 3%; }
+  .section { padding: 64px 0; }
+  .section-intro { gap: 16px; }
+  .section-heading { font-size: clamp(32px, 8.5vw, 46px); }
+  .social-posts { grid-template-columns: 1fr; }
+  .social-post--wide { grid-column: auto; }
+}
+@media (max-width: 380px) {
+  :root { --gutter: 18px; }
+  .hero__title { font-size: clamp(45px, 13vw, 50px); }
+  .hero-art { min-height: 330px; }
+  .orbit-label { min-width: 108px; max-width: 132px; padding: 9px; font-size: 8px; }
+  .orbit-label--two { right: 0; }
+  .hero-art__caption { max-width: 140px; text-align: right; }
+}

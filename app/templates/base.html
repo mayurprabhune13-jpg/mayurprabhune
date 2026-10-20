@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#080b12">
+    <meta name="theme-color" content="#101426">
     {% set seo_title = self.title()|striptags|trim %}
     {% set seo_description = self.meta_description()|striptags|trim %}
     <title>{% block title %}{{ site_settings.seo_title }}{% endblock %} | {{ site_settings.site_name }}</title>
@@ -22,8 +22,6 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
     <link rel="preload" href="{{ url_for('static', filename='css/experience.css') }}" as="style">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/experience.css') }}">
-    {# Keep Tailwind available to legacy content pages until those pages complete their CSS migration. #}
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     {% block styles %}{% endblock %}
     {% block structured_data %}<script type="application/ld+json">
     {{ {
